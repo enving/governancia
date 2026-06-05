@@ -289,6 +289,76 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16p
   body.tc-printing .tc-actions{display:none}
   body.tc-printing .tc-tools{grid-template-columns:repeat(3,1fr)}
 }
+/* ═══════════════════════════════════════════
+   FRAGENKATALOG MODULE
+   ═══════════════════════════════════════════ */
+.fk-page{padding:32px;max-width:1000px;margin:0 auto;width:100%}
+@media(max-width:700px){.fk-page{padding:16px}}
+.fk-tag{font-family:var(--mono);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.fk-heading{font-family:var(--serif);font-weight:400;font-size:clamp(22px,3vw,30px);line-height:1.1;letter-spacing:-0.01em;margin-bottom:8px}
+.fk-heading em{font-style:italic;color:var(--accent)}
+.fk-sub{font-family:var(--serif);font-style:italic;font-weight:300;font-size:14px;color:var(--ink2);max-width:680px;line-height:1.45;margin-bottom:20px}
+.fk-stats{display:flex;gap:24px;flex-wrap:wrap;padding:12px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-bottom:16px}
+.fk-stat{font-family:var(--mono);font-size:11px;color:var(--mute);letter-spacing:0.05em}
+.fk-stat strong{font-size:18px;font-weight:700;color:var(--ink);font-family:var(--serif);display:block;margin-bottom:2px;letter-spacing:-0.01em}
+.fk-stat.s-ok strong{color:var(--teal)}.fk-stat.s-warn strong{color:var(--accent)}
+.fk-filters{margin-bottom:16px}
+.fk-filter-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.fk-cat-btn{padding:3px 9px;border:1.5px solid var(--rule);background:var(--white);font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;color:var(--mute);transition:all 0.15s}
+.fk-cat-btn:hover{border-color:var(--ink2);color:var(--ink)}
+.fk-cat-btn.active{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-ink);font-weight:700}
+.fk-status-btn{padding:5px 13px;border:1.5px solid var(--rule);background:var(--white);font-size:12px;font-weight:500;cursor:pointer;color:var(--mute);transition:all 0.15s}
+.fk-status-btn:hover{border-color:var(--ink2);color:var(--ink)}
+.fk-status-btn.active{border-color:var(--ink);background:var(--ink);color:var(--bg)}
+.fk-status-btn.orient.active{border-color:var(--teal);background:var(--teal);color:white}
+.fk-status-btn.entsch.active{border-color:var(--gold);background:var(--gold);color:white}
+.fk-filter-sep{width:1px;height:20px;background:var(--rule);margin:0 4px}
+.fk-filter-label{font-size:12px;color:var(--mute);white-space:nowrap}
+.fk-role-select{padding:5px 10px;border:1.5px solid var(--rule);background:var(--white);font-size:12px;font-family:var(--sans);cursor:pointer;color:var(--ink)}
+.fk-reset-btn{padding:4px 12px;border:1.5px solid var(--rule);background:transparent;font-size:11px;font-family:var(--mono);cursor:pointer;color:var(--mute);transition:all 0.15s;margin-left:auto}
+.fk-reset-btn:hover{border-color:var(--warn);color:var(--warn)}
+.fk-cat-group{margin-bottom:20px}
+.fk-cat-head{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--mute);padding:7px 0;margin-bottom:6px;border-bottom:1px solid var(--rule2);display:flex;align-items:center;gap:8px}
+.fk-cat-head .fk-cat-id{color:var(--accent);font-weight:700;font-size:11px}
+.fk-list{display:flex;flex-direction:column;gap:0}
+.fk-item{background:var(--card);border:1px solid var(--rule);border-bottom:none;transition:background 0.15s}
+.fk-item:last-child{border-bottom:1px solid var(--rule)}
+.fk-item:hover{background:var(--white)}
+.fk-item.reviewed{opacity:0.5}
+.fk-item.reviewed:hover{opacity:0.85}
+.fk-item-head{display:grid;grid-template-columns:52px 1fr auto auto;align-items:center;gap:10px;padding:10px 14px;cursor:pointer}
+@media(max-width:600px){.fk-item-head{grid-template-columns:44px 1fr auto}}
+.fk-id{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:0.08em;color:var(--mute);white-space:nowrap}
+.fk-title{font-size:13px;font-weight:500;line-height:1.35;color:var(--ink)}
+.fk-sbadge{display:inline-flex;align-items:center;padding:2px 8px;font-size:10px;font-weight:600;font-family:var(--mono);letter-spacing:0.05em;white-space:nowrap}
+@media(max-width:600px){.fk-sbadge{display:none}}
+.fk-sbadge.orient{background:var(--teal-soft);color:var(--teal)}
+.fk-sbadge.entsch{background:var(--gold-soft);color:#78590a}
+.fk-chk{width:20px;height:20px;border:2px solid var(--rule);display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;transition:all 0.15s}
+.fk-chk:hover{border-color:var(--teal)}
+.fk-item.reviewed .fk-chk{background:var(--teal);border-color:var(--teal)}
+.fk-item.reviewed .fk-chk::after{content:'✓';color:white;font-size:11px;font-weight:700}
+.fk-item-body{display:none;padding:10px 14px 14px;border-top:1px solid var(--rule2)}
+.fk-item.open .fk-item-body{display:block}
+.fk-guidance{padding:9px 12px;background:var(--teal-soft);border-left:3px solid var(--teal);margin-bottom:10px}
+.fk-guidance-label{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal);margin-bottom:4px}
+.fk-guidance-text{font-size:13px;line-height:1.5;color:var(--ink2)}
+.fk-body-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.fk-body-grid{grid-template-columns:1fr}}
+.fk-body-label{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--mute);margin-bottom:5px}
+.fk-who-chips{display:flex;flex-wrap:wrap;gap:4px}
+.fk-who-chip{padding:2px 8px;background:var(--eu-soft);color:var(--eu);font-size:11px;font-family:var(--mono);font-weight:500}
+.fk-body-text{font-size:13px;line-height:1.5;color:var(--ink2)}
+.fk-empty{padding:40px;text-align:center;color:var(--mute);font-style:italic;font-family:var(--serif)}
+@media print{
+  body.fk-printing .view{display:none!important}
+  body.fk-printing #view-fragenkatalog{display:block!important}
+  body.fk-printing .fk-filters,.fk-printing .tc-actions{display:none!important}
+  body.fk-printing .fk-stats{display:block}
+  body.fk-printing .fk-item{page-break-inside:avoid;border:1px solid #ccc;margin-bottom:4px}
+  body.fk-printing .fk-item-body{display:block!important}
+  body.fk-printing .fk-chk{display:none}
+}
 </style>
 </head>
 <body>
@@ -301,6 +371,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16p
     <button class="tab" data-view="ergebnis">Ergebnis <span class="badge" id="countBadge">0/10</span></button>
     <button class="tab" data-view="kompass">Kompass</button>
     <button class="tab" data-view="toolcheck">Tool-Check</button>
+    <button class="tab" data-view="fragenkatalog">Fragenkatalog</button>
   </div>
   <div class="topbar-meta">v1.0 · Open Source</div>
 </div>
@@ -454,6 +525,43 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16p
       <div class="label">Ehrlicher Hinweis · drei Vorbedingungen</div>
       <p>Welche Tiefe ist mit der eigenen Rolle vereinbar — Orientierung ja, konkrete Produktempfehlung heikel. Wie verhält sich der Kompass zu bestehenden Beratern in der Branche? Und: wer hat das Mandat, diesen Service anzubieten, und wer trägt die Verantwortung für seine Inhalte?</p>
       <p>Die Antworten sind nicht offensichtlich. Aber genau darum lohnt sich der Prototyp <em>vor</em> der Strategie-Entscheidung — er macht die Frage anfassbar.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FRAGENKATALOG TAB -->
+<div class="view" id="view-fragenkatalog">
+  <div class="fk-page">
+    <div class="fk-tag">Fragenkatalog · 12 Themen · 85 Fragen</div>
+    <h1 class="fk-heading">Verantwortungsvolle <em>KI-Nutzung</em> — Fragenkatalog</h1>
+    <p class="fk-sub">Orientierungshilfe, keine Rechtsberatung. EU-Perspektive (DSGVO, EU AI Act), prinzipienbasiert und anbieterneutral. Häkchen = überprüft / geklärt (wird im Browser gespeichert).</p>
+
+    <div class="fk-stats" id="fkStats"></div>
+
+    <div class="fk-filters">
+      <div class="fk-filter-row" id="fkCatRow"></div>
+      <div class="fk-filter-row">
+        <div id="fkStatusRow" style="display:flex;gap:6px"></div>
+        <div class="fk-filter-sep"></div>
+        <span class="fk-filter-label">Rolle:</span>
+        <select class="fk-role-select" id="fkRoleSelect" onchange="fkApplyFilter()">
+          <option value="">Alle Rollen</option>
+          <option value="DSB">DSB (Datenschutz)</option>
+          <option value="IT-Recht">IT-Recht / Justiziariat</option>
+          <option value="ISB">ISB (Informationssicherheit)</option>
+          <option value="BR">BR / Mitbestimmung</option>
+          <option value="Leitung">Leitung</option>
+          <option value="Fachbereich">Fachbereich</option>
+          <option value="IT-Betrieb">IT-Betrieb</option>
+        </select>
+        <button class="fk-reset-btn" onclick="fkResetAll()">Reviews zurücksetzen</button>
+      </div>
+    </div>
+
+    <div id="fkList"></div>
+
+    <div class="tc-actions">
+      <button class="tc-btn primary" onclick="fkPrint()">Katalog drucken / PDF</button>
     </div>
   </div>
 </div>
@@ -1193,6 +1301,250 @@ function tcReset() {
 
 // Hook into tab switch to lazy-init
 document.querySelector('[data-view="toolcheck"]').addEventListener('click', tcInit);
+
+// ═══════════════════════════════════════════
+// FRAGENKATALOG MODULE
+// ═══════════════════════════════════════════
+
+const FK_CATS = [
+  {id:'GOV',l:'Grundlagen & Governance'},
+  {id:'DSG',l:'Datenschutz / personenbezogene Daten'},
+  {id:'VER',l:'Vertraulichkeit & Geschäftsgeheimnisse'},
+  {id:'AVV',l:'Auftragsverarbeitung & Anbieter'},
+  {id:'SPE',l:'Persistente Speicherung'},
+  {id:'INT',l:'Integrationen & Datenzugriff'},
+  {id:'AIA',l:'EU AI Act'},
+  {id:'OUT',l:'Output: Urheberrecht, Haftung, Qualität'},
+  {id:'MIT',l:'Mitbestimmung & Beschäftigtendatenschutz'},
+  {id:'SEC',l:'Sicherheit'},
+  {id:'AGE',l:'Agentische Nutzung & Automatisierung'},
+  {id:'TRA',l:'Transparenz & Kennzeichnung'},
+];
+
+// [id, frage, O/E, [wer], risiko, orientierungstext?]
+const FK_Q=[
+  ['GOV-01','Welche Definition von „KI" legen wir zugrunde?','O',['Leitung','IT-Recht'],'Uneinheitliches Verständnis, Fehlklassifikation','An EU AI Act / nationaler Umsetzung ausrichten; eigene Konkretisierungen nur, wo nötig.'],
+  ['GOV-02','Was ist in Scope, was nicht (z. B. Assistenz vs. automatisierte Entscheidung)?','E',['Leitung','Fachbereich'],'Unkontrollierte Nutzung, falsche Erwartungen'],
+  ['GOV-03','Wer ist wofür verantwortlich (Governance-Modell)?','E',['Leitung'],'Diffuse Verantwortung, Lücken im Ernstfall'],
+  ['GOV-04','Welche Werkzeuge sind freigegeben — und wie kommen neue dazu?','E',['IT-Betrieb','ISB','DSB'],'Schatten-IT, ungeprüfte Tools'],
+  ['GOV-05','Wie verhindern wir Schatten-KI (eigenmächtige Nutzung nicht freigegebener Tools)?','O',['Leitung','IT-Betrieb'],'Unkontrollierter Datenabfluss','Ein offizielles, geprüftes Angebot plus Schulung ist wirksamer als Verbote.'],
+  ['GOV-06','Welche Dokumentation müssen wir vorhalten (Nachweisbarkeit)?','O',['DSB','IT-Recht'],'Rechenschaftspflicht verletzt','Verarbeitungsverzeichnis, Berechtigungs-/Verarbeitungskonzept, Schulungsnachweise, Entscheidungen dokumentieren.'],
+  ['GOV-07','Wie und wann werden Freigaben überprüft (Re-Evaluation)?','E',['DSB','ISB'],'Veraltete Bewertung'],
+  ['GOV-08','Wer entscheidet im Konflikt zwischen Nutzen und Risiko?','E',['Leitung'],'Blockade oder unkontrollierte Freigabe'],
+  ['DSG-01','Werden überhaupt personenbezogene Daten verarbeitet — und welche?','E',['Fachbereich','DSB'],'Unerkannte Verarbeitung'],
+  ['DSG-02','Welche Rechtsgrundlage trägt die Verarbeitung (z. B. Art. 6 DSGVO)?','E',['DSB','IT-Recht'],'Rechtswidrige Verarbeitung, Bußgeld'],
+  ['DSG-03','Sind besondere Kategorien (Art. 9) betroffen (Gesundheit, Biometrie u. a.)?','O',['DSB'],'Schwerwiegender Verstoß','Erhöhte Anforderungen; im Zweifel vermeiden oder anonymisieren.'],
+  ['DSG-04','Gilt der Zweckbindungsgrundsatz — werden Daten nur für den erhobenen Zweck genutzt?','O',['DSB','Fachbereich'],'Zweckentfremdung','Eingabedaten dürfen nicht zweckfremd weiterverwendet werden.'],
+  ['DSG-05','Ist eine Datenschutz-Folgenabschätzung (Art. 35 DSGVO) erforderlich?','E',['DSB'],'Fehlende Pflicht-DSFA'],
+  ['DSG-06','Wie werden Betroffenenrechte gewahrt (Auskunft, Löschung, Berichtigung)?','E',['DSB','IT-Betrieb'],'Nicht erfüllbare Betroffenenrechte'],
+  ['DSG-07','Erfolgt eine Übermittlung in Drittländer — mit welchen Garantien?','E',['DSB','IT-Recht'],'Unzulässiger Drittlandtransfer'],
+  ['DSG-08','Ist Datenminimierung umgesetzt (so wenig personenbezogene Eingaben wie möglich)?','O',['Fachbereich','ISB'],'Unnötige Verarbeitung','Vor Eingabe minimieren/anonymisieren; technische Guardrails (PII-Entfernung) erwägen.'],
+  ['DSG-09','Findet eine automatisierte Entscheidung mit Rechtswirkung statt (Art. 22 DSGVO)?','E',['DSB','IT-Recht'],'Unzulässige Automatisierung'],
+  ['VER-01','Dürfen vertrauliche Inhalte in ein externes KI-Werkzeug eingegeben werden?','E',['ISB','IT-Recht','Fachbereich'],'Verlust von Geschäftsgeheimnissen (GeschGehG §2)'],
+  ['VER-02','Existiert eine Datenklassifizierung (öffentlich/intern/vertraulich/geheim)?','O',['ISB','Fachbereich'],'Fehlbehandlung sensibler Daten','Voraussetzung für klare Nutzungsregeln — ohne Klassifizierung keine operativen Grenzen.'],
+  ['VER-03','Sind durch Verträge/NDA bestimmte Inhalte von der KI-Nutzung ausgeschlossen?','E',['IT-Recht','Fachbereich'],'Vertragsbruch, Schadensersatz'],
+  ['VER-04','Werden Eingaben des Anbieters zum Modelltraining genutzt?','O',['IT-Recht','ISB'],'Abfluss vertraulichen Wissens ins Modell','Training mit Eingaben vertraglich ausschließen (AVV-Klausel oder Tarif-Opt-out).'],
+  ['VER-05','Können vertrauliche Inhalte über Plugins/Connectoren/Funktionen abfließen?','E',['ISB','DSB'],'Unkontrollierte Weitergabe'],
+  ['VER-06','Dürfen Quellcode oder interne Systemdetails eingegeben werden?','E',['ISB','Fachbereich'],'Sicherheits-/Wettbewerbsnachteil'],
+  ['VER-07','Wie wird Vertraulichkeit bei extern sichtbarem KI-Output gewahrt?','O',['Fachbereich'],'Unbeabsichtigte Offenlegung','Fachliche/rechtliche Endkontrolle vor jeder Veröffentlichung.'],
+  ['AVV-01','Liegt ein Auftragsverarbeitungsvertrag (Art. 28 DSGVO) vor, der die Datenkategorien deckt?','O',['DSB','IT-Recht'],'Rechtswidrige Auftragsverarbeitung','Vor Produktiveinsatz mit personenbezogenen Daten abschließen.'],
+  ['AVV-02','Wo werden Daten gespeichert/verarbeitet (Region, Land)?','E',['DSB','IT-Recht'],'Transfer-/Speicherverstoß'],
+  ['AVV-03','Welche Unterauftragsverarbeiter setzt der Anbieter ein?','E',['DSB'],'Intransparente Subverarbeitung'],
+  ['AVV-04','Welche Aufbewahrungs- und Löschfristen sichert der Anbieter zu?','E',['DSB','ISB'],'Speicherbegrenzungsgrundsatz verletzt'],
+  ['AVV-05','Welche technischen/organisatorischen Maßnahmen (Art. 32) garantiert der Anbieter?','O',['ISB','DSB'],'Unzureichendes Schutzniveau','TOMs und Zertifizierungen (ISO 27001, SOC 2) prüfen.'],
+  ['AVV-06','Wie unterscheiden sich Anbieter-Tarife rechtlich (AVV nur ab bestimmten Plänen)?','E',['IT-Recht','IT-Betrieb'],'Fehlende vertragliche Basis'],
+  ['AVV-07','Wie lange werden Audit-/Compliance-Logs aufbewahrt — und exportieren wir sie?','O',['ISB','IT-Betrieb'],'Nachweisverlust','Bei kurzer Aufbewahrung regelmäßig exportieren.'],
+  ['SPE-01','Dürfen Informationen ohne konkreten Zweck dauerhaft vorgehalten werden (Memory)?','O',['DSB','ISB'],'Speicherbegrenzung/Zweckbindung verletzt (Art. 5 Abs. 1e DSGVO)','Zweckloses Dauervorhalten vermeiden; Zweck und Löschfrist definieren.'],
+  ['SPE-02','Welche Daten landen in persistenter Memory-Funktion — wie werden sie gelöscht?','E',['DSB','IT-Betrieb'],'Unkontrollierte Profilbildung'],
+  ['SPE-03','Enthalten RAG-/Wissensbasen personenbezogene oder vertrauliche Inhalte?','E',['Fachbereich','DSB'],'Offenlegung über Suchtreffer'],
+  ['SPE-04','Respektiert der Zugriff auf die Wissensbasis die Berechtigungen (ACL) der Quellsysteme?','O',['ISB','IT-Betrieb'],'Zugriff auf unbefugte Inhalte','Retrieval muss ACL-treu filtern (Least-Privilege-Prinzip).'],
+  ['SPE-05','Wie lange wird der Gesprächsverlauf gespeichert — und wer kann ihn einsehen?','E',['DSB','BR'],'Verhaltensauswertung, Speicherverstoß'],
+  ['SPE-06','Wie werden eingebettete Daten (Vektor-Index) gelöscht/aktualisiert?','E',['IT-Betrieb','DSB'],'Faktisch unlöschbare Daten'],
+  ['SPE-07','Werden gespeicherte Inhalte zweckfremd weiterverwendet (z. B. Training, Analyse)?','O',['DSB','IT-Recht'],'Zweckentfremdung','Zweckbindung sicherstellen, Sekundärnutzung vertraglich/technisch unterbinden.'],
+  ['SPE-08','Wie wird Datensparsamkeit bei persistenter Speicherung umgesetzt?','O',['ISB','DSB'],'Wachsende Altdatenrisiken','Standardmäßig wenig speichern, aktiv aufräumen.'],
+  ['INT-01','Dürfen Funktionen wie Projekte, Erinnerungen, Aufgaben aktiviert werden?','E',['ISB','DSB','BR'],'Unbeabsichtigte Dauerverarbeitung'],
+  ['INT-02','Stellt eine neue Anbindung eine wesentliche Änderung dar (Prüf-/Beteiligungspflicht)?','O',['DSB','BR','ISB'],'Übergangene Mitbestimmung/Prüfung','Neue autonome Datenzugriffe sind i. d. R. wesentlich → Prüfung/Beteiligung erforderlich.'],
+  ['INT-03','Erbt die Anbindung die Zugriffsrechte des Nutzers (z. B. via OAuth)?','O',['IT-Betrieb','ISB'],'Zugriff auf unbefugte Inhalte','Das KI-Werkzeug erbt vorhandene Rechte; ein fehlerhaftes Quell-RBAC wird mitgeerbt.'],
+  ['INT-04','Wer verantwortet das Berechtigungskonzept (RBAC) der angebundenen Quellsysteme?','E',['IT-Betrieb','ISB'],'Ungesteuerte Zugriffe'],
+  ['INT-05','Gibt es ein standardisiertes Freigabeschema für neue Connectoren?','O',['ISB','DSB'],'Uneinheitliche/ad-hoc-Freigaben','Einmal definieren, dann jede Anbindung gleich durchlaufen lassen.'],
+  ['INT-06','Erhält das KI-Werkzeug Schreib-/Änderungsrechte oder nur Lesezugriff?','O',['ISB'],'Ungewollte Datenänderung','Read-only als sicherer Einstieg; Schreibrechte nur bei explizitem Bedarf.'],
+  ['INT-07','Welche Daten verlassen die Organisation durch die Integration — und wohin?','E',['DSB','ISB'],'Unkontrollierter Abfluss'],
+  ['INT-08','Wie werden Integrationen protokolliert und überwacht?','O',['ISB','IT-Betrieb'],'Unentdeckter Missbrauch','Audit-Events und Monitoring vorsehen.'],
+  ['AIA-01','In welche Risikokategorie fällt der Anwendungsfall (minimal/begrenzt/hoch/unzulässig)?','E',['IT-Recht','DSB'],'Fehlklassifikation, Sanktionen'],
+  ['AIA-02','Liegt eine unzulässige Praktik vor (z. B. Social Scoring, verbotene Emotionserkennung)?','O',['IT-Recht'],'Schwerwiegender Verstoß (Bußgeld bis 35 Mio. €)','Verbotene Praktiken ausschließen (Art. 5 EU AI Act).'],
+  ['AIA-03','Bestehen Transparenzpflichten (z. B. Kennzeichnung KI-generierter Inhalte)?','O',['Fachbereich','IT-Recht'],'Transparenzverstoß','Generierte Inhalte (v. a. Medien, Text mit Außenwirkung) kennzeichnen.'],
+  ['AIA-04','Ist ausreichende KI-Kompetenz der Mitarbeitenden sichergestellt (AI-Literacy-Pflicht)?','O',['Leitung','Fachbereich'],'Pflichtverstoß, Haftung bei Fehlnutzung','Schulung ist verpflichtend (Art. 4 EU AI Act) und zu dokumentieren.'],
+  ['AIA-05','Welche Pflichten treffen uns als Betreiber (Deployer) vs. als Anbieter (Provider)?','E',['IT-Recht'],'Verkannte Pflichten'],
+  ['AIA-06','Bei Allzweck-KI (GPAI): welche Hinweise/Grenzen des Anbieters gelten?','O',['IT-Recht','ISB'],'Nutzung außerhalb zulässiger Grenzen','Anbieter-Dokumentation und Nutzungsgrenzen beachten.'],
+  ['AIA-07','Bei Hochrisiko-Anwendungen: sind menschliche Aufsicht und Dokumentation gewährleistet?','E',['IT-Recht','DSB'],'Nichterfüllung der Hochrisiko-Anforderungen'],
+  ['OUT-01','Wem „gehört" der generierte Output — und darf er kommerziell genutzt werden?','E',['IT-Recht'],'Unklare/fehlende Nutzungsrechte'],
+  ['OUT-02','Verletzt generierter Output Rechte Dritter (Marken, geschützte Werke)?','O',['Fachbereich','IT-Recht'],'Urheberrechts-/Markenverletzung','Keine realen Personen/Marken/geschützten Werke ohne Prüfung verwenden.'],
+  ['OUT-03','Sind verwendete/generierte Bilder lizenziert?','O',['Fachbereich'],'Urheberrechtsverstoß','Nur lizenzfrei/lizenziert; Quelle/Lizenz dokumentieren.'],
+  ['OUT-04','Wer haftet, wenn auf Basis fehlerhaften KI-Outputs entschieden wird?','O',['Leitung','Fachbereich'],'Fehlentscheidung, Haftung','Menschliche Letztverantwortung; KI ist Assistenz, kein Entscheider.'],
+  ['OUT-05','Wie wird mit Halluzinationen/Faktenfehlern umgegangen?','O',['Fachbereich'],'Verbreitung falscher Inhalte','Verpflichtende Endkontrolle/Faktencheck — kein KI-Output ohne menschliche Prüfung nach außen.'],
+  ['OUT-06','Wann ist menschliche Qualitätssicherung verpflichtend (je nach Außenwirkung)?','E',['Fachbereich','Leitung'],'Ungeprüfte Außenwirkung'],
+  ['OUT-07','Bei generiertem Code: erfolgt Review vor Produktiveinsatz?','O',['IT-Betrieb','ISB'],'Unsicherer/lizenzwidriger Code in Produktion','Code-Review und Lizenz-/Security-Check sind Pflicht.'],
+  ['MIT-01','Ermöglicht das Werkzeug Leistungs- oder Verhaltenskontrolle von Beschäftigten?','O',['BR','DSB'],'Mitbestimmungsverstoß','Verdeckte Kontrolle ausschließen; Mitbestimmung frühzeitig einbeziehen.'],
+  ['MIT-02','Ist die Einführung mitbestimmungspflichtig (Beteiligung der Personalvertretung)?','O',['BR','Leitung'],'Unwirksame/anfechtbare Einführung','Häufig ja; frühzeitig beteiligen — Betriebsrat vor Rollout einbinden.'],
+  ['MIT-03','Werden Beschäftigtendaten verarbeitet — auf welcher Rechtsgrundlage?','E',['DSB','BR'],'Unzulässige Verarbeitung'],
+  ['MIT-04','Lassen Nutzungs-/Verlaufsdaten Rückschlüsse auf einzelne Beschäftigte zu?','E',['DSB','BR'],'Profilbildung, Kontrollpflichten'],
+  ['MIT-05','Regelt eine Betriebs-/Dienstvereinbarung die KI-Nutzung?','O',['BR','Leitung'],'Regelungslücke','Technologieoffen mit klaren Grenzen formulieren; wesentliche Änderungen über Beteiligung.'],
+  ['MIT-06','Ist die Nutzung freiwillig — gibt es Schutz vor Sanktionen bei Nichtnutzung?','E',['Leitung','BR'],'Druck/Akzeptanzprobleme'],
+  ['SEC-01','Wie wird Prompt Injection / Manipulation der KI begegnet?','O',['ISB'],'Manipulation, Datenabfluss','Tests (inkl. Red-Teaming), Eingaben/externe Quellen kontrollieren.'],
+  ['SEC-02','Können Zugangsdaten/Secrets in Eingaben gelangen — wie wird das verhindert?','O',['ISB'],'Kompromittierung von Credentials','Keine Secrets in Prompts; technische Filter und Schulung einsetzen.'],
+  ['SEC-03','Wird ungeprüfter, KI-erzeugter Code/Inhalt ausgeführt?','O',['ISB','IT-Betrieb'],'Schadcode in Produktion','Sandbox/Review vor Ausführung — niemals blind ausführen.'],
+  ['SEC-04','Werden sicherheitsrelevante Ereignisse protokolliert (Audit-Trail)?','O',['ISB'],'Fehlende Nachvollziehbarkeit','Audit-Trail vorsehen; Logs aufbewahren und schützen.'],
+  ['SEC-05','Wie wird ein Datenabfluss über das Werkzeug erkannt und verhindert (DLP)?','E',['ISB'],'Unentdeckter Datenverlust'],
+  ['SEC-06','Greifen Identitäts-/Zugriffsmanagement (IAM) und Least-Privilege?','O',['ISB','IT-Betrieb'],'Rechteausweitung, Zugriff auf Unbefugtes','Zentrale Identitäten, minimale Rechte — kein geteilter Account.'],
+  ['AGE-01','Darf das Werkzeug eigenständig Aktionen ausführen (über reines Antworten hinaus)?','E',['ISB','Fachbereich'],'Unkontrollierte autonome Aktionen'],
+  ['AGE-02','Welche Aktionen erfordern eine menschliche Bestätigung (Human-in-the-Loop)?','E',['Fachbereich','ISB'],'Folgenreiche Fehlhandlung ohne Korrektmöglichkeit'],
+  ['AGE-03','Dürfen geplante/wiederkehrende Aufgaben (Automatisierungen) laufen?','E',['ISB','DSB'],'Unbeaufsichtigte Dauerverarbeitung'],
+  ['AGE-04','Wie werden Tools/Funktionen eines Agenten freigegeben und mit Risikostufen versehen?','O',['ISB'],'Unkontrollierte Tool-Nutzung','Tool-Katalog mit Risk-Tier und Freigabe-Policy erstellen.'],
+  ['AGE-05','Wie werden agentische Abläufe nachvollziehbar protokolliert?','O',['ISB'],'Fehlende Nachvollziehbarkeit bei Fehlern/Vorfällen','Schritt-/Tool-Logs und verwendete Quellen dokumentieren.'],
+  ['AGE-06','Wer trägt die Verantwortung für Handlungen eines Agenten?','O',['Leitung'],'Verantwortungslücke','Verantwortung bleibt beim Menschen/der Organisation — auch bei vollautomatischem Ablauf.'],
+  ['TRA-01','Werden KI-generierte Inhalte als solche gekennzeichnet?','O',['Fachbereich'],'Täuschung, Transparenzverstoß','Kennzeichnung, insbesondere bei Medien, Texten und Inhalten mit Außenwirkung.'],
+  ['TRA-02','Werden Beschäftigte über Art und Umfang der KI-Nutzung informiert?','O',['Leitung','BR'],'Vertrauensverlust, Pflichtverstoß','Transparente, proaktive Information vorsehen.'],
+  ['TRA-03','Werden Betroffene informiert, wenn sie mit KI interagieren?','O',['Fachbereich','DSB'],'Transparenzverstoß (AI Act, DSGVO)','Interaktion mit KI offenlegen — Pflicht bei KI-Chatbots etc.'],
+  ['TRA-04','Sind Quellen/Fundstellen im Output nachvollziehbar?','O',['Fachbereich'],'Nicht überprüfbare Aussagen','Quellen mitliefern; Nachprüfbarkeit ist Teil der Qualitätssicherung.'],
+  ['TRA-05','Gibt es klare, verständliche Nutzungsregeln mit konkreten Beispielen?','O',['Fachbereich','DSB'],'Unsicherheit, Fehlnutzung','Konkrete Beispiele (erlaubt / mit Auflagen / untersagt) statt abstrakter Regeln.'],
+  ['TRA-06','Ist geregelt, wie Output vor externer Veröffentlichung geprüft wird?','O',['Fachbereich','IT-Recht'],'Fehlerhafte Außendarstellung','Fachliche und ggf. rechtliche QS-Stufe vor Veröffentlichung definieren.'],
+];
+
+let fkFilter = {cat:'', status:'', role:''};
+let fkReviewed = {};
+
+function fkInit() {
+  const listEl = document.getElementById('fkList');
+  if (!listEl || listEl.dataset.built) return;
+  listEl.dataset.built = '1';
+  try { fkReviewed = JSON.parse(localStorage.getItem('fk-reviewed-v1')||'{}'); } catch(e){}
+
+  // Category filter
+  const catRow = document.getElementById('fkCatRow');
+  catRow.innerHTML = `<button class="fk-cat-btn active" onclick="fkSetFilter(this,'cat','')">Alle</button>` +
+    FK_CATS.map(c => `<button class="fk-cat-btn" onclick="fkSetFilter(this,'cat','${c.id}')" title="${c.l}">${c.id}</button>`).join('');
+
+  // Status filter
+  document.getElementById('fkStatusRow').innerHTML =
+    `<button class="fk-status-btn active" onclick="fkSetFilter(this,'status','')">Alle</button>` +
+    `<button class="fk-status-btn orient" onclick="fkSetFilter(this,'status','O')">Orientierung</button>` +
+    `<button class="fk-status-btn entsch" onclick="fkSetFilter(this,'status','E')">Entscheidung</button>`;
+
+  fkRender();
+}
+
+function fkSetFilter(btn, key, val) {
+  const rowId = key === 'cat' ? 'fkCatRow' : 'fkStatusRow';
+  document.querySelectorAll('#'+rowId+' button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  fkFilter[key] = val;
+  fkRender();
+}
+
+function fkApplyFilter() {
+  fkFilter.role = document.getElementById('fkRoleSelect')?.value || '';
+  fkRender();
+}
+
+function fkRender() {
+  const listEl = document.getElementById('fkList');
+  if (!listEl) return;
+
+  const qs = FK_Q.filter(q => {
+    if (fkFilter.cat && !q[0].startsWith(fkFilter.cat)) return false;
+    if (fkFilter.status && q[2] !== fkFilter.status) return false;
+    if (fkFilter.role && !q[3].includes(fkFilter.role)) return false;
+    return true;
+  });
+
+  if (!qs.length) {
+    listEl.innerHTML = '<div class="fk-empty">Keine Fragen für diesen Filter.</div>';
+    fkUpdateStats(qs.length);
+    return;
+  }
+
+  // Group by category
+  const groups = {};
+  qs.forEach(q => { const c=q[0].split('-')[0]; (groups[c]||(groups[c]=[])).push(q); });
+
+  listEl.innerHTML = Object.entries(groups).map(([cat, qs]) => {
+    const info = FK_CATS.find(c=>c.id===cat);
+    return `<div class="fk-cat-group">
+      <div class="fk-cat-head"><span class="fk-cat-id">${cat}</span>${info?.l||''}</div>
+      <div class="fk-list">${qs.map(q=>fkItemHtml(q)).join('')}</div>
+    </div>`;
+  }).join('');
+
+  fkUpdateStats(qs.length);
+}
+
+function fkItemHtml(q) {
+  const [id,title,status,who,risk,guidance] = q;
+  const reviewed = !!fkReviewed[id];
+  const sb = status==='O'
+    ? '<span class="fk-sbadge orient">Orientierung</span>'
+    : '<span class="fk-sbadge entsch">Entscheidung</span>';
+  return `<div class="fk-item${reviewed?' reviewed':''}" id="fki-${id}">
+    <div class="fk-item-head" onclick="fkToggle('${id}')">
+      <span class="fk-id">${id}</span>
+      <span class="fk-title">${title}</span>
+      ${sb}
+      <div class="fk-chk" onclick="event.stopPropagation();fkToggleReviewed('${id}')"></div>
+    </div>
+    <div class="fk-item-body">
+      ${guidance?`<div class="fk-guidance"><div class="fk-guidance-label">Orientierung</div><div class="fk-guidance-text">${guidance}</div></div>`:''}
+      <div class="fk-body-grid">
+        <div><div class="fk-body-label">Zuständig</div><div class="fk-who-chips">${who.map(w=>`<span class="fk-who-chip">${w}</span>`).join('')}</div></div>
+        <div><div class="fk-body-label">Risiko bei Fehlhandhabung</div><div class="fk-body-text">${risk}</div></div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function fkToggle(id) {
+  document.getElementById('fki-'+id)?.classList.toggle('open');
+}
+
+function fkToggleReviewed(id) {
+  if (fkReviewed[id]) delete fkReviewed[id]; else fkReviewed[id]=1;
+  try { localStorage.setItem('fk-reviewed-v1',JSON.stringify(fkReviewed)); } catch(e){}
+  const el = document.getElementById('fki-'+id);
+  if (el) el.classList.toggle('reviewed', !!fkReviewed[id]);
+  fkUpdateStats();
+}
+
+function fkUpdateStats(filtered) {
+  const total = FK_Q.length;
+  const rev = Object.keys(fkReviewed).length;
+  const decisions = FK_Q.filter(q=>q[2]==='E').length;
+  const revDec = FK_Q.filter(q=>q[2]==='E'&&fkReviewed[q[0]]).length;
+  const el = document.getElementById('fkStats');
+  if (el) el.innerHTML =
+    `<div class="fk-stat"><strong>${total}</strong>Fragen gesamt</div>`+
+    `<div class="fk-stat s-ok"><strong>${rev}</strong>Überprüft</div>`+
+    `<div class="fk-stat"><strong>${total-rev}</strong>Noch offen</div>`+
+    `<div class="fk-stat s-warn"><strong>${decisions-revDec}</strong>Entscheidungen ausstehend</div>`;
+}
+
+function fkResetAll() {
+  if (!confirm('Alle Reviews zurücksetzen?')) return;
+  fkReviewed = {};
+  try { localStorage.removeItem('fk-reviewed-v1'); } catch(e){}
+  document.querySelectorAll('.fk-item.reviewed').forEach(el=>el.classList.remove('reviewed'));
+  fkUpdateStats();
+}
+
+function fkPrint() {
+  document.body.classList.add('fk-printing');
+  document.querySelectorAll('.fk-item').forEach(el=>el.classList.add('open'));
+  window.print();
+  setTimeout(()=>{
+    document.body.classList.remove('fk-printing');
+    document.querySelectorAll('.fk-item').forEach(el=>el.classList.remove('open'));
+  }, 1000);
+}
+
+document.querySelector('[data-view="fragenkatalog"]').addEventListener('click', fkInit);
 </script>
 </body>
 </html>
