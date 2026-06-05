@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<!-- KI-Kompass — Open Source · Strategieentscheidungen für den Aufbau einer KI-Plattform -->
+<!-- github.com/enving/ki-kompass · Lizenz: MIT -->
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KI-Kompass · Strategieentscheidungen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4efe4;--card:#fbf8f1;--white:#ffffff;
+  --ink:#1a1816;--ink2:#3d3833;--mute:#8a827a;
+  --rule:#d8d1c1;--rule2:#e6e0d1;
+  --accent:#6b2737;--accent-soft:#f0e0e3;--accent-ink:#4a1a26;
+  --gold:#9a7b3a;--gold-soft:#f0e6d0;
+  --teal:#2d5e57;--teal-soft:#dce9e5;
+  --warn:#a04030;--warn-soft:#f5e0dc;
+  --eu:#1a3a6b;--eu-soft:#dce4f0;
+  --serif:'Fraunces','Times New Roman',serif;
+  --sans:'Geist',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  --mono:'JetBrains Mono','Menlo',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+.topbar{position:sticky;top:0;z-index:100;background:var(--ink);display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:56px;border-bottom:1px solid rgba(244,239,228,0.1);flex-wrap:nowrap;gap:16px}
+.topbar-brand{font-family:var(--serif);font-weight:400;font-size:18px;color:var(--bg);display:flex;align-items:baseline;gap:8px;white-space:nowrap}
+.topbar-brand em{font-style:italic;color:var(--gold);font-weight:300}
+.topbar-tabs{display:flex;gap:0;flex-shrink:0}
+.tab{padding:16px 20px;font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:0.03em;color:rgba(244,239,228,0.55);cursor:pointer;border:none;background:transparent;border-bottom:2px solid transparent;transition:all 0.2s;white-space:nowrap}
+.tab:hover{color:rgba(244,239,228,0.85)}
+.tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+.tab .badge{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;border-radius:10px;background:rgba(244,239,228,0.15);font-size:10px;font-weight:600;margin-left:6px;padding:0 6px}
+.tab.active .badge{background:var(--gold);color:var(--ink)}
+.topbar-meta{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(244,239,228,0.35);white-space:nowrap}
+.profile-bar{background:var(--card);border-bottom:1px solid var(--rule);padding:10px 32px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.profile-bar .pb-label{font-family:var(--mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--mute);font-weight:500;white-space:nowrap}
+.profile-opts{display:flex;gap:6px;flex-wrap:wrap}
+.profile-btn{padding:5px 14px;border:1px solid var(--rule);background:var(--white);font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;color:var(--ink2);transition:all 0.15s}
+.profile-btn:hover{border-color:var(--ink2)}
+.profile-btn.active{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-ink);font-weight:600}
+.view{display:none;flex:1}
+.view.active{display:block}
+.wizard{padding:32px;max-width:960px;margin:0 auto;width:100%}
+.wizard-progress{display:flex;align-items:center;gap:16px;margin-bottom:36px}
+.progress-track{flex:1;height:4px;background:var(--rule);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:var(--accent);transition:width 0.4s ease;border-radius:2px}
+.progress-label{font-family:var(--mono);font-size:11px;letter-spacing:0.1em;color:var(--mute);white-space:nowrap}
+.wizard-step-tag{font-family:var(--mono);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.wizard-q{font-family:var(--serif);font-weight:400;font-size:clamp(26px,4vw,38px);line-height:1.1;letter-spacing:-0.01em;margin-bottom:10px}
+.wizard-q em{font-style:italic;color:var(--accent)}
+.wizard-hint{font-family:var(--serif);font-style:italic;font-weight:300;font-size:16px;color:var(--ink2);margin-bottom:28px;max-width:720px;line-height:1.45}
+.wizard-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:28px}
+@media(min-width:700px){.wizard-cards.cols-2{grid-template-columns:1fr 1fr}.wizard-cards.cols-3{grid-template-columns:1fr 1fr 1fr}.wizard-cards.cols-4{grid-template-columns:1fr 1fr}}
+.wcard{background:var(--card);border:2px solid var(--rule);padding:20px 22px 18px;cursor:pointer;transition:all 0.2s;position:relative;display:flex;flex-direction:column;min-height:150px;-webkit-tap-highlight-color:transparent}
+.wcard:hover{border-color:var(--ink2);background:var(--white);transform:translateY(-1px);box-shadow:0 8px 24px -8px rgba(26,24,22,0.12)}
+.wcard.selected{border-color:var(--accent);background:var(--white);box-shadow:0 0 0 1px var(--accent)}
+.wcard.recommended::before{content:attr(data-reclabel);position:absolute;top:-10px;left:18px;background:var(--accent);color:var(--bg);font-family:var(--mono);font-size:9px;letter-spacing:0.18em;padding:3px 10px 4px;font-weight:500}
+.wcard.eu-rec::before{background:var(--eu)}
+.wcard-letter{font-family:var(--serif);font-style:italic;font-size:30px;font-weight:300;color:var(--accent);line-height:1;margin-bottom:5px}
+.wcard-title{font-family:var(--serif);font-weight:500;font-size:18px;line-height:1.2;margin-bottom:7px}
+.wcard-desc{font-size:13px;line-height:1.5;color:var(--ink2);flex-grow:1}
+.wcard-risk{display:inline-flex;align-items:center;gap:6px;margin-top:9px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:0.03em}
+.wcard-risk.low{background:var(--teal-soft);color:var(--teal)}
+.wcard-risk.mid{background:var(--gold-soft);color:#78590a}
+.wcard-risk.high{background:var(--warn-soft);color:var(--warn)}
+.wcard-tag{display:inline-flex;align-items:center;gap:4px;margin-top:9px;padding:3px 8px;font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;background:var(--eu-soft);color:var(--eu);font-weight:500}
+.wcard .check{position:absolute;top:14px;right:14px;width:24px;height:24px;border-radius:50%;border:2px solid var(--rule);display:flex;align-items:center;justify-content:center;transition:all 0.2s}
+.wcard.selected .check{background:var(--accent);border-color:var(--accent)}
+.wcard.selected .check::after{content:"✓";color:var(--bg);font-size:13px;font-weight:600}
+.wizard-nav{display:flex;justify-content:space-between;align-items:center}
+.wbtn{padding:14px 28px;font-family:var(--sans);font-size:14px;font-weight:500;cursor:pointer;border:1px solid var(--ink);background:transparent;color:var(--ink);transition:all 0.2s;-webkit-tap-highlight-color:transparent}
+.wbtn:disabled{opacity:0.25;cursor:not-allowed}
+.wbtn.primary{background:var(--ink);color:var(--bg)}
+.wbtn.primary:hover:not(:disabled){background:var(--accent);border-color:var(--accent)}
+.wbtn.ghost{border-color:transparent;color:var(--mute)}
+.ergebnis{max-width:960px;margin:0 auto;padding:32px;width:100%}
+.erg-section{margin-bottom:52px}
+.erg-label{font-family:var(--mono);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.erg-heading{font-family:var(--serif);font-weight:400;font-size:clamp(28px,4vw,40px);line-height:1.05;margin-bottom:8px}
+.erg-heading em{font-style:italic;color:var(--accent)}
+.erg-sub{font-family:var(--serif);font-style:italic;font-weight:300;font-size:17px;color:var(--ink2);margin-bottom:28px;max-width:700px}
+.path-card{padding:22px 26px;background:var(--ink);color:var(--bg);margin-bottom:24px;border-left:4px solid var(--gold)}
+.path-card .label{font-family:var(--mono);font-size:10px;letter-spacing:0.15em;color:var(--gold);margin-bottom:6px}
+.path-card h3{font-family:var(--serif);font-size:22px;font-weight:400;margin-bottom:4px}
+.path-card p{font-family:var(--serif);font-style:italic;font-size:14px;color:rgba(244,239,228,0.7);line-height:1.45}
+.path-card.empty h3{color:rgba(244,239,228,0.4);font-style:italic;font-weight:300}
+.wellen{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;margin-bottom:8px}
+@media(max-width:700px){.wellen{grid-template-columns:1fr}}
+.welle{padding:20px 22px 22px}
+.welle:nth-child(1){background:var(--ink);color:var(--bg)}
+.welle:nth-child(2){background:var(--accent);color:var(--bg)}
+.welle:nth-child(3){background:var(--gold);color:var(--ink)}
+.welle-num{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;opacity:0.65;margin-bottom:4px}
+.welle-zeit{font-family:var(--serif);font-size:22px;font-weight:400;margin-bottom:4px;line-height:1.1}
+.welle-fokus{font-family:var(--serif);font-style:italic;font-size:13px;opacity:0.8;margin-bottom:12px}
+.welle-items{list-style:none;font-size:13px;line-height:1.5}
+.welle-items li{padding:5px 0 5px 16px;position:relative;opacity:0.9}
+.welle-items li::before{content:"→";position:absolute;left:0;font-family:var(--mono);font-size:11px;opacity:0.7}
+.welle:nth-child(1) .welle-items li::before{color:var(--gold)}
+.nexus-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:8px}
+@media(max-width:700px){.nexus-grid{grid-template-columns:1fr}}
+.nblock{border:1px solid var(--rule);background:var(--card);overflow:hidden;cursor:pointer;transition:box-shadow 0.2s}
+.nblock:hover{box-shadow:0 4px 16px -4px rgba(26,24,22,0.12)}
+.nblock-head{padding:14px 20px;border-bottom:1px solid var(--rule);display:flex;align-items:center;gap:12px}
+.nblock-num{font-family:var(--mono);font-size:10px;letter-spacing:0.15em;color:var(--accent)}
+.nblock-title{font-family:var(--serif);font-weight:500;font-size:17px}
+.nblock-title em{font-style:italic;color:var(--accent)}
+.nblock-body{padding:14px 20px}
+.nblock-items{list-style:none}
+.nblock-items li{padding:7px 0 7px 18px;font-size:13px;line-height:1.4;color:var(--ink2);border-bottom:1px solid var(--rule2);position:relative}
+.nblock-items li:last-child{border-bottom:none}
+.nblock-items li::before{content:"→";position:absolute;left:0;color:var(--gold);font-family:var(--mono);font-size:11px}
+.nblock-items li.warn::before{content:"!";color:var(--warn)}
+.nblock-items li.warn{color:var(--warn)}
+.nblock-empty{font-family:var(--serif);font-style:italic;color:var(--mute);font-size:13px}
+.nblock-toggle{display:flex;align-items:center;gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid var(--rule2);font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);font-weight:500}
+.nblock-toggle .arr{transition:transform 0.2s;display:inline-block;font-size:11px}
+.nblock.open .nblock-toggle .arr{transform:rotate(90deg)}
+.nblock-detail{display:none;margin-top:10px;padding:14px 16px;background:var(--ink)}
+.nblock.open .nblock-detail{display:block}
+.nblock-detail p{font-family:var(--serif);font-size:14px;line-height:1.6;color:rgba(244,239,228,0.88);font-weight:300}
+.nblock-detail p+p{margin-top:8px}
+.nblock-detail strong{font-weight:500;color:var(--bg)}
+.deep-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--rule);overflow:hidden}
+@media(max-width:700px){.deep-grid{grid-template-columns:1fr 1fr}}
+.deep-block{padding:20px 18px;border-right:1px solid var(--rule)}
+.deep-block:last-child{border-right:none}
+.deep-letter{font-family:var(--serif);font-style:italic;font-size:48px;font-weight:300;line-height:1;margin-bottom:4px}
+.deep-block:nth-child(1){background:var(--card)} .deep-block:nth-child(1) .deep-letter{color:var(--accent)}
+.deep-block:nth-child(2){background:var(--card)} .deep-block:nth-child(2) .deep-letter{color:var(--gold)}
+.deep-block:nth-child(3){background:var(--card)} .deep-block:nth-child(3) .deep-letter{color:var(--teal)}
+.deep-block:nth-child(4){background:var(--ink);color:var(--bg)} .deep-block:nth-child(4) .deep-letter{color:var(--gold)}
+.deep-phase{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--mute);margin-bottom:6px}
+.deep-block:nth-child(4) .deep-phase{color:rgba(244,239,228,0.5)}
+.deep-title{font-family:var(--serif);font-weight:500;font-size:15px;margin-bottom:6px}
+.deep-q{font-size:12px;line-height:1.45;color:var(--ink2);margin-bottom:6px}
+.deep-block:nth-child(4) .deep-q{color:rgba(244,239,228,0.75)}
+.deep-out{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:0.05em}
+.deep-block:nth-child(4) .deep-out{color:var(--gold)}
+.deep-tip{margin-top:16px;padding:12px 16px;background:var(--teal-soft);border-left:3px solid var(--teal);font-size:13px;line-height:1.5;color:var(--ink2);font-style:italic}
+.arch-table{width:100%;border-collapse:collapse;font-size:13.5px}
+.arch-table th{background:var(--ink);color:var(--bg);text-align:left;padding:10px 16px;font-family:var(--mono);font-size:11px;letter-spacing:0.1em;font-weight:500}
+.arch-table td{padding:10px 16px;border-bottom:1px solid var(--rule);vertical-align:top}
+.arch-table .layer-group td{background:var(--ink);color:var(--bg);padding:7px 16px;font-family:var(--mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;font-weight:500}
+.arch-table .layer-group.g-identity td{background:#243240}
+.arch-table .layer-group.g-tools td{background:#3a2030}
+.arch-table .layer-group.g-gateway td{background:#2a3a28}
+.arch-table .layer-group.g-data td{background:#3a3020}
+.arch-table .layer-group.g-inference td{background:#1e2a3a}
+.arch-table .layer-group.g-monitor td{background:#2a1e20}
+.arch-table tr:nth-child(odd) td:not(.arch-group-cell){background:var(--card)}
+.arch-table .component strong{font-weight:600}
+.arch-table .note{color:var(--mute);font-size:12px;font-style:italic}
+.botschaften{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px}
+.botschaft{padding:16px 20px;background:var(--ink);color:var(--bg)}
+.botschaft .bq{font-family:var(--serif);font-style:italic;font-size:16px;line-height:1.4;color:var(--bg);margin-bottom:6px}
+.botschaft .bq::before{content:'"';color:var(--gold);font-size:24px;font-style:normal;line-height:0;vertical-align:-8px;margin-right:2px}
+.botschaft .bq::after{content:'"';color:var(--gold);font-size:24px;font-style:normal;line-height:0;vertical-align:-8px;margin-left:2px}
+.botschaft .bwhy{font-size:12px;color:rgba(244,239,228,0.55);line-height:1.4}
+.decisions-table{width:100%;border-collapse:collapse;font-size:13.5px;margin-bottom:8px}
+.decisions-table th{background:var(--ink);color:var(--bg);text-align:left;padding:10px 16px;font-family:var(--mono);font-size:11px;letter-spacing:0.1em;font-weight:500}
+.decisions-table td{padding:11px 16px;border-bottom:1px solid var(--rule);vertical-align:top}
+.decisions-table tr:nth-child(even) td{background:var(--card)}
+.decisions-table .q-num{font-family:var(--mono);font-size:11px;color:var(--mute);letter-spacing:0.08em}
+.decisions-table .q-title{font-family:var(--serif);font-weight:500}
+.decisions-table .q-answer{font-weight:500;color:var(--accent)}
+.decisions-table .q-answer .letter{font-family:var(--serif);font-style:italic;margin-right:4px}
+.decisions-table .q-empty{color:var(--mute);font-style:italic}
+.kompass-view{max-width:960px;margin:0 auto;padding:32px;width:100%}
+.kompass-hero{background:linear-gradient(135deg,var(--ink) 0%,#2a3848 100%);padding:40px 40px 36px;margin-bottom:32px;border-left:4px solid var(--gold)}
+.kompass-hero .erg-label{color:var(--gold)}
+.kompass-hero .erg-heading{color:var(--bg)}
+.kompass-hero .erg-heading em{color:var(--gold)}
+.kompass-hero .erg-sub{color:rgba(244,239,228,0.7)}
+.kompass-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+@media(max-width:700px){.kompass-grid{grid-template-columns:1fr}}
+.kblock{padding:24px;background:var(--white);border:1px solid var(--rule)}
+.kblock-num{font-family:var(--serif);font-style:italic;font-size:40px;font-weight:300;color:var(--gold);line-height:1;margin-bottom:6px}
+.kblock h4{font-family:var(--serif);font-weight:500;font-size:20px;margin-bottom:8px}
+.kblock p{font-size:14px;color:var(--ink2);line-height:1.55}
+.kblock strong{color:var(--ink);font-weight:500}
+.caveat{padding:22px 26px;background:rgba(107,39,55,0.06);border-left:3px solid var(--accent)}
+.caveat .label{font-family:var(--mono);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.caveat p{font-family:var(--serif);font-size:16px;line-height:1.5;color:var(--ink2);font-weight:300}
+.caveat p+p{margin-top:10px}
+.caveat em{color:var(--accent)}
+.uebersicht{max-width:960px;margin:0 auto;padding:32px;width:100%}
+.ub-section{margin-bottom:20px;padding:22px;background:var(--card);border:1px solid var(--rule)}
+.ub-num{font-family:var(--mono);font-size:11px;color:var(--mute);letter-spacing:0.1em;margin-bottom:4px}
+.ub-title{font-family:var(--serif);font-size:20px;font-weight:500;margin-bottom:12px}
+.ub-title em{font-style:italic;color:var(--accent)}
+.ub-opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px}
+.ub-opt{padding:12px 14px;border:1px solid var(--rule);cursor:pointer;transition:all 0.15s;font-size:13px;position:relative;-webkit-tap-highlight-color:transparent}
+.ub-opt:hover{border-color:var(--ink2)}
+.ub-opt.selected{border-color:var(--accent);background:var(--accent-soft)}
+.ub-opt.recommended::after{content:'★';position:absolute;top:8px;right:10px;color:var(--gold);font-size:12px}
+.ub-opt strong{font-family:var(--serif);font-size:14px;display:block;margin-bottom:2px}
+.ub-opt .desc{color:var(--ink2);font-size:11px;line-height:1.4}
+@media print{.topbar,.profile-bar{display:none}.view{display:block!important}body{background:white}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-brand">KI-<em>Kompass</em></div>
+  <div class="topbar-tabs">
+    <button class="tab active" data-view="walkthrough">Walkthrough</button>
+    <button class="tab" data-view="uebersicht">Übersicht</button>
+    <button class="tab" data-view="ergebnis">Ergebnis <span class="badge" id="countBadge">0/10</span></button>
+    <button class="tab" data-view="kompass">Kompass</button>
+  </div>
+  <div class="topbar-meta">v1.0 · Open Source</div>
+</div>
+
+<div class="profile-bar">
+  <span class="pb-label">Organisationstyp</span>
+  <div class="profile-opts" id="profileOpts">
+    <button class="profile-btn active" data-profil="B">Unternehmen</button>
+    <button class="profile-btn" data-profil="A">Branchenverband</button>
+    <button class="profile-btn" data-profil="C">Behörde / öffentl. Sektor</button>
+    <button class="profile-btn" data-profil="D">Start-up / KMU</button>
+  </div>
+</div>
+
+<!-- WALKTHROUGH -->
+<div class="view active" id="view-walkthrough">
+  <div class="wizard">
+    <div class="wizard-progress">
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-label" id="progressLabel">Frage 1 von 10</div>
+    </div>
+    <div id="wizardBody"></div>
+    <div class="wizard-nav">
+      <button class="wbtn ghost" id="btnBack" style="visibility:hidden">← Zurück</button>
+      <button class="wbtn primary" id="btnNext" disabled>Weiter →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ÜBERSICHT -->
+<div class="view" id="view-uebersicht">
+  <div class="uebersicht" id="uebersichtBody"></div>
+</div>
+
+<!-- ERGEBNIS -->
+<div class="view" id="view-ergebnis">
+  <div class="ergebnis">
+
+    <div class="erg-section">
+      <div class="erg-label">Konsens-Mitschrift</div>
+      <div class="erg-heading">Ihre <em>Entscheidungen</em></div>
+      <div class="erg-sub">Alle 10 Weichenstellungen auf einen Blick.</div>
+      <table class="decisions-table"><thead><tr><th>#</th><th>Frage</th><th>Entscheidung</th></tr></thead><tbody id="decisionsTbody"></tbody></table>
+    </div>
+
+    <div class="erg-section">
+      <div class="erg-label">Pfad-Synthese</div>
+      <div class="path-card empty" id="pathCard">
+        <div class="label">Empfohlener Pfad</div>
+        <h3>— treffen Sie Entscheidungen im Walkthrough —</h3>
+        <p></p>
+      </div>
+    </div>
+
+    <div class="erg-section">
+      <div class="erg-label">Roadmap · drei Wellen</div>
+      <div class="erg-heading">Wann <em>was</em> passiert</div>
+      <div class="erg-sub">Reihenfolge ist Strategie — nicht alles auf einmal, aber konsequent aufbauend.</div>
+      <div class="wellen" id="wellenEl">
+        <div class="welle"><div class="welle-num">Welle 1</div><div class="welle-zeit">Sofort · Wochen 1–8</div><div class="welle-fokus">Adoption &amp; Quick Wins</div><ul class="welle-items"><li>KI-Werkzeuge für alle MA ausrollen</li><li>Identity, Gateway, Token-Caps aufsetzen</li><li>Erster RAG-Pilot: dokumentenreiches Asset</li><li>KI-Inventar inkl. Shadow-AI erfassen</li><li>Responsible-AI-Leitlinie beschließen</li></ul></div>
+        <div class="welle"><div class="welle-num">Welle 2</div><div class="welle-zeit">Q1–Q2 · Monate 3–6</div><div class="welle-fokus">Skills &amp; Discovery durch Nutzung</div><ul class="welle-items"><li>Daten-Inventar → Standards → erste Pipelines</li><li>Communities of Practice je Fachbereich</li><li>Strukturierte Use-Case-Anforderungen entstehen</li><li>Telemetrie zeigt echten Bedarf</li><li>Showback-Reports je Fachbereich</li></ul></div>
+        <div class="welle"><div class="welle-num">Welle 3</div><div class="welle-zeit">Ab Q3 · Monate 7–12</div><div class="welle-fokus">ML-Wertschöpfung &amp; externe Services</div><ul class="welle-items"><li>Spezialisiertes ML auf Basis reifer Daten</li><li>MLflow-Registry + Drift-Alerts produktiv</li><li>Chargeback-Modell aktivieren</li><li>Pilot-Service für externe Partner / Mitglieder</li><li>Abgestimmter Fahrplan mit IT-Tochter / Dienstleister</li></ul></div>
+      </div>
+    </div>
+
+    <div class="erg-section">
+      <div class="erg-label">Nexus · vier Bausteine</div>
+      <div class="erg-heading">Wo es <em>hingehört</em></div>
+      <div class="erg-sub">Adoption ist der Motor — die anderen drei sind der Motor-Block. Anklicken für Führungsebene-Erklärung.</div>
+      <div class="nexus-grid" id="nexusGrid"></div>
+    </div>
+
+    <div class="erg-section">
+      <div class="erg-label">DEEP-Framework</div>
+      <div class="erg-heading">Wie <em>Use-Case-Anfragen</em> strukturiert werden</div>
+      <div class="erg-sub">Wenn ein Fachbereich eine KI-Lösung möchte — statt Ad-hoc-Projekte ein reproduzierbarer Prozess.</div>
+      <div class="deep-grid">
+        <div class="deep-block">
+          <div class="deep-phase">Phase D · Woche 1–2</div>
+          <div class="deep-letter">D</div>
+          <div class="deep-title">Discover</div>
+          <div class="deep-q">Was ist das echte Problem? Wer hat es? Wie oft? Welche Daten sind vorhanden?</div>
+          <div class="deep-out">Output: 1-Seiten-Problem-Statement</div>
+        </div>
+        <div class="deep-block">
+          <div class="deep-phase">Phase E · Woche 2–3</div>
+          <div class="deep-letter">E</div>
+          <div class="deep-title">Evaluate</div>
+          <div class="deep-q">Welche KI-Methode passt? AI-Act-Risikoklasse? RICE-Score vs. andere Vorhaben?</div>
+          <div class="deep-out">Output: AI-Act-Klasse + Priorisierung</div>
+        </div>
+        <div class="deep-block">
+          <div class="deep-phase">Phase E · Woche 3–7</div>
+          <div class="deep-letter">E</div>
+          <div class="deep-title">Experiment</div>
+          <div class="deep-q">Funktioniert es? Erster lauffähiger Prototyp, echte Nutzer geben Feedback, Community of Practice testet.</div>
+          <div class="deep-out">Output: Pilot-Eval-Report</div>
+        </div>
+        <div class="deep-block">
+          <div class="deep-phase">Phase P · Ab Woche 8</div>
+          <div class="deep-letter">P</div>
+          <div class="deep-title">Produce</div>
+          <div class="deep-q">Gut genug? Sicher genug? MLflow-Registry, Drift-Alerts, IaC, Monitoring, Übergabe an Betrieb.</div>
+          <div class="deep-out">Output: Produktiver UC + Lifecycle-Plan</div>
+        </div>
+      </div>
+      <div class="deep-tip">Mit Welle-1-Telemetrie: <strong>D + erstes E entstehen durch Nutzungs-Daten</strong> — ohne Interview. Das System zeigt von selbst, welche Probleme häufig auftauchen.</div>
+    </div>
+
+    <div class="erg-section">
+      <div class="erg-label">Architektur-Skizze</div>
+      <div class="erg-heading">Der <em>Stack</em>, abgeleitet</div>
+      <div class="erg-sub">Die Entscheidungen, übersetzt in Schichten. Farbige Trennzeilen zeigen Schichten-Gruppen.</div>
+      <table class="arch-table"><thead><tr><th style="width:180px">Schicht</th><th>Komponente</th><th>Hinweis</th></tr></thead><tbody id="archTbody"></tbody></table>
+    </div>
+
+    <div class="erg-section">
+      <div class="erg-label">Kernbotschaften · direkt zitierbar</div>
+      <div class="erg-heading">Was bleibt, wenn die <em>Folien</em> weg sind</div>
+      <div class="erg-sub">Für das Gespräch konzipiert — einprägsam, konkret, nicht generisch.</div>
+      <div class="botschaften">
+        <div class="botschaft"><div class="bq">Adoption ist der Motor — die anderen drei sind der Motor-Block</div><div class="bwhy">Erklärt in einem Satz warum Plattform, Governance und Daten allein nicht reichen.</div></div>
+        <div class="botschaft"><div class="bq">Wir warten nicht auf saubere Daten — Nutzung zeigt was gebraucht wird</div><div class="bwhy">Contra das klassische "erst Daten ordnen, dann KI" — Telemetrie ist das echte Discovery-Instrument.</div></div>
+        <div class="botschaft"><div class="bq">Kein Monitoring = kein Go-Live</div><div class="bwhy">Non-negotiable: kein UC geht in Produktion ohne Drift-Erkennung und Eval-Baseline.</div></div>
+        <div class="botschaft"><div class="bq">Plattform statt Insellösung, Governance statt Wildwuchs, Nutzen statt Hype</div><div class="bwhy">Die drei Leitplanken — setzt Erwartungen und schützt vor den häufigsten KI-Fehlern.</div></div>
+        <div class="botschaft"><div class="bq">Discovery ohne Interview — durch Telemetrie</div><div class="bwhy">Use-Case-Bedarf entsteht nicht in Workshops, sondern zeigt sich in Nutzungs-Mustern.</div></div>
+        <div class="botschaft"><div class="bq">Die Plattform sollte anbieterneutral wahrgenommen werden</div><div class="bwhy">Begründet warum Multi-Modell-Strategie wichtiger ist als Lock-in bei einem Anbieter.</div></div>
+        <div class="botschaft"><div class="bq">Quick Start der sofort liefert — ausbaubar statt locked-in</div><div class="bwhy">Welle-1-Architektur muss in Welle-2/3 tragfähig bleiben — keine MVP-Sackgassen.</div></div>
+        <div class="botschaft"><div class="bq">Sovereign-Cloud-Optionen: Abgrenzung frühzeitig klären</div><div class="bwhy">DELOS (öffentl. Sektor), AWS Brandenburg, Azure-Sovereign: je nach Regulierungsstatus passt eine andere Option.</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- KOMPASS TAB -->
+<div class="view" id="view-kompass">
+  <div class="kompass-view">
+    <div class="kompass-hero">
+      <div class="erg-label">Vom Werkzeug zum Produkt</div>
+      <div class="erg-heading">Der <em>Kompass</em> als Service für andere</div>
+      <div class="erg-sub">Dieses Werkzeug ist ein Prototyp dafür, wie eine Organisation, die KI intern erfolgreich eingeführt hat, dieses Wissen strukturiert nach außen weitergeben kann — an Mitglieder, Partner oder Branchenkollegen.</div>
+    </div>
+    <div class="kompass-grid">
+      <div class="kblock"><div class="kblock-num">i</div><h4>Die Beobachtung</h4><p>Viele Organisationen in derselben Branche treffen <strong>dieselben zehn strategischen KI-Entscheidungen</strong> — und zahlen dafür separat Berater, mit weniger Branchenkontext als eine Organisation, die mit allen gleichzeitig im Gespräch ist.</p></div>
+      <div class="kblock"><div class="kblock-num">ii</div><h4>Das Angebot</h4><p>Ein <strong>kuratierer KI-Kompass für die eigene Zielgruppe</strong>: dieselben Entscheidungen, angepasst pro Profil (Größe, Regulierungsstatus, Branche), mit <strong>AI-Act-Mapping</strong>, anonymisierten Benchmark-Daten und Verweisen auf eigene Standards oder Empfehlungen.</p></div>
+      <div class="kblock"><div class="kblock-num">iii</div><h4>Der Lieferungsweg</h4><p>Self-Service-Tool wie dieses, ergänzt durch <strong>moderierte Workshops</strong>. Plus jährlicher Branchen-Report: „Wo steht meine Branche bei diesen zehn Entscheidungen?" — eine Sichtbarkeitsmaßnahme, die kaum eine einzelne Organisation leisten kann.</p></div>
+      <div class="kblock"><div class="kblock-num">iv</div><h4>Die Verbindung zu Welle 1</h4><p>Die <strong>interne Plattform-Erfahrung</strong> liefert das Material. Was intern funktioniert hat (und was nicht), ist die belastbarste Evidenz. <em>Welle 1 ist Voraussetzung, nicht Konkurrenz.</em></p></div>
+    </div>
+    <div class="caveat">
+      <div class="label">Ehrlicher Hinweis · drei Vorbedingungen</div>
+      <p>Welche Tiefe ist mit der eigenen Rolle vereinbar — Orientierung ja, konkrete Produktempfehlung heikel. Wie verhält sich der Kompass zu bestehenden Beratern in der Branche? Und: wer hat das Mandat, diesen Service anzubieten, und wer trägt die Verantwortung für seine Inhalte?</p>
+      <p>Die Antworten sind nicht offensichtlich. Aber genau darum lohnt sich der Prototyp <em>vor</em> der Strategie-Entscheidung — er macht die Frage anfassbar.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// PROFIL: wählbar über Profile-Bar
+// A=Branchenverband, B=Unternehmen, C=Behörde, D=Start-up/KMU
+// ═══════════════════════════════════════════
+let PROFIL = 'B';
+
+document.querySelectorAll('.profile-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.profile-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    PROFIL = btn.dataset.profil;
+    renderStep();
+  });
+});
+
+// ═══════════════════════════════════════════
+// 10 FRAGEN
+// ═══════════════════════════════════════════
+const QS = [
+{id:'scope',tag:'Sektion A · Strategie',q:'Für <em>wen</em> bauen wir in Jahr 1?',
+hint:'Die Antwort prägt Scope, Governance, Schnittstellen und Kommunikationsstrategie der gesamten Initiative. Intern zuerst ist in den meisten Fällen sinnvoller als direkt extern — die interne Erfahrung liefert das Material für externe Angebote.',cols:3,
+opts:[
+{l:'A',t:'Intern zuerst, extern ab Jahr 2/3',d:'Welle 1 für interne Mitarbeitende. Externer Service (Mitglieder, Partner, Kunden) als kuratierte Plattform in Welle 2/3.'},
+{l:'B',t:'Nur intern, kein externes Mandat',d:'Interne Mitarbeitende als Endziel. Kein Partner-Service geplant. Einfacheres Mandat, klarere Governance.'},
+{l:'C',t:'Extern von Anfang an',d:'Ausgewählte externe Partner bereits in Welle 1 als Co-Pilot eingebunden. Höheres Risiko, höhere Sichtbarkeit.'},
+]},
+{id:'cloud',tag:'Sektion A · Strategie',q:'Wie <em>tief</em> in die Cloud — und welche <em>Modell-Strategie</em>?',
+hint:'Cloud-first bedeutet: managed Services zuerst, Eigenentwicklung nur wo nötig. Die eigentliche Entscheidung ist Tiefe und Souveränität: vollständig bei einem Hyperscaler, oder mit einer EU-nativen Modell-Option kombiniert?',cols:2,
+opts:[
+{l:'A',t:'Hyperscaler Full-Stack',d:'Ein Hyperscaler (Azure, AWS, GCP) für Infrastruktur, Governance und Modelle. Tiefste Integration in bestehendes Ökosystem, einfachste Governance.'},
+{l:'B',t:'Primary Cloud + Sovereign-Komponente',d:'Hyperscaler als Primary. Sensitivdaten (FuE, Personal, strategische Dokumente) auf EU-Hoster oder Sovereign-Region.',euRec:true},
+{l:'C',t:'Cloud-Infra + EU-natives Modell',d:'Hyperscaler für Infrastruktur und Governance. EU-natives Modell (z. B. Mistral, Paris) für Inferenz — DSGVO-konform, kein US-CLOUD-Act.',euRec:true},
+{l:'D',t:'Multi-Cloud bewusst',d:'Verschiedene Anbieter je Workload-Typ. Maximale Flexibilität und Lock-in-Vermeidung, hoher Governance-Overhead.'},
+]},
+{id:'buildbuy',tag:'Sektion A · Strategie',q:'Wie viel <em>selbst bauen</em>, wie viel <em>zukaufen</em>?',
+hint:'Cloud-first bedeutet: managed Services bevorzugen. Aber organisationsspezifische Use Cases haben oft kein Standardprodukt — hier liegt die eigentliche Build-Entscheidung.',cols:3,
+opts:[
+{l:'A',t:'Buy-first',d:'Enterprise-Copilot oder vergleichbares Standardprodukt. Plattform = Konfiguration + Governance. Keine Eigenentwicklung. Schnellster Start.'},
+{l:'B',t:'Hybrid: Buy unten, Build oben',d:'Standardprodukt für allgemeine Produktivität. Eigener RAG- und Orchestrierungs-Layer für organisationsspezifische Use Cases.'},
+{l:'C',t:'Build-Platform',d:'Eigener Stack auf Cloud-Primitiven. Maximale Kontrolle und Differenzierung, eigenes Engineering-Team erforderlich.'},
+]},
+{id:'usecase',tag:'Sektion B · Use-Case & Daten',q:'Womit <em>fangen wir an</em>?',
+hint:'Kriterien für den ersten Use Case: trifft Kerngeschäft, messbarer Nutzen, in 90–120 Tagen machbar, Low-Risk nach AI Act, nutzt ein einzigartiges Daten-Asset der Organisation.',cols:2,
+opts:[
+{l:'A',t:'Wissens-RAG + Drafting',d:'RAG über den eigenen Dokumentenbestand (Positionspapiere, Richtlinien, interne Wissensquellen). Mitarbeitende fragen: „Was haben wir zu Thema X?" Das Modell zitiert und liefert Argumentationslinien.',risk:'low',riskLabel:'Low-Risk · Transparenz + AI Literacy'},
+{l:'B',t:'Monitoring / Klassifikation',d:'Automatische Klassifikation eingehender Dokumente (Regulierungen, Nachrichten, Anfragen) nach Relevanz, Routing an Fachbereich, erster Entwurf.',risk:'low',riskLabel:'Low-Risk · Transparenz'},
+{l:'C',t:'Horizontaler Copilot',d:'Enterprise-Copilot für alle Mitarbeitenden. Breite Adoption, generischer Mehrwert — kein organisationsspezifisches Daten-Asset als Differenzierung.',risk:'low',riskLabel:'Low-Risk · AI Literacy'},
+{l:'D',t:'Prozess- / Workflow-Support',d:'KI-Unterstützung für wiederkehrende Workflows (Protokolle, Zusammenfassungen, Action-Item-Tracking). Sichtbarer Nutzen im Tagesgeschäft.',risk:'mid',riskLabel:'Mittel · Vertraulichkeit prüfen'},
+]},
+{id:'aiact',tag:'Sektion B · Use-Case & Daten',q:'Welche <em>AI-Act-Risikoklasse</em> hat der erste Use-Case?',
+hint:'Der EU AI Act unterscheidet nach Risikoklasse des Einsatzes (nicht des Modells) und nach Rolle: Deployer (Anwender) vs. Provider (Entwickler eigener Systeme). Interne Produktivitäts-Tools fallen typischerweise in Low-Risk.',cols:2,
+opts:[
+{l:'A',t:'Low-Risk',d:'Chatbot, Drafting-Assistenz, Dokumentensuche, Übersetzung. Pflicht: Transparenz (KI-Kennzeichnung) + AI Literacy für alle Nutzenden.',risk:'low',riskLabel:'Typisch für Welle 1 intern'},
+{l:'B',t:'Mittel-Risk',d:'Vorprüfung mit Entscheidungsbezug, Scoring-Vorschläge. Pflicht: Human Oversight + Bias-Check.',risk:'mid',riskLabel:'Wenn Entscheidungen beeinflusst'},
+{l:'C',t:'High-Risk (Anhang III)',d:'Outputs beeinflussen Entscheidungen mit rechtlicher oder wirtschaftlicher Wirkung. Pflicht: Konformitätsbewertung, EU-Registrierung, technische Dokumentation.',risk:'high',riskLabel:'Prüfen ob Anhang III zutrifft'},
+{l:'D',t:'GPAI-Provider',d:'Organisation trainiert ein eigenes Basis-Modell substantiell. Pflicht: Trainingsdaten-Summary, Copyright-Policy, Dokumentation. Für Welle 1 nicht realistisch.',risk:'high',riskLabel:'Nicht für Welle 1 empfohlen'},
+]},
+{id:'ragft',tag:'Sektion B · Use-Case & Daten',q:'RAG, Fine-Tuning — oder <em>beides</em>?',
+hint:'Zwei verschiedene Werkzeuge: RAG lässt das Modell in eigenen Dokumenten suchen und faktenbasiert antworten — Wissen bleibt aktuell durch einfaches Dokument-Update. Fine-Tuning trainiert das Modell auf organisationsspezifischen Stil und Terminologie — aufwändiger, aber tiefere Integration.',cols:3,
+opts:[
+{l:'A',t:'Nur RAG',d:'KI sucht in eigenen Dokumenten und antwortet faktenbasiert. Kein Re-Training. Wissen bleibt aktuell durch Dokument-Updates. Schnellster MVP, niedrigstes Risiko.'},
+{l:'B',t:'RAG + Light Fine-Tuning',d:'RAG für faktenbasierte Antworten aus dem Dokumentenbestand. Leichtes Training (LoRA) für organisationsspezifischen Stil und Fachterminologie.'},
+{l:'C',t:'Volles Domain-Modell',d:'Eigenes spezialisiertes Sprachmodell auf dem eigenen Daten-Korpus. Löst GPAI-Provider-Pflichten aus. Erst sinnvoll ab sehr großem Datenbestand und ML-Team.'},
+]},
+{id:'data',tag:'Sektion B · Use-Case & Daten',q:'Wie gehen wir mit der <em>Daten-Realität</em> um?',
+hint:'KI ohne saubere Daten bleibt Demo. Die meisten Organisationen haben unklassifizierte Dokumente in SharePoint/OneDrive. Die Frage: Inventur parallel zum MVP starten, oder erst aufräumen dann KI?',cols:3,
+opts:[
+{l:'A',t:'90-Tage-Plan parallel zum MVP',d:'Monat 1: Datenkatalog + Sensitivitäts-Tags. Monat 2: Data-Owner-Workshop je Fachbereich, Standards. Monat 3: erste Pipeline (Bronze/Silver/Gold-Schichten).'},
+{l:'B',t:'Direkt Medallion für Pilot',d:'Sofort Bronze/Silver/Gold nur für den ersten Use Case. Inventar und Standards kommen nachgelagert. Schnellster UC, Restbestand bleibt unbearbeitet.'},
+{l:'C',t:'Datenstrategie später',d:'Welle 1 läuft mit vorhandenen Dokumenten ohne Klassifikation. Datenstrategie ab Welle 2. Welle-3-ML verzögert sich erheblich.'},
+]},
+{id:'governance',tag:'Sektion C · Governance & FinOps',q:'Wer <em>verantwortet</em> KI-Nutzung?',
+hint:'Responsible-AI-Leitlinien, Audit-Fähigkeit und Rollen-/Rechtemanagement sind Grundvoraussetzungen für den Produktivbetrieb. Wer entscheidet je Use Case über Freigabe, Risikoklasse und Datenzugriff?',cols:3,
+opts:[
+{l:'A',t:'Zentral · Platform-Team',d:'Alle KI-Initiativen laufen durch das Platform-Team. Maximale Konsistenz, aber Engpass und geringe Fachbereichs-Autonomie.'},
+{l:'B',t:'Center of Excellence',d:'Platform-Team setzt Standards und Guardrails. Fachbereiche bauen eigene Use Cases auf der Plattform — mit AI-Act-Klassifizierung als Pflichtschritt. CoE als Enabler.'},
+{l:'C',t:'Föderiert',d:'Jeder Fachbereich entscheidet eigenständig. Maximale Geschwindigkeit, aber AI-Act-Compliance schwer nachweisbar und Shadow-AI-Risiko hoch.'},
+]},
+{id:'finops',tag:'Sektion C · Governance & FinOps',q:'Wer <em>zahlt</em>, wer <em>sieht</em> die Kosten?',
+hint:'Token-basierte KI-Kosten sind volatil — ein intensiver Nutzer verbraucht das Vielfache eines gelegentlichen. Showback macht Kosten sichtbar ohne Nutzung zu bremsen. Chargeback aktiviert Steuerungseffekt.',cols:2,
+opts:[
+{l:'A',t:'Token-Modell · Showback → Chargeback',d:'Nutzungsbasiert via API-Gateway. Jahr 1–2: Showback (transparent, nicht verrechnet). Ab Jahr 3: Chargeback wenn Nutzungsmuster stabil. Blended ~8–12 €/MA/Mo.'},
+{l:'B',t:'Flat-Seat-Lizenzen',d:'Fester Preis pro User (~25–35 €/Mo). Planbar und einfach, aber kein Steuerungseffekt und Power-User subventioniert.'},
+{l:'C',t:'Chargeback sofort',d:'Direkte interne Verrechnung ab Tag 1. Maximale Kostendisziplin, hemmt aber Experimente in der Adoptionsphase.'},
+{l:'D',t:'Zentral · IT-Budget',d:'Alle Token-Kosten im zentralen IT-Budget. Einfachste Lösung, kein Fachbereichs-Kostenbewusstsein, kein Steuerungseffekt.'},
+]},
+{id:'okr',tag:'Sektion C · Governance & FinOps',q:'Was <em>messen</em> wir am Jahresende?',
+hint:'OKRs müssen gegenüber IT-Leitung, Geschäftsführung und Gremien bestehen. Zu technisch = unverständlich. Zu weich = nicht messbar. Plattform-Fokus und Adoptions-Fokus haben je eigene blinde Flecken.',cols:3,
+opts:[
+{l:'A',t:'Plattform-Fokus',d:'O: Produktionsreife, compliance-konforme KI-Plattform — KR1: 3 Fachbereiche produktiv bis Q3 · KR2: Uptime ≥99,5%, Incident-Reaktion <4h · KR3: AI-Act-Inventar komplett · KR4: ≥2 CoPs aktiv · KR5: Cloud-Kosten ±10% Budget'},
+{l:'B',t:'Adoptions-Fokus',d:'O: Mitarbeitende als KI-Use-Case-Quelle — KR1: ≥85% MA nutzen KI wöchentlich · KR2: ≥50 KI-gestützte Dokument-Outputs · KR3: Bearbeitungszeit −30% vs. Baseline · KR4: Time-to-Value neuer UCs <5 Tage · KR5: Selbstwirksamkeit ≥4,2/5'},
+{l:'C',t:'Hybrid (empfohlen)',d:'O: KI ist produktiv und wird genutzt — KR1: 3 Fachbereiche produktiv · KR2: AI-Act-Inventar komplett · KR3: Cloud ±10% Budget · KR4: ≥70% MA wöchentlich aktiv · KR5: ≥50 KI-gestützte Outputs + Bearbeitungszeit −30%'},
+]},
+];
+
+// ═══════════════════════════════════════════
+// EMPFEHLUNGEN (profil-sensitiv)
+// ═══════════════════════════════════════════
+function computeRec(qid, letter){
+  switch(qid){
+    case 'scope':   return letter==='A';
+    case 'cloud':
+      if(PROFIL==='C') return letter==='B'; // Behörde: Sovereign bevorzugen
+      if(PROFIL==='A') return letter==='C'; // Verband: EU-Modell politisch konsistent
+      return letter==='B';                  // Default: Hybrid
+    case 'buildbuy':
+      if(PROFIL==='D') return letter==='A'; // Start-up: Buy-first
+      return letter==='B';
+    case 'usecase': return letter==='A';
+    case 'aiact':   return letter==='A';
+    case 'ragft':   return letter==='B';
+    case 'data':    return letter==='A';
+    case 'governance':
+      if(PROFIL==='D') return letter==='A'; // KMU: zentraler einfacher
+      return letter==='B';
+    case 'finops':  return letter==='A';
+    case 'okr':     return letter==='C';
+    default:        return false;
+  }
+}
+
+function getRecLabel(qid, letter){
+  if(qid==='cloud' && (letter==='B'||letter==='C')) return 'EU-SOUVERÄNITÄT';
+  return 'EMPFEHLUNG';
+}
+
+function getOkrDesc(letter){
+  if(letter==='A') return 'O: Produktionsreife, compliance-konforme KI-Plattform — KR1: 3 Fachbereiche produktiv bis Q3 · KR2: Uptime ≥99,5%, Incident <4h · KR3: AI-Act-Inventar komplett · KR4: ≥2 CoPs aktiv · KR5: Cloud-Kosten ±10% Budget';
+  if(letter==='B') return 'O: Mitarbeitende als KI-UC-Quelle — KR1: ≥85% MA wöchentlich · KR2: ≥50 KI-gestützte Outputs · KR3: Bearbeitungszeit −30% · KR4: Time-to-Value neuer UCs <5 Tage · KR5: Selbstwirksamkeits-Score ≥4,2/5';
+  if(letter==='C') return 'O: KI ist produktiv und wird genutzt — KR1: 3 Fachbereiche produktiv · KR2: AI-Act-Inventar komplett · KR3: Cloud ±10% Budget · KR4: ≥70% MA wöchentlich · KR5: ≥50 KI-gestützte Outputs + Bearbeitungszeit −30%';
+  return '';
+}
+
+// ═══════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════
+let step=0;
+const answers={};
+function countAnswers(){return Object.keys(answers).length;}
+
+// ═══════════════════════════════════════════
+// TABS
+// ═══════════════════════════════════════════
+function switchTab(view){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.querySelector(`[data-view="${view}"]`).classList.add('active');
+  document.getElementById('view-'+view).classList.add('active');
+  if(view==='ergebnis') updateErgebnis();
+  if(view==='uebersicht') buildUebersicht();
+}
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.addEventListener('click',()=>switchTab(tab.dataset.view));
+});
+
+// ═══════════════════════════════════════════
+// WIZARD
+// ═══════════════════════════════════════════
+function renderStep(){
+  const q=QS[step];if(!q)return;
+  document.getElementById('progressFill').style.width=((step/QS.length)*100)+'%';
+  document.getElementById('progressLabel').textContent=`Frage ${step+1} von ${QS.length}`;
+  const colsClass=q.cols===2?'cols-2 cols-4':q.cols===3?'cols-3':'';
+  const cards=q.opts.map(o=>{
+    const isRec=computeRec(q.id,o.l);
+    const isEU=o.euRec;
+    const sel=answers[q.id]===o.l?' selected':'';
+    const recClass=isRec?' recommended':isEU?' recommended eu-rec':'';
+    const reclabel=isRec?getRecLabel(q.id,o.l):isEU?'EU-SOUVERÄNITÄT':'';
+    const recAttr=reclabel?` data-reclabel="${reclabel}"`:'';
+    const riskHtml=o.risk?`<div class="wcard-risk ${o.risk}">${o.riskLabel}</div>`:'';
+    const euHtml=o.euRec&&!isRec?`<div class="wcard-tag">🇪🇺 EU-souverän</div>`:'';
+    const desc=q.id==='okr'?getOkrDesc(o.l):o.d;
+    return `<div class="wcard${sel}${recClass}" data-letter="${o.l}"${recAttr}><div class="check"></div><div class="wcard-letter">${o.l}</div><h3 class="wcard-title">${o.t}</h3><p class="wcard-desc">${desc}</p>${riskHtml}${euHtml}</div>`;
+  }).join('');
+  document.getElementById('wizardBody').innerHTML=`<div class="wizard-step-tag">${q.tag} · Entscheidung ${String(step+1).padStart(2,'0')}</div><h2 class="wizard-q">${q.q}</h2><p class="wizard-hint">${q.hint}</p><div class="wizard-cards ${colsClass}">${cards}</div>`;
+  document.querySelectorAll('.wcard').forEach(card=>{
+    card.addEventListener('click',()=>{
+      document.querySelectorAll('.wcard').forEach(c=>c.classList.remove('selected'));
+      card.classList.add('selected');
+      answers[q.id]=card.dataset.letter;
+      updateBadge();save();
+      setTimeout(()=>{
+        if(step<QS.length-1){step++;renderStep();}
+        else switchTab('ergebnis');
+      },350);
+    });
+  });
+  document.getElementById('btnBack').style.visibility=step===0?'hidden':'visible';
+  document.getElementById('btnNext').disabled=!answers[q.id];
+  document.getElementById('btnNext').textContent=step===QS.length-1?'Zum Ergebnis →':'Weiter →';
+}
+document.getElementById('btnBack').onclick=()=>{if(step>0){step--;renderStep();}};
+document.getElementById('btnNext').onclick=()=>{
+  if(step<QS.length-1){step++;renderStep();}else switchTab('ergebnis');
+};
+
+// ═══════════════════════════════════════════
+// ÜBERSICHT
+// ═══════════════════════════════════════════
+function buildUebersicht(){
+  const body=document.getElementById('uebersichtBody');
+  body.innerHTML=QS.map((q,i)=>{
+    const opts=q.opts.map(o=>{
+      const sel=answers[q.id]===o.l?'selected':'';
+      const isRec=computeRec(q.id,o.l)||o.euRec;
+      const rec=isRec?'recommended':'';
+      return `<div class="ub-opt ${sel} ${rec}" data-qid="${q.id}" data-letter="${o.l}"><strong>${o.l} · ${o.t}</strong><div class="desc">${o.d}</div></div>`;
+    }).join('');
+    return `<div class="ub-section"><div class="ub-num">${q.tag} · ${String(i+1).padStart(2,'0')}</div><h3 class="ub-title">${q.q}</h3><div class="ub-opts">${opts}</div></div>`;
+  }).join('');
+  body.querySelectorAll('.ub-opt').forEach(opt=>{
+    opt.addEventListener('click',()=>{
+      const qid=opt.dataset.qid;
+      body.querySelectorAll(`.ub-opt[data-qid="${qid}"]`).forEach(o=>o.classList.remove('selected'));
+      opt.classList.add('selected');
+      answers[qid]=opt.dataset.letter;
+      updateBadge();save();
+    });
+  });
+}
+
+// ═══════════════════════════════════════════
+// ERGEBNIS
+// ═══════════════════════════════════════════
+function updateErgebnis(){
+  updateDecisionsTable();updatePath();updateNexus();updateArch();
+}
+
+function updateDecisionsTable(){
+  document.getElementById('decisionsTbody').innerHTML=QS.map((q,i)=>{
+    const a=answers[q.id];
+    const opt=a?q.opts.find(o=>o.l===a):null;
+    const ansHtml=opt?`<span class="q-answer"><span class="letter">${opt.l}</span>${opt.t}</span>`:'<span class="q-empty">— offen —</span>';
+    return `<tr><td class="q-num">${String(i+1).padStart(2,'0')}</td><td class="q-title">${q.q.replace(/<\/?em>/g,'')}</td><td>${ansHtml}</td></tr>`;
+  }).join('');
+}
+
+function updatePath(){
+  const pc=document.getElementById('pathCard');
+  if(countAnswers()<3){pc.classList.add('empty');pc.querySelector('h3').textContent='— treffen Sie mindestens 3 Entscheidungen —';pc.querySelector('p').textContent='';return;}
+  pc.classList.remove('empty');
+  const a=id=>answers[id];
+  let h='Hybrider Standardpfad',r='Pragmatische Mitte: Primary Cloud mit Sovereign-Option, Hybrid Build/Buy, Center of Excellence, Hybrid-OKRs. Gremien-tauglich und adoptionssichtbar.';
+  if(a('cloud')==='C'){h='EU-Souveränitäts-Pfad · Cloud + EU-Modell';r='Politisch konsistentester Pfad für Organisationen, die EU-Regulierung mitgestalten oder in regulierten Branchen tätig sind. EU-natives Modell stärkt Glaubwürdigkeit nach außen.';}
+  else if(a('buildbuy')==='A'){h='Buy-first-Pfad · Schnelle Adoption';r='Maximale Geschwindigkeit durch Standardprodukte. Kein organisationsspezifisches Asset als Differenzierung — Unterscheidungsmerkmal kommt in Welle 2/3.';}
+  else if(a('ragft')==='C'){h='Sovereign-SLM-Pfad · Eigenes Modell';r='Höchste Kontrolle, GPAI-Pflichten nach AI Act. Erst realistisch wenn großer organisationsspezifischer Datenbestand und ML-Team vorhanden.';}
+  else if(a('buildbuy')==='B'&&a('okr')==='C'&&a('cloud')==='B'){h='Hybrider Standardpfad · Empfehlung';r='Primary Cloud mit Sovereign-Komponente, Buy+Build, Center of Excellence, Hybrid-OKRs. Risikoarm, gremien-tauglich und adoptionssichtbar.';}
+  pc.querySelector('h3').textContent=h;pc.querySelector('p').textContent=r;
+}
+
+function updateNexus(){
+  const grid=document.getElementById('nexusGrid');
+  const a=id=>answers[id];
+  const blocks=[
+    {num:'01',title:'Menschen &amp; <em>Adoption</em>',sub:'Befähigung · CoP · Discovery',items:[]},
+    {num:'02',title:'Plattform &amp; <em>Daten</em>',sub:'Cloud · Identity · RAG · Medallion',items:[]},
+    {num:'03',title:'KI &amp; <em>ML-Wertschöpfung</em>',sub:'Modelle · Lifecycle · Use-Cases',items:[]},
+    {num:'04',title:'Governance &amp; <em>Nachhaltigkeit</em>',sub:'AI Act · FinOps · Audit',items:[]},
+  ];
+  const b=blocks;
+
+  if(a('scope')==='A') b[0].items.push('Welle 1 intern · externer Service ab Jahr 2/3');
+  else if(a('scope')==='B') b[0].items.push('Nur intern — kein externes Mandat');
+  else if(a('scope')==='C') b[0].items.push('Externe Partner bereits in Welle 1');
+  if(a('usecase')==='A') b[0].items.push('Erster UC: Wissens-RAG (dokumentenreiches Asset)');
+  else if(a('usecase')==='B') b[0].items.push('Erster UC: Monitoring / Klassifikation');
+  else if(a('usecase')==='C') b[0].items.push('Erster UC: Horizontaler Copilot (generisch)');
+  else if(a('usecase')==='D') b[0].items.push('Erster UC: Prozess- / Workflow-Support');
+  if(a('governance')==='B') b[0].items.push('Center of Excellence · CoP je Fachbereich');
+  else if(a('governance')==='A') b[0].items.push('Zentrale Steuerung durch Platform-Team');
+  else if(a('governance')==='C') b[0].items.push({text:'Föderiert — AI-Act-Compliance schwer nachweisbar',warn:true});
+  if(a('okr')==='C') b[0].items.push('OKR: ≥70% wöchentlich + ≥50 KI-gestützte Outputs');
+  else if(a('okr')==='B') b[0].items.push('OKR: ≥85% Nutzung + Bearbeitungszeit −30%');
+  else if(a('okr')==='A') b[0].items.push('OKR: 3 Fachbereiche produktiv + Compliance + Uptime');
+
+  if(a('cloud')==='A') b[1].items.push('Hyperscaler Full-Stack · Managed Services durchgehend');
+  else if(a('cloud')==='B') b[1].items.push('Primary Cloud + Sovereign-Region für Sensitivdaten');
+  else if(a('cloud')==='C') b[1].items.push('Cloud-Infra + EU-natives Modell (z. B. Mistral, Paris)');
+  else if(a('cloud')==='D') b[1].items.push('Multi-Cloud: verschiedene Anbieter je Workload');
+  if(a('buildbuy')==='B') b[1].items.push('RAG- & Orchestrierungs-Layer (Build) auf Cloud-Primitiven');
+  else if(a('buildbuy')==='A') b[1].items.push('Managed Enterprise-Copilot (Buy-only)');
+  if(a('ragft')==='A'||a('ragft')==='B') b[1].items.push('Vector Store + Embeddings für RAG über Dokumentenbestand');
+  if(a('data')==='A') b[1].items.push('90-Tage: Inventar → Standards → Medallion-Pipeline');
+  else if(a('data')==='B') b[1].items.push('Direkt Medallion für Pilot-UC');
+  else if(a('data')==='C') b[1].items.push({text:'Datenstrategie aufgeschoben — Welle 3 verzögert',warn:true});
+
+  if(a('ragft')==='A') b[2].items.push('RAG-only · Standard-LLM via API');
+  else if(a('ragft')==='B') b[2].items.push('RAG + Light Fine-Tuning (LoRA) für Stil + Terminologie');
+  else if(a('ragft')==='C') b[2].items.push({text:'Eigenes Domain-SLM — GPAI-Pflichten nach AI Act',warn:true});
+  if(a('usecase')==='A') b[2].items.push('Asset: interner Dokumentenbestand als Wissensquelle');
+  b[2].items.push('DEEP-Framework für Use-Case-Anfragen aus Fachbereichen');
+  b[2].items.push('Modell-Registry + Drift-Alerts (MLflow)');
+
+  if(a('aiact')==='A') b[3].items.push('AI Act Low-Risk: Transparenz + AI Literacy');
+  else if(a('aiact')==='B') b[3].items.push('AI Act Mittel: Human Oversight + Bias-Check');
+  else if(a('aiact')==='C') b[3].items.push({text:'High-Risk: Konformitätsbewertung + Registrierung Pflicht',warn:true});
+  else if(a('aiact')==='D') b[3].items.push({text:'GPAI: Trainingsdaten-Doku, Copyright-Policy',warn:true});
+  if(a('finops')==='A') b[3].items.push('Token-Caps via API-Gateway · Showback Y1→Chargeback Y3');
+  else if(a('finops')==='B') b[3].items.push('Flat-Seat-Lizenzen (~25–35 €/MA/Mo)');
+  else if(a('finops')==='C') b[3].items.push('Chargeback ab Start — Adoption-Risiko beachten');
+  b[3].items.push('Exit-Strategien je Cloud-Stack dokumentiert');
+  b[3].items.push('Schnittstellen zu IT-Töchtern / Dienstleistern klären');
+
+  const details=[
+    `<p>Dieser Baustein entscheidet, ob die KI-Plattform wirklich genutzt wird — oder ein Infrastruktur-Projekt bleibt. <strong>Adoption bedeutet: Mitarbeitende nutzen KI täglich und sehen einen echten Unterschied in ihrer Arbeit.</strong> Das passiert nicht von selbst.</p><p>Communities of Practice sind der Mechanismus, durch den gute Ideen aus einem Fachbereich in andere wandern, ohne dass IT zum Flaschenhals wird. Die Telemetrie aus Welle 1 ersetzt teure Discovery-Workshops: das System zeigt, welche Use Cases wirklich gebraucht werden.</p>`,
+    `<p>Dieser Baustein legt fest, <strong>auf welcher Grundlage die KI arbeitet</strong>. Eine KI, die auf veralteten oder schlecht klassifizierten Dokumenten sucht, liefert unzuverlässige Ergebnisse — und verliert das Vertrauen der Fachbereiche schnell.</p><p>Die Cloud-Entscheidung ist heute mehr eine politische und regulatorische als eine technische. Welche Daten dürfen wo liegen? Welche Modell-Anbieter sind mit der eigenen Außendarstellung vereinbar? Diese Fragen müssen vor der Tool-Auswahl beantwortet werden.</p>`,
+    `<p>Dieser Baustein beschreibt den <strong>konkreten Mehrwert</strong>. RAG bedeutet: die KI liest in eigenen Dokumenten und beantwortet Fragen dazu — faktengenau und aktuell, weil die Dokumente jederzeit austauschbar sind. Fine-Tuning bedeutet: die KI lernt den spezifischen Stil der Organisation und produziert Drafts, die weniger nachbearbeitet werden müssen.</p><p>DEEP ist der Prozess, der verhindert, dass jeder Fachbereichswunsch direkt zu einem Ad-hoc-Projekt wird. Discover → Evaluate → Experiment → Produce gibt jedem Use Case eine reproduzierbare Qualitätssicherung.</p>`,
+    `<p>Dieser Baustein sichert ab, dass die KI-Nutzung <strong>dauerhaft regelkonform, kostentransparent und verantwortbar</strong> bleibt. Der EU AI Act schreibt je nach Risikoklasse vor, was dokumentiert und geprüft werden muss — wer das nicht von Anfang an einbaut, riskiert teure Nachrüstung.</p><p>Schnittstellen zu IT-Töchtern, externen Dienstleistern und Cloud-Anbietern sind keine technischen Details, sondern Governance-Fragen: wer hat welches Mandat, wer trägt bei einem Incident die Verantwortung?</p>`,
+  ];
+
+  grid.innerHTML=blocks.map((bl,i)=>{
+    const lis=bl.items.length===0?'<div class="nblock-empty">— wird befüllt —</div>':'<ul class="nblock-items">'+bl.items.map(it=>typeof it==='string'?`<li>${it}`:`<li class="warn">${it.text}`).join('')+'</ul>';
+    return `<div class="nblock" data-nblock="${i}"><div class="nblock-head"><div><div class="nblock-num">Baustein ${bl.num}</div><div class="nblock-title">${bl.title}</div></div></div><div class="nblock-body">${lis}<div class="nblock-toggle"><span class="arr">▶</span> Was bedeutet das für die Führungsebene?</div><div class="nblock-detail">${details[i]}</div></div></div>`;
+  }).join('');
+  grid.querySelectorAll('.nblock').forEach(nb=>nb.addEventListener('click',()=>nb.classList.toggle('open')));
+}
+
+function updateArch(){
+  const tbody=document.getElementById('archTbody');
+  const a=id=>answers[id];
+  const rows=[];
+  const group=(cls,label)=>({group:true,cls,label});
+  const row=(l,c,n)=>({layer:l,comp:c,note:n});
+
+  rows.push(group('g-identity','01 · Identity & Security'));
+  rows.push(row('','Identity Provider (SSO)','Entra ID / Okta / LDAP — SSO für alle KI-Tools'));
+  if(a('governance')==='B'||a('governance')==='A') rows.push(row('','RBAC + Row-Level Security','je Use Case und Datenquelle konfiguriert'));
+
+  rows.push(group('g-tools','02 · Endnutzer-Tools'));
+  if(a('buildbuy')==='A') rows.push(row('','Enterprise-Copilot (Buy)','M365 Copilot / ChatGPT Enterprise / Claude Enterprise o. ä.'));
+  else if(a('buildbuy')==='B'){rows.push(row('','Enterprise-Copilot (Buy)','Standardproduktivität für alle MA'));rows.push(row('','Eigene RAG-/Chat-Oberfläche (Build)','für organisationsspezifische Use Cases'));}
+  else rows.push(row('','Eigene Oberflächen (Build)','vollständiger eigener Stack auf Cloud-Primitiven'));
+
+  rows.push(group('g-gateway','03 · Gateway & FinOps'));
+  if(a('finops')==='A'){rows.push(row('','API-Gateway (z. B. Azure APIM, Kong)','Token-Caps, Rate-Limits, Cost-Tags je Anfrage'));rows.push(row('','Showback-Reports','monatlich je Fachbereich · ab Y3 Chargeback'));}
+  else if(a('finops')==='B') rows.push(row('','Flat-Seat-Lizenzen','~25–35 €/MA/Mo, planbar'));
+  else if(a('finops')==='C') rows.push(row('','Chargeback ab Start','direkte Fachbereichs-Verrechnung'));
+  else rows.push(row('','Zentrales IT-Budget','keine Kosten-Allokation je Fachbereich'));
+
+  rows.push(group('g-data','04 · Daten-Layer'));
+  if(a('data')==='A'){rows.push(row('','Datenkatalog (Purview / open-source)','Inventar + Sensitivitäts-Tags, Monat 1'));rows.push(row('','Data-Owner-Standards','Pflicht-Metadaten je Fachbereich, Monat 2'));rows.push(row('','Medallion-Pipeline (Bronze/Silver/Gold)','strukturierte ETL-Pipeline, Monat 3'));}
+  else if(a('data')==='B') rows.push(row('','Medallion direkt für Pilot-UC','Bronze/Silver/Gold nur für ersten Use Case'));
+  else rows.push(row('','⚠ Datenstrategie offen','Welle-3-ML verzögert sich erheblich'));
+  if(a('ragft')==='A'||a('ragft')==='B') rows.push(row('','Vector Store (Azure AI Search, Qdrant, pgvector)','Embeddings für RAG über Dokumentenbestand'));
+  if(a('ragft')==='B') rows.push(row('','Fine-Tuning-Pipeline (LoRA)','Training auf organisationsspezifischem Stil + Terminologie'));
+
+  rows.push(group('g-inference','05 · Inference & Modelle'));
+  if(a('cloud')==='A') rows.push(row('','Foundation Model via Hyperscaler','GPT-4o / Claude / Gemini in EU-Region'));
+  else if(a('cloud')==='B'){rows.push(row('','Hyperscaler Primary','Standard-Use-Cases in EU-Region'));rows.push(row('','Sovereign-Region / EU-Hoster','Sensitivdaten: strategische Dokumente, FuE, Personal'));}
+  else if(a('cloud')==='C'){rows.push(row('','Cloud-Infra + Governance','Identity, Monitoring, Compliance beim Hyperscaler'));rows.push(row('','EU-natives Modell (z. B. Mistral, Aleph Alpha)','EU-souverän, DSGVO-konform, kein US-CLOUD-Act'));}
+  else rows.push(row('','Multi-Cloud Routing via API-Gateway','optimaler Anbieter je Use Case'));
+  rows.push(row('','MLflow Modell-Registry','Versionierung + Drift-Alerts + Eval-Baseline'));
+
+  rows.push(group('g-monitor','06 · Monitoring & Compliance'));
+  rows.push(row('','AI-Act-Inventar','je UC: Risikoklasse, Dokumentation, Freigabe-Nachweis'));
+  rows.push(row('','Drift- & Quality-Monitoring','wöchentliche Eval-Runs gegen Baseline · kein Go-Live ohne'));
+  if(a('aiact')==='B'||a('aiact')==='C') rows.push(row('','Bias-Monitoring (Fairlearn / SHAP)','Pflicht bei Mittel-/High-Risk-Systemen'));
+
+  tbody.innerHTML=rows.map(r=>{
+    if(r.group) return `<tr class="layer-group ${r.cls}"><td colspan="3">${r.label}</td></tr>`;
+    return `<tr><td class="layer-name">${r.layer}</td><td class="component"><strong>${r.comp}</strong></td><td class="note">${r.note}</td></tr>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════
+function updateBadge(){document.getElementById('countBadge').textContent=`${countAnswers()}/${QS.length}`;}
+function save(){try{localStorage.setItem('ki-kompass-v1',JSON.stringify({answers,profil:PROFIL}));}catch(e){}}
+function load(){
+  try{
+    const s=JSON.parse(localStorage.getItem('ki-kompass-v1')||'{}');
+    if(s.answers) Object.assign(answers,s.answers);
+    if(s.profil){
+      PROFIL=s.profil;
+      document.querySelectorAll('.profile-btn').forEach(b=>{
+        b.classList.toggle('active',b.dataset.profil===PROFIL);
+      });
+    }
+    updateBadge();
+  }catch(e){}
+}
+
+load();
+renderStep();
+</script>
+</body>
+</html>
