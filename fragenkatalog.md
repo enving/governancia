@@ -1,3 +1,50 @@
+# KI-Kompass — Fragenkatalog für verantwortungsvolle KI-Nutzung
+
+Ein **neutraler, anbieter- und organisationsunabhängiger** Fragenkatalog rund um die Einführung und Nutzung generativer KI in Organisationen. Er bündelt die Fragen, die typischerweise von Datenschutz, IT-Recht, Informationssicherheit und Mitbestimmung gestellt werden — und macht sichtbar, **was sich allgemein orientieren lässt** und **wo eine Entscheidung nötig ist (durch wen, mit welchem Risiko)**.
+
+> **Hinweis:** Dieser Kompass ist eine **Orientierungshilfe, keine Rechtsberatung.** Er nimmt eine EU-Perspektive ein (DSGVO, EU AI Act) und ist bewusst prinzipienbasiert formuliert. Für verbindliche Bewertungen sind qualifizierte Datenschutz-/Rechtsexpertise und die jeweils geltende, aktuelle Rechtslage maßgeblich.
+
+## Wozu
+
+- **Vorbereitung** einer Datenschutz-/IT-rechtlichen Prüfung (strukturierte Fragenliste).
+- **Entscheidungsfindung**: je Frage sehen, ob es eine allgemeine Orientierung gibt oder eine Entscheidung getroffen werden muss — und wer dafür zuständig ist.
+- **Befähigung**: ein gemeinsames, verständliches Begriffs- und Frageraster für alle Beteiligten.
+
+## Aufbau
+
+`KI-Kompass_Fragenkatalog.md` enthält rund 100 Fragen in 12 Themen. Jede Frage hat:
+
+- **Status** — *Orientierung möglich* (es gibt eine allgemein anerkannte Leitlinie) oder *Entscheidung nötig* (organisationsspezifisch zu klären).
+- **Wer** — typische zuständige Rollen (abstrakt): Datenschutzbeauftragte:r (DSB), Justiziariat/IT-Recht, Informationssicherheit (ISB), Betriebsrat/Mitbestimmung, Fachbereich/Dateneigentümer, Leitung, IT-Betrieb.
+- **Risiko** — was bei falscher Handhabung auf dem Spiel steht.
+
+| Kürzel | Thema |
+|---|---|
+| GOV | Grundlagen & Governance |
+| DSG | Datenschutz / personenbezogene Daten |
+| VER | Vertraulichkeit & Geschäftsgeheimnisse |
+| AVV | Auftragsverarbeitung & Anbieter |
+| SPE | Persistente Speicherung: Memory, Verlauf, RAG |
+| INT | Integrationen & Datenzugriff |
+| AIA | EU AI Act |
+| OUT | Output: Urheberrecht, Haftung, Qualität |
+| MIT | Mitbestimmung & Beschäftigtendatenschutz |
+| SEC | Sicherheit |
+| AGE | Agentische Nutzung & Automatisierung |
+| TRA | Transparenz & Kennzeichnung |
+
+## Lizenz
+
+Vorschlag: **CC BY 4.0** (frei nutzbar mit Namensnennung). Die finale Lizenzwahl trifft die herausgebende Organisation.
+
+## Mitwirken
+
+Vorschläge und Korrekturen willkommen (Pull Request). Der Katalog ist bewusst prinzipienbasiert; bitte keine anbieter- oder organisationsspezifischen Details ergänzen, damit er neutral bleibt.
+
+
+
+
+
 # KI-Kompass — Fragenkatalog
 
 **Orientierungshilfe, keine Rechtsberatung.** EU-Perspektive (DSGVO, EU AI Act), prinzipienbasiert und anbieterneutral. „KI-Werkzeug" meint ein generatives KI-System; „Anbieter" den Betreiber des Modells/Dienstes; „Organisation" die einsetzende Stelle.
