@@ -201,6 +201,94 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16p
 .ub-opt strong{font-family:var(--serif);font-size:14px;display:block;margin-bottom:2px}
 .ub-opt .desc{color:var(--ink2);font-size:11px;line-height:1.4}
 @media print{.topbar,.profile-bar{display:none}.view{display:block!important}body{background:white}}
+/* ═══════════════════════════════════════════
+   TOOL-CHECK MODULE
+   ═══════════════════════════════════════════ */
+.tc-page{padding:32px;max-width:1100px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 300px;gap:32px;align-items:start}
+@media(max-width:880px){.tc-page{grid-template-columns:1fr;padding:20px}}
+.tc-header{margin-bottom:32px}
+.tc-header-tag{font-family:var(--mono);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.tc-heading{font-family:var(--serif);font-weight:400;font-size:clamp(24px,3.5vw,34px);line-height:1.1;letter-spacing:-0.01em;margin-bottom:10px}
+.tc-heading em{font-style:italic;color:var(--accent)}
+.tc-subhead{font-family:var(--serif);font-style:italic;font-weight:300;font-size:15px;color:var(--ink2);max-width:620px;line-height:1.45}
+.tc-section-head{display:flex;align-items:center;gap:12px;margin:28px 0 6px}
+.tc-section-num{width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--bg);font-family:var(--mono);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tc-section-title{font-family:var(--serif);font-weight:500;font-size:18px}
+.tc-section-hint{font-size:12px;color:var(--mute);margin-bottom:12px;font-style:italic}
+.tc-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px}
+.tc-chip{padding:9px 14px;border:2px solid var(--rule);background:var(--card);cursor:pointer;font-size:13px;font-weight:500;transition:all 0.15s;user-select:none;display:flex;flex-direction:column;gap:2px;min-width:150px}
+.tc-chip:hover{border-color:var(--ink2);background:var(--white)}
+.tc-chip.selected{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-ink)}
+.tc-chip.danger-sel{border-color:var(--warn);background:var(--warn-soft);color:var(--warn)}
+.tc-chip.safe-sel{border-color:var(--teal);background:var(--teal-soft);color:var(--teal)}
+.tc-chip-sub{font-size:10px;font-weight:400;opacity:0.65}
+.tc-tools{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:4px}
+.tc-tool-card{padding:13px 15px 11px;border:2px solid var(--rule);background:var(--card);cursor:pointer;transition:all 0.15s}
+.tc-tool-card:hover{border-color:var(--ink2);background:var(--white);transform:translateY(-1px);box-shadow:0 4px 14px -6px rgba(26,24,22,0.12)}
+.tc-tool-card.selected{border-color:var(--accent);background:var(--white);box-shadow:0 0 0 1px var(--accent)}
+.tc-tool-name{font-weight:600;font-size:13px;line-height:1.3;margin-bottom:2px}
+.tc-tool-sub{font-size:10px;color:var(--mute);font-family:var(--mono)}
+.tc-tool-badges{display:flex;flex-wrap:wrap;gap:4px;margin-top:7px}
+.tc-badge{display:inline-flex;padding:2px 7px;font-size:10px;font-weight:600;font-family:var(--mono);letter-spacing:0.05em}
+.tc-badge.low{background:var(--teal-soft);color:var(--teal)}
+.tc-badge.med{background:var(--gold-soft);color:#78590a}
+.tc-badge.high{background:var(--warn-soft);color:var(--warn)}
+.tc-badge.eu{background:var(--eu-soft);color:var(--eu)}
+.tc-infobox{padding:15px 18px;margin:10px 0 16px;border-left:4px solid}
+.tc-infobox.warn{border-color:var(--warn);background:var(--warn-soft)}
+.tc-infobox.info{border-color:var(--eu);background:var(--eu-soft)}
+.tc-infobox.ok{border-color:var(--teal);background:var(--teal-soft)}
+.tc-infobox-head{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:8px;font-weight:600}
+.tc-infobox.warn .tc-infobox-head{color:var(--warn)}
+.tc-infobox.info .tc-infobox-head{color:var(--eu)}
+.tc-infobox.ok .tc-infobox-head{color:var(--teal)}
+.tc-infobox p{font-size:13px;line-height:1.55;color:var(--ink2)}
+.tc-infobox p+p{margin-top:6px}
+.tc-checks{display:flex;flex-direction:column;gap:6px;margin-bottom:4px}
+.tc-check-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:16px;padding:10px 14px;background:var(--card);border:1px solid var(--rule)}
+.tc-check-label{font-size:13px;font-weight:500;display:block}
+.tc-check-sub{font-size:10px;color:var(--mute);margin-top:1px;display:block}
+.tc-yn{display:flex;gap:4px}
+.tc-yn-btn{padding:4px 13px;border:1.5px solid var(--rule);background:var(--white);font-size:11px;font-weight:600;font-family:var(--mono);cursor:pointer;letter-spacing:0.05em;transition:all 0.15s;color:var(--mute)}
+.tc-yn-btn:hover{border-color:var(--ink2);color:var(--ink)}
+.tc-yn-btn.yes.active{background:var(--teal);border-color:var(--teal);color:white}
+.tc-yn-btn.no.active{background:var(--warn);border-color:var(--warn);color:white}
+.tc-actions{display:flex;gap:10px;margin-top:24px;padding-top:20px;border-top:1px solid var(--rule);flex-wrap:wrap}
+.tc-btn{padding:11px 22px;font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;border:1.5px solid var(--ink);background:transparent;color:var(--ink);transition:all 0.2s}
+.tc-btn:hover{background:var(--ink);color:var(--bg)}
+.tc-btn.primary{background:var(--ink);color:var(--bg)}
+.tc-btn.primary:hover{background:var(--accent);border-color:var(--accent)}
+.tc-sidebar{position:sticky;top:88px;display:flex;flex-direction:column;gap:12px}
+@media(max-width:880px){.tc-sidebar{position:static;order:-1}}
+.tc-sidebar-card{background:var(--card);border:1px solid var(--rule);padding:18px}
+.tc-sidebar-head{font-family:var(--mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--mute);margin-bottom:12px}
+.tc-ampel{display:flex;gap:9px;align-items:center;margin-bottom:10px}
+.tc-light{width:28px;height:28px;border-radius:50%;transition:all 0.4s}
+.tc-light.on-red{background:#c0392b;opacity:1;box-shadow:0 0 12px rgba(192,57,43,0.5)}
+.tc-light.on-yellow{background:#c68b00;opacity:1;box-shadow:0 0 12px rgba(198,139,0,0.45)}
+.tc-light.on-green{background:#1a7a40;opacity:1;box-shadow:0 0 12px rgba(26,122,64,0.45)}
+.tc-light.off{background:var(--rule);opacity:0.6}
+.tc-verdict{font-family:var(--serif);font-weight:500;font-size:17px;line-height:1.2;margin-bottom:10px}
+.tc-verdict.red{color:var(--warn)}.tc-verdict.yellow{color:#a07030}.tc-verdict.green{color:var(--teal)}.tc-verdict.grey{color:var(--mute)}
+.tc-findings{display:flex;flex-direction:column;gap:5px}
+.tc-finding{padding:7px 10px;font-size:12px;line-height:1.45;border-left:3px solid}
+.tc-finding.red{border-color:var(--warn);background:var(--warn-soft);color:#5a1a1a}
+.tc-finding.yellow{border-color:var(--gold);background:var(--gold-soft);color:#5a3d10}
+.tc-finding.green{border-color:var(--teal);background:var(--teal-soft);color:#1a3d30}
+.tc-alt{padding:9px 12px;background:var(--teal-soft);border:1px solid var(--teal);margin-bottom:7px}
+.tc-alt-name{font-weight:600;font-size:12px;color:var(--teal);margin-bottom:2px}
+.tc-alt-desc{font-size:11px;color:var(--ink2);line-height:1.4}
+.tc-print-meta{display:none;font-family:var(--mono);font-size:10px;color:var(--mute);margin-bottom:16px}
+@media print{
+  body.tc-printing .view{display:none!important}
+  body.tc-printing #view-toolcheck{display:block!important}
+  body.tc-printing .tc-sidebar{display:none!important}
+  body.tc-printing .tc-page{display:block!important;padding:0}
+  body.tc-printing .tc-print-meta{display:block!important}
+  body.tc-printing .tc-yn{display:none}
+  body.tc-printing .tc-actions{display:none}
+  body.tc-printing .tc-tools{grid-template-columns:repeat(3,1fr)}
+}
 </style>
 </head>
 <body>
@@ -212,6 +300,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16p
     <button class="tab" data-view="uebersicht">Übersicht</button>
     <button class="tab" data-view="ergebnis">Ergebnis <span class="badge" id="countBadge">0/10</span></button>
     <button class="tab" data-view="kompass">Kompass</button>
+    <button class="tab" data-view="toolcheck">Tool-Check</button>
   </div>
   <div class="topbar-meta">v1.0 · Open Source</div>
 </div>
@@ -366,6 +455,77 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16p
       <p>Welche Tiefe ist mit der eigenen Rolle vereinbar — Orientierung ja, konkrete Produktempfehlung heikel. Wie verhält sich der Kompass zu bestehenden Beratern in der Branche? Und: wer hat das Mandat, diesen Service anzubieten, und wer trägt die Verantwortung für seine Inhalte?</p>
       <p>Die Antworten sind nicht offensichtlich. Aber genau darum lohnt sich der Prototyp <em>vor</em> der Strategie-Entscheidung — er macht die Frage anfassbar.</p>
     </div>
+  </div>
+</div>
+
+<!-- TOOL-CHECK TAB -->
+<div class="view" id="view-toolcheck">
+  <div class="tc-page">
+
+    <!-- MAIN COLUMN -->
+    <div class="tc-main">
+      <div class="tc-print-meta" id="tcPrintMeta"></div>
+
+      <div class="tc-header">
+        <div class="tc-header-tag">Nutzungs-Compliance · Tool-Check</div>
+        <h1 class="tc-heading">Darf ich dieses <em>Tool</em> mit diesen <em>Daten</em> nutzen?</h1>
+        <p class="tc-subhead">Prüfen Sie in drei Minuten, ob ein KI-Tool für Ihren konkreten Anwendungsfall zulässig ist — inkl. DSGVO, CLOUD Act und Geschäftsgeheimnisgesetz.</p>
+      </div>
+
+      <!-- 1: DATENKATEGORIEN -->
+      <div class="tc-section-head">
+        <span class="tc-section-num">1</span>
+        <span class="tc-section-title">Welche Daten werden verarbeitet?</span>
+      </div>
+      <p class="tc-section-hint">Mehrfachauswahl — wählen Sie alle zutreffenden Kategorien.</p>
+      <div class="tc-chips" id="tcDataChips"></div>
+
+      <!-- 2: TOOL-AUSWAHL -->
+      <div class="tc-section-head">
+        <span class="tc-section-num">2</span>
+        <span class="tc-section-title">Welches Tool wird eingesetzt?</span>
+      </div>
+      <p class="tc-section-hint">Wählen Sie ein Tool aus — die Bewertung aktualisiert sich sofort.</p>
+      <div class="tc-tools" id="tcToolCards"></div>
+      <div id="tcToolInfo"></div>
+
+      <!-- 3: ORGANISATION -->
+      <div class="tc-section-head">
+        <span class="tc-section-num">3</span>
+        <span class="tc-section-title">Organisatorische Voraussetzungen</span>
+      </div>
+      <p class="tc-section-hint">Für eine vollständige Bewertung alle Punkte beantworten — wird zur Checkliste beim Drucken.</p>
+      <div class="tc-checks" id="tcOrgChecks"></div>
+
+      <div class="tc-actions">
+        <button class="tc-btn primary" onclick="tcPrint()">Checkliste drucken / PDF</button>
+        <button class="tc-btn" onclick="tcReset()">Zurücksetzen</button>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="tc-sidebar">
+      <div class="tc-sidebar-card">
+        <div class="tc-sidebar-head">Live-Bewertung</div>
+        <div class="tc-ampel">
+          <div class="tc-light off" id="tcLightRed"></div>
+          <div class="tc-light off" id="tcLightYellow"></div>
+          <div class="tc-light off" id="tcLightGreen"></div>
+        </div>
+        <div class="tc-verdict grey" id="tcVerdict">Daten &amp; Tool auswählen</div>
+        <div class="tc-findings" id="tcFindings"></div>
+      </div>
+      <div class="tc-sidebar-card" id="tcAltsCard" style="display:none">
+        <div class="tc-sidebar-head">Empfohlene Alternativen</div>
+        <div id="tcAltsContent"></div>
+      </div>
+      <div class="tc-sidebar-card">
+        <div class="tc-sidebar-head">Über diesen Check</div>
+        <p style="font-size:12px;line-height:1.55;color:var(--ink2)">Dieser Check prüft drei Rechtsrahmen: <strong>DSGVO</strong> (Personenbezug + AVV), <strong>GeschGehG §2</strong> (Schutz von Geschäftsgeheimnissen) und den <strong>US CLOUD Act</strong> (Datenzugriff durch US-Behörden auch bei EU-Nutzern).</p>
+        <p style="font-size:12px;line-height:1.55;color:var(--mute);margin-top:8px">Kein Rechtsrat. Für verbindliche Einschätzungen IT-Rechtsanwalt hinzuziehen.</p>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -756,6 +916,283 @@ function load(){
 
 load();
 renderStep();
+
+// ═══════════════════════════════════════════
+// TOOL-CHECK MODULE
+// ═══════════════════════════════════════════
+
+const TC_DATA = [
+  {id:'personal',  label:'Personenbezogene Daten',  sub:'Namen, E-Mail, Adressen, IDs',                  dsgvo:true,  secret:false, cls:'selected'},
+  {id:'customer',  label:'Kundendaten (B2B/B2C)',    sub:'Verträge, Kontakte, Umsätze',                   dsgvo:true,  secret:false, cls:'selected'},
+  {id:'employee',  label:'Mitarbeiterdaten',          sub:'HR, Gehälter, Leistungsbeurteilungen',          dsgvo:true,  secret:false, cls:'selected'},
+  {id:'secret',    label:'Geschäftsgeheimnisse',      sub:'Strategien, M&A, unveröff. Produkte, IP',      dsgvo:false, secret:true,  cls:'danger-sel'},
+  {id:'financial', label:'Vertrauliche Finanzdaten',  sub:'Interne Zahlen, Forecasts, unveröff. Ergebnis',dsgvo:false, secret:true,  cls:'danger-sel'},
+  {id:'internal',  label:'Interne Dokumente',          sub:'Protokolle, Berichte (nicht geheim)',           dsgvo:false, secret:false, cls:'selected'},
+  {id:'public',    label:'Öffentliche Daten',          sub:'Pressemitteilungen, öffentliche Reports',      dsgvo:false, secret:false, cls:'safe-sel'},
+];
+
+const TC_TOOLS = [
+  {id:'chatgpt-free',  name:'ChatGPT Free / Plus',         sub:'Privatkonto · openai.com',       cloudAct:true,  training:true,  avv:false, euRegion:false, risk:'high'},
+  {id:'chatgpt-team',  name:'ChatGPT Team / Business',     sub:'Teamkonto · openai.com',         cloudAct:true,  training:false, avv:true,  euRegion:false, risk:'med'},
+  {id:'chatgpt-ent',   name:'ChatGPT Enterprise',           sub:'Enterprise-Vertrag · OpenAI',   cloudAct:true,  training:false, avv:true,  euRegion:false, risk:'med'},
+  {id:'ms-copilot',    name:'Microsoft Copilot (M365)',     sub:'M365-Lizenz',                    cloudAct:true,  training:false, avv:true,  euRegion:true,  risk:'med'},
+  {id:'azure-oai',     name:'Azure OpenAI · eigenes Depl.', sub:'EU-Region + VNet möglich',      cloudAct:true,  training:false, avv:true,  euRegion:true,  risk:'low'},
+  {id:'claude-ent',    name:'Claude Enterprise (Anthropic)',sub:'Teams / API-Vertrag',            cloudAct:true,  training:false, avv:true,  euRegion:false, risk:'med'},
+  {id:'mistral-eu',    name:'Mistral / Aleph Alpha',        sub:'EU-Anbieter · kein CLOUD Act',  cloudAct:false, training:false, avv:true,  euRegion:true,  risk:'low'},
+  {id:'local',         name:'Lokale KI (Ollama / LLaMA)',   sub:'On-Premise · kein Datentransfer',cloudAct:false,training:false, avv:false, euRegion:true,  risk:'low'},
+];
+
+const TC_TOOL_INFO = {
+  'chatgpt-free': {lvl:'warn', head:'ChatGPT Free / Plus — nicht für Unternehmensdaten', body:[
+    'Kein Unternehmensvertrag, keine AVV. Daten können für Modelltraining genutzt werden (sofern nicht aktiv deaktiviert — gilt pro Konto, nicht organisationsweit).',
+    '<strong>Für keinerlei Unternehmensdaten geeignet:</strong> keine personenbezogenen Daten, keine internen Dokumente, keine vertraulichen Inhalte.',
+  ]},
+  'chatgpt-team': {lvl:'warn', head:'ChatGPT Team / Business — CLOUD Act beachten', body:[
+    'Kein Training standardmäßig. OpenAI bietet einen DPA. Daten liegen auf <strong>US-Servern</strong> (Stand Juni 2026 keine EU-Region verfügbar).',
+    '<strong>CLOUD Act (USA):</strong> US-Behörden können OpenAI zur Herausgabe von Daten verpflichten — unabhängig von vertraglichen Regelungen.',
+    '<strong>GeschGehG §2 (DE):</strong> Geschäftsgeheimnisse verlieren ihren rechtlichen Schutzstatus, wenn keine angemessenen Geheimhaltungsmaßnahmen getroffen wurden. Eingabe in US-Cloud gilt als unzureichend.',
+    'Geeignet mit AVV für: öffentliche Texte, nicht-geheime interne Dokumente, allgemeine Produktivitätsaufgaben.',
+  ]},
+  'chatgpt-ent': {lvl:'warn', head:'ChatGPT Enterprise — besser, aber CLOUD Act bleibt', body:[
+    'SOC 2 Type 2, kein Training, 256-Bit-Verschlüsselung, eigene Admin-Konsole. Deutlich besser als Team/Business.',
+    '<strong>Aber:</strong> OpenAI ist ein US-Unternehmen. Der CLOUD Act gilt weiterhin. Keine EU-Datenspeicherungsoption (Stand Juni 2026).',
+    'Für echte Geschäftsgeheimnisse, M&A-Informationen oder unveröffentlichte Strategien <strong>nicht empfohlen.</strong>',
+  ]},
+  'ms-copilot': {lvl:'info', head:'Microsoft Copilot (M365) — EU-Datenspeicherung konfigurierbar', body:[
+    'EU-Datenspeicherung mit entsprechendem M365-Enterprise-Vertrag aktivierbar. Microsoft DPA verfügbar.',
+    'Microsofts <em>EU Data Boundary</em>-Programm reduziert Datenabfluss in die USA deutlich. CLOUD Act gilt formal weiterhin (Microsoft = US-Unternehmen).',
+    'Empfehlung: EU Data Boundary aktivieren, DPA prüfen/unterzeichnen, IT-Sicherheitsfreigabe einholen.',
+  ]},
+  'azure-oai': {lvl:'ok', head:'Azure OpenAI (eigenes Deployment) — Empfehlung für sensible Daten', body:[
+    'Deployment in EU-Region (z.B. West Europe, Sweden Central). VNet-Isolation, private Endpoints, kein Training auf Kundendaten.',
+    'Microsoft Enterprise DPA verfügbar. Mit korrekter Konfiguration beste Balance aus Modellleistung und Datenschutz.',
+    'CLOUD Act-Restrisiko praktisch gering bei EU-Region + VNet, rechtlich nicht vollständig ausgeschlossen.',
+    'Empfohlen für: vertrauliche interne Daten, sensitives IP. Für streng geheime Inhalte → lokale KI oder EU-Anbieter.',
+  ]},
+  'claude-ent': {lvl:'info', head:'Claude Enterprise (Anthropic) — ähnlich wie ChatGPT Enterprise', body:[
+    'Enterprise DPA verfügbar, kein Training auf Kundendaten. Anthropic ist US-Unternehmen, CLOUD Act gilt.',
+    'Anthropics Constitutional AI bietet gute Datenschutzgarantien vertraglich. Keine EU-Datenspeicherung als Standard (Stand Juni 2026).',
+    'Ähnliche Einschränkungen wie ChatGPT Enterprise. Nicht für Geschäftsgeheimnisse oder hochvertrauliche Daten.',
+  ]},
+  'mistral-eu': {lvl:'ok', head:'Mistral / Aleph Alpha — EU-Souveränität, kein CLOUD Act', body:[
+    '<strong>Mistral AI</strong> (Frankreich): EU-Unternehmen, EU-Datenspeicherung, kein US CLOUD Act. Leistungsfähige Modelle (Mistral Large 2, Mistral Small).',
+    '<strong>Aleph Alpha</strong> (Deutschland): BSI-geprüft, DSGVO-konform, On-Premise-Deployment möglich. Für hochregulierte Branchen und öffentlichen Sektor geeignet.',
+    'Enterprise DPA verfügbar. Empfohlen wenn EU-Souveränität Priorität hat.',
+  ]},
+  'local': {lvl:'ok', head:'Lokale KI (Ollama, LM Studio) — sicherste Option', body:[
+    'Daten verlassen das Unternehmen nie. Kein CLOUD Act, kein Training-Risiko, keine Drittanbieter-Abhängigkeit.',
+    'Geeignete Modelle: LLaMA 3.x, Mistral 7B/8x7B, Phi-4 (Microsoft), Qwen2.5. Erfordert GPU-Hardware (Workstation oder eigener Server).',
+    'Einschränkungen: Modellleistung meist unterhalb von GPT-4o/Claude Sonnet. IT-Betrieb erforderlich. Datenschutzkonzept trotzdem intern dokumentieren.',
+    'Empfohlen für: Geschäftsgeheimnisse, streng vertrauliche Inhalte, hochregulierte Branchen (Pharma, Rüstung, Recht).',
+  ]},
+};
+
+const TC_ORG = [
+  {id:'approved',  label:'Tool intern freigegeben',               sub:'Whitelist / Freigabeprozess durch IT-Sicherheit abgeschlossen', critical:true},
+  {id:'avv',       label:'AVV / DPA mit Anbieter unterzeichnet',  sub:'Art. 28 DSGVO — erforderlich bei personenbezogenen Daten',      critical:true},
+  {id:'purpose',   label:'Verarbeitungszweck dokumentiert',        sub:'Im KI-Register oder Verfahrensverzeichnis erfasst',             critical:false},
+  {id:'retention', label:'Löschfrist definiert',                   sub:'z.B. 30 Tage · in Kontoeinstellungen oder intern festgelegt',   critical:false},
+  {id:'trained',   label:'Mitarbeitende geschult',                 sub:'Richtlinie kommuniziert, Do/Don\'ts bekannt',                   critical:false},
+  {id:'register',  label:'Im KI-Inventar / AI-Register erfasst',  sub:'Pflicht bei AI Act · für alle Tools empfohlen',                 critical:false},
+];
+
+const TC_ALTS_SECRET = [
+  {name:'Lokale KI (Ollama / LLaMA)', desc:'On-Premise, kein Datentransfer, kein CLOUD Act — beste Wahl für Geheimnisse und IP.'},
+  {name:'Aleph Alpha (BSI-geprüft)',  desc:'Deutsches EU-Unternehmen, BSI-zertifiziert, On-Premise-Option für Hochsicherheitsbereiche.'},
+  {name:'Mistral Enterprise',         desc:'Französischer EU-Anbieter, kein CLOUD Act, starke Modelle, DSGVO-konform.'},
+];
+const TC_ALTS_SENS = [
+  {name:'Azure OpenAI + EU-Region',    desc:'EU-Datenspeicherung, VNet-Isolation, Enterprise DPA. Für sensible Daten empfohlen.'},
+  {name:'Microsoft Copilot + EU Data Boundary', desc:'EU-Region aktivieren, DPA unterzeichnen. Gut in M365-Umgebungen.'},
+  {name:'Mistral API Enterprise',      desc:'EU-Anbieter, DSGVO-konform, gute Modellleistung, kein CLOUD Act.'},
+];
+
+const tcState = {data:{}, tool:null, org:{}};
+
+function tcInit() {
+  const dc = document.getElementById('tcDataChips');
+  if (!dc || dc.dataset.built) return;
+  dc.dataset.built = '1';
+
+  dc.innerHTML = TC_DATA.map(d =>
+    `<div class="tc-chip" id="tcd-${d.id}" onclick="tcToggleData('${d.id}')">
+      <span>${d.label}</span>
+      <span class="tc-chip-sub">${d.sub}</span>
+    </div>`
+  ).join('');
+
+  document.getElementById('tcToolCards').innerHTML = TC_TOOLS.map(t => {
+    const rc = t.risk==='high'?'high':t.risk==='low'?'low':'med';
+    const rl = t.risk==='high'?'Hohes Risiko':t.risk==='low'?'Niedrig':'Mittel';
+    const b = [];
+    if (!t.cloudAct) b.push('<span class="tc-badge eu">EU-SOUVERÄN</span>');
+    if (t.cloudAct)  b.push('<span class="tc-badge high">CLOUD ACT</span>');
+    if (t.euRegion && t.cloudAct) b.push('<span class="tc-badge eu">EU-REGION</span>');
+    b.push(`<span class="tc-badge ${rc}">${rl}</span>`);
+    return `<div class="tc-tool-card" id="tct-${t.id}" onclick="tcSelectTool('${t.id}')">
+      <div class="tc-tool-name">${t.name}</div>
+      <div class="tc-tool-sub">${t.sub}</div>
+      <div class="tc-tool-badges">${b.join('')}</div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('tcOrgChecks').innerHTML = TC_ORG.map(c =>
+    `<div class="tc-check-row" id="tcr-${c.id}">
+      <div><span class="tc-check-label">${c.label}</span><span class="tc-check-sub">${c.sub}</span></div>
+      <div class="tc-yn">
+        <button class="tc-yn-btn yes" onclick="tcSetOrg('${c.id}',true)">JA</button>
+        <button class="tc-yn-btn no"  onclick="tcSetOrg('${c.id}',false)">NEIN</button>
+      </div>
+    </div>`
+  ).join('');
+
+  tcUpdateAmpel();
+}
+
+function tcToggleData(id) {
+  tcState.data[id] = !tcState.data[id];
+  const chip = document.getElementById('tcd-' + id);
+  const d = TC_DATA.find(x => x.id === id);
+  if (tcState.data[id]) chip.classList.add(d.cls);
+  else chip.classList.remove('selected','danger-sel','safe-sel');
+  tcUpdateAmpel();
+}
+
+function tcSelectTool(id) {
+  tcState.tool = id;
+  document.querySelectorAll('.tc-tool-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('tct-' + id).classList.add('selected');
+  const info = TC_TOOL_INFO[id];
+  document.getElementById('tcToolInfo').innerHTML = info
+    ? `<div class="tc-infobox ${info.lvl}"><div class="tc-infobox-head">${info.head}</div>${info.body.map(p=>`<p>${p}</p>`).join('')}</div>`
+    : '';
+  tcUpdateAmpel();
+}
+
+function tcSetOrg(id, val) {
+  tcState.org[id] = val;
+  const row = document.getElementById('tcr-' + id);
+  row.querySelectorAll('.tc-yn-btn').forEach(b => {
+    b.classList.remove('active');
+    if ((b.classList.contains('yes') && val) || (b.classList.contains('no') && !val)) b.classList.add('active');
+  });
+  tcUpdateAmpel();
+}
+
+function tcIssues() {
+  const issues = [];
+  const tool  = TC_TOOLS.find(t => t.id === tcState.tool);
+  const hasAny     = Object.values(tcState.data).some(v => v);
+  const hasSecret  = tcState.data.secret || tcState.data.financial;
+  const hasDsgvo   = tcState.data.personal || tcState.data.customer || tcState.data.employee;
+  const hasNonPub  = TC_DATA.filter(d => d.id !== 'public').some(d => tcState.data[d.id]);
+  if (!tool || !hasAny) return issues;
+
+  if (tcState.tool === 'chatgpt-free' && hasNonPub)
+    issues.push({lvl:'red', msg:'ChatGPT Free/Plus: Kein Unternehmensvertrag, kein Training-Opt-out. Für keinerlei Unternehmensdaten geeignet.'});
+
+  if (hasSecret && tool.cloudAct)
+    issues.push({lvl:'red', msg:'Geschäftsgeheimnisse + US-Cloud: CLOUD Act + GeschGehG §2 — Geheimnisschutz erlischt bei Eingabe in US-Cloud-Dienste.'});
+
+  if (hasDsgvo) {
+    if (!tool.avv)
+      issues.push({lvl:'red', msg:'Personenbezogene Daten ohne AVV-Möglichkeit: Verarbeitung unzulässig (Art. 28 DSGVO).'});
+    else if (tcState.org.avv === false)
+      issues.push({lvl:'red', msg:'AVV noch nicht abgeschlossen — vor jeder Verarbeitung personenbezogener Daten zwingend erforderlich.'});
+    else if (tcState.org.avv === undefined)
+      issues.push({lvl:'yellow', msg:'AVV / DPA mit Anbieter abschließen (Art. 28 DSGVO) — noch nicht beantwortet.'});
+  }
+
+  if (tcState.org.approved === false)
+    issues.push({lvl:'red', msg:'Tool nicht intern freigegeben. Freigabeprozess anstoßen bevor Mitarbeitende das Tool nutzen.'});
+  else if (tcState.org.approved === undefined)
+    issues.push({lvl:'yellow', msg:'Interne Freigabe: noch nicht beantwortet.'});
+
+  if (tcState.org.purpose === false)
+    issues.push({lvl:'yellow', msg:'Verarbeitungszweck nicht dokumentiert. Im KI-Register oder Verfahrensverzeichnis erfassen.'});
+  if (tcState.org.retention === false)
+    issues.push({lvl:'yellow', msg:'Löschfrist nicht definiert. Empfehlung: 30–90 Tage, in Kontoeinstellungen oder intern festlegen.'});
+  if (tcState.org.trained === false)
+    issues.push({lvl:'yellow', msg:'Mitarbeitende nicht geschult. KI-Nutzungsrichtlinie kommunizieren, Do/Don\'ts erläutern.'});
+  if (tcState.org.register === false)
+    issues.push({lvl:'yellow', msg:'Nicht im KI-Inventar erfasst. Für AI-Act-Compliance und interne Transparenz empfohlen.'});
+
+  return issues;
+}
+
+function tcUpdateAmpel() {
+  const issues = tcIssues();
+  const tool   = TC_TOOLS.find(t => t.id === tcState.tool);
+  const hasData = Object.values(tcState.data).some(v => v);
+  const hasTool = !!tcState.tool;
+  const allOrg  = TC_ORG.every(c => c.id in tcState.org);
+  const hasRed  = issues.some(i => i.lvl === 'red');
+  const hasYell = issues.some(i => i.lvl === 'yellow');
+
+  const lr = document.getElementById('tcLightRed');
+  const ly = document.getElementById('tcLightYellow');
+  const lg = document.getElementById('tcLightGreen');
+  lr.className = 'tc-light ' + (hasRed ? 'on-red' : 'off');
+  ly.className = 'tc-light ' + (!hasRed && hasYell ? 'on-yellow' : 'off');
+  lg.className = 'tc-light ' + (!hasRed && !hasYell && hasData && hasTool && allOrg ? 'on-green' : 'off');
+
+  const vEl = document.getElementById('tcVerdict');
+  if (!hasData || !hasTool) {
+    vEl.className = 'tc-verdict grey'; vEl.textContent = 'Daten & Tool auswählen';
+  } else if (hasRed) {
+    vEl.className = 'tc-verdict red'; vEl.textContent = 'Nutzung nicht zulässig';
+  } else if (hasYell) {
+    vEl.className = 'tc-verdict yellow'; vEl.textContent = 'Prüfung erforderlich';
+  } else if (allOrg) {
+    vEl.className = 'tc-verdict green'; vEl.textContent = 'Nutzung zulässig ✓';
+  } else {
+    vEl.className = 'tc-verdict yellow'; vEl.textContent = 'Angaben vervollständigen';
+  }
+
+  const fEl = document.getElementById('tcFindings');
+  if (!hasData || !hasTool) {
+    fEl.innerHTML = '';
+  } else if (issues.length === 0 && allOrg) {
+    fEl.innerHTML = '<div class="tc-finding green">Keine kritischen Punkte — alle Anforderungen erfüllt.</div>';
+  } else {
+    fEl.innerHTML = issues.map(i => `<div class="tc-finding ${i.lvl}">${i.msg}</div>`).join('');
+  }
+
+  const hasSecret = tcState.data.secret || tcState.data.financial;
+  const hasDsgvo  = tcState.data.personal || tcState.data.customer || tcState.data.employee;
+  const showAlts  = hasRed && tool && (tool.cloudAct || !tool.avv) && (hasSecret || hasDsgvo);
+  document.getElementById('tcAltsCard').style.display = showAlts ? '' : 'none';
+  if (showAlts) {
+    const alts = hasSecret ? TC_ALTS_SECRET : TC_ALTS_SENS;
+    document.getElementById('tcAltsContent').innerHTML = alts.map(a =>
+      `<div class="tc-alt"><div class="tc-alt-name">${a.name}</div><div class="tc-alt-desc">${a.desc}</div></div>`
+    ).join('');
+  }
+}
+
+function tcPrint() {
+  const tool = TC_TOOLS.find(t => t.id === tcState.tool);
+  const dLabels = TC_DATA.filter(d => tcState.data[d.id]).map(d => d.label).join(', ');
+  document.getElementById('tcPrintMeta').textContent =
+    `KI Tool-Check · ${new Date().toLocaleDateString('de-DE')} · Daten: ${dLabels||'—'} · Tool: ${tool?tool.name:'—'}`;
+  document.body.classList.add('tc-printing');
+  window.print();
+  setTimeout(() => document.body.classList.remove('tc-printing'), 1000);
+}
+
+function tcReset() {
+  Object.keys(tcState.data).forEach(k => { tcState.data[k] = false; });
+  tcState.tool = null;
+  Object.keys(tcState.org).forEach(k => { delete tcState.org[k]; });
+  document.querySelectorAll('.tc-chip').forEach(c => c.classList.remove('selected','danger-sel','safe-sel'));
+  document.querySelectorAll('.tc-tool-card').forEach(c => c.classList.remove('selected'));
+  document.querySelectorAll('.tc-yn-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tcToolInfo').innerHTML = '';
+  tcUpdateAmpel();
+}
+
+// Hook into tab switch to lazy-init
+document.querySelector('[data-view="toolcheck"]').addEventListener('click', tcInit);
 </script>
 </body>
 </html>
