@@ -359,6 +359,59 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16p
   body.fk-printing .fk-item-body{display:block!important}
   body.fk-printing .fk-chk{display:none}
 }
+/* ═══════════════════════════════════════════
+   VORLAGEN MODULE
+   ═══════════════════════════════════════════ */
+.vl-page{padding:32px;max-width:960px;margin:0 auto;width:100%}
+@media(max-width:700px){.vl-page{padding:16px}}
+.vl-nav{display:flex;gap:0;border-bottom:2px solid var(--rule);margin-bottom:24px;flex-wrap:wrap}
+.vl-nav-btn{padding:10px 18px;border:none;background:transparent;font-size:13px;font-weight:500;cursor:pointer;color:var(--mute);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all 0.15s;white-space:nowrap}
+.vl-nav-btn:hover{color:var(--ink)}
+.vl-nav-btn.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+.vl-tpl{display:none}.vl-tpl.active{display:block}
+/* Document look */
+.vl-doc{background:var(--white);border:1px solid var(--rule);padding:36px 40px;margin-bottom:16px;max-width:800px}
+.vl-doc-org{font-family:var(--mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--mute);margin-bottom:5px}
+.vl-doc-title{font-family:var(--serif);font-weight:600;font-size:20px;letter-spacing:-0.01em;margin-bottom:4px}
+.vl-doc-meta{font-size:11px;color:var(--mute);font-family:var(--mono);margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid var(--ink);line-height:1.6}
+.vl-sec{margin-bottom:18px}
+.vl-sec-head{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;padding-bottom:3px;border-bottom:1px solid var(--rule2)}
+.vl-p{font-size:13px;line-height:1.7;color:var(--ink2);margin-bottom:8px}
+.vl-p strong{color:var(--ink)}
+.vl-field{display:flex;align-items:baseline;gap:8px;margin-bottom:7px}
+.vl-flabel{font-size:12px;font-weight:600;white-space:nowrap;min-width:220px;color:var(--ink2)}
+.vl-fline{flex:1;border-bottom:1px solid var(--rule);min-width:60px;height:18px}
+.vl-checks{display:flex;flex-wrap:wrap;gap:10px 20px;margin-bottom:7px}
+.vl-ci{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink2)}
+.vl-box{width:13px;height:13px;border:1.5px solid var(--ink2);display:inline-block;flex-shrink:0}
+.vl-sign{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:28px}
+@media(max-width:600px){.vl-sign{grid-template-columns:1fr}}
+.vl-sline{border-bottom:1px solid var(--ink2);height:28px;margin-bottom:4px}
+.vl-slabel{font-size:10px;color:var(--mute);font-family:var(--mono)}
+.vl-note{font-size:11px;color:var(--mute);font-style:italic;margin-top:20px;padding-top:10px;border-top:1px solid var(--rule2);line-height:1.5}
+/* Register table */
+.vl-tbl{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:12px}
+.vl-tbl th{background:var(--ink);color:var(--bg);padding:5px 7px;font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-align:left;white-space:nowrap}
+.vl-tbl td{padding:7px;border:1px solid var(--rule);vertical-align:top;min-width:60px}
+.vl-tbl tr:nth-child(even) td{background:var(--bg)}
+.vl-tbl tr.filler td{height:28px}
+/* Stand + Quellen */
+.stand-pill{display:inline-flex;align-items:center;padding:2px 8px;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;background:var(--teal-soft);color:var(--teal);margin-left:10px;font-weight:600}
+.stand-pill.warn{background:var(--gold-soft);color:#78590a}
+.quellen-block{margin-top:24px;padding:14px 18px;background:var(--card);border:1px solid var(--rule)}
+.quellen-head{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--mute);margin-bottom:10px}
+.quellen-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px}
+.quelle-item{padding:8px 10px;background:var(--white);border:1px solid var(--rule2)}
+.quelle-name{font-size:12px;font-weight:600;color:var(--eu);margin-bottom:2px}
+.quelle-desc{font-size:11px;color:var(--mute);line-height:1.4}
+@media print{
+  body.vl-printing .view{display:none!important}
+  body.vl-printing #view-vorlagen{display:block!important}
+  body.vl-printing .vl-nav,.vl-printing .tc-actions,.vl-printing .quellen-block{display:none!important}
+  body.vl-printing .vl-tpl{display:none!important}
+  body.vl-printing .vl-tpl.active{display:block!important}
+  body.vl-printing .vl-doc{border:none;padding:0}
+}
 </style>
 </head>
 <body>
@@ -372,8 +425,9 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16p
     <button class="tab" data-view="kompass">Kompass</button>
     <button class="tab" data-view="toolcheck">Tool-Check</button>
     <button class="tab" data-view="fragenkatalog">Fragenkatalog</button>
+    <button class="tab" data-view="vorlagen">Vorlagen</button>
   </div>
-  <div class="topbar-meta">v1.0 · Open Source</div>
+  <div class="topbar-meta">v1.2 · Jun 2026 · Open Source</div>
 </div>
 
 <div class="profile-bar">
@@ -525,6 +579,371 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16p
       <div class="label">Ehrlicher Hinweis · drei Vorbedingungen</div>
       <p>Welche Tiefe ist mit der eigenen Rolle vereinbar — Orientierung ja, konkrete Produktempfehlung heikel. Wie verhält sich der Kompass zu bestehenden Beratern in der Branche? Und: wer hat das Mandat, diesen Service anzubieten, und wer trägt die Verantwortung für seine Inhalte?</p>
       <p>Die Antworten sind nicht offensichtlich. Aber genau darum lohnt sich der Prototyp <em>vor</em> der Strategie-Entscheidung — er macht die Frage anfassbar.</p>
+    </div>
+  </div>
+</div>
+
+<!-- VORLAGEN TAB -->
+<div class="view" id="view-vorlagen">
+  <div class="vl-page">
+    <div class="fk-tag">Mustervorlagen · 4 Dokumente · druckfertig</div>
+    <h1 class="fk-heading">Vorlagen für <em>KI-Governance</em></h1>
+    <p class="fk-sub">Anpassungsbedürftige Muster — kein Ersatz für rechtliche Beratung. Platzhalter in [ECKIGEN KLAMMERN] durch eigene Inhalte ersetzen.</p>
+
+    <div class="vl-nav">
+      <button class="vl-nav-btn active" onclick="vlSwitch(this,'vlt-richtlinie')">KI-Nutzungsrichtlinie</button>
+      <button class="vl-nav-btn" onclick="vlSwitch(this,'vlt-register')">KI-Register</button>
+      <button class="vl-nav-btn" onclick="vlSwitch(this,'vlt-vvt')">VVT-Eintrag (Art. 30 DSGVO)</button>
+      <button class="vl-nav-btn" onclick="vlSwitch(this,'vlt-avv')">AVV-Prüfcheckliste</button>
+    </div>
+
+    <!-- ── VORLAGE 1: NUTZUNGSRICHTLINIE ── -->
+    <div class="vl-tpl active" id="vlt-richtlinie">
+      <div class="vl-doc">
+        <div class="vl-doc-org">[ORGANISATION] · Interne Richtlinie</div>
+        <div class="vl-doc-title">KI-Nutzungsrichtlinie</div>
+        <div class="vl-doc-meta">
+          Version ___ · Stand: ___________ · Gültig ab: ___________ · Freigabe: ___________<br>
+          Gilt für: alle Mitarbeitenden, Auftragnehmer und sonstige Personen, die KI-Werkzeuge im Auftrag von [ORGANISATION] nutzen.
+        </div>
+
+        <div class="vl-sec">
+          <div class="vl-sec-head">§ 1 · Erlaubte Werkzeuge</div>
+          <p class="vl-p">Nur von [IT-Sicherheit / DSB] freigegebene KI-Werkzeuge dürfen dienstlich genutzt werden. Die aktuelle Freigabeliste ist unter [ABLAGEORT/INTRANET] einsehbar. Werkzeuge außerhalb der Liste sind für dienstliche Inhalte untersagt <strong>(Schatten-KI-Verbot).</strong> Neue Werkzeuge können über [PROZESS/KONTAKT] zur Freigabe beantragt werden.</p>
+        </div>
+
+        <div class="vl-sec">
+          <div class="vl-sec-head">§ 2 · Zulässige und unzulässige Eingaben</div>
+          <p class="vl-p"><strong>Erlaubt ohne weitere Prüfung:</strong> Öffentlich zugängliche Informationen, allgemeine Texte, Recherche ohne Unternehmensbezug.</p>
+          <p class="vl-p"><strong>Erlaubt mit Freigabe und AVV:</strong> Interne, nicht vertrauliche Dokumente; nicht-sensible personenbezogene Daten (sofern AVV abgeschlossen).</p>
+          <p class="vl-p"><strong>Untersagt:</strong> Geschäftsgeheimnisse · unveröffentlichte Finanz-/Strategiedaten · M&A-Informationen · Kundendaten ohne AVV · Zugangsdaten/Secrets/API-Keys · besondere Datenkategorien nach Art. 9 DSGVO (Gesundheit, Biometrie u. a.) · durch NDA/Vertrag geschützte Drittinformationen · Quellcode ohne explizite Freigabe.</p>
+        </div>
+
+        <div class="vl-sec">
+          <div class="vl-sec-head">§ 3 · Letztverantwortung und Qualitätssicherung</div>
+          <p class="vl-p">KI-Ausgaben ersetzen kein fachliches Urteil. Die <strong>Letztverantwortung</strong> für jede Entscheidung, jeden veröffentlichten Text und jeden eingesetzten Code liegt bei der nutzenden Person und der fachlich Verantwortlichen. KI-generierte Inhalte mit Außenwirkung sind vor Verwendung auf Korrektheit, Vollständigkeit und Zulässigkeit zu prüfen.</p>
+        </div>
+
+        <div class="vl-sec">
+          <div class="vl-sec-head">§ 4 · Kennzeichnung</div>
+          <p class="vl-p">KI-generierte Inhalte sind zu kennzeichnen, sofern sie nach außen kommuniziert werden oder Grundlage einer Entscheidung sind. Interne Kennzeichnung: [METHODE — z. B. Fußnote „KI-unterstützt erstellt", Metadaten, Kommentar im Dokument].</p>
+        </div>
+
+        <div class="vl-sec">
+          <div class="vl-sec-head">§ 5 · Schulungspflicht (AI Literacy)</div>
+          <p class="vl-p">Alle Nutzenden absolvieren eine Grundschulung (AI Literacy) gem. Art. 4 EU AI Act. Die Teilnahme wird dokumentiert. Wiederholung ist erforderlich bei: wesentlichen Änderungen des Tool-Portfolios · neuen Freigaben mit erhöhtem Risiko · Anweisung durch [VERANTWORTLICHE STELLE].</p>
+        </div>
+
+        <div class="vl-sec">
+          <div class="vl-sec-head">§ 6 · Meldepflichten</div>
+          <p class="vl-p">Sicherheitsvorfälle, unbeabsichtigte Datenweitergaben und Richtlinienverstöße sind <strong>unverzüglich</strong> zu melden an: [KONTAKT/E-MAIL]. Der Datenschutzbeauftragte ist bei möglichen Datenpannen (Art. 33/34 DSGVO) innerhalb von 24 h einzubeziehen.</p>
+        </div>
+
+        <div class="vl-sec">
+          <div class="vl-sec-head">§ 7 · Inkrafttreten und Sanktionen</div>
+          <p class="vl-p">Verstöße können arbeitsrechtliche Konsequenzen haben. Diese Richtlinie tritt am ___________ in Kraft und ersetzt alle vorherigen Regelungen zur KI-Nutzung.</p>
+        </div>
+
+        <div class="vl-sign">
+          <div><div class="vl-sline"></div><div class="vl-slabel">Geschäftsführung · Datum</div></div>
+          <div><div class="vl-sline"></div><div class="vl-slabel">Datenschutzbeauftragte:r · Datum</div></div>
+          <div><div class="vl-sline"></div><div class="vl-slabel">Betriebsrat (sofern zustimmungspflichtig) · Datum</div></div>
+          <div><div class="vl-sline"></div><div class="vl-slabel">IT-Sicherheitsbeauftragte:r · Datum</div></div>
+        </div>
+        <div class="vl-note">Muster ohne Rechtsberatungscharakter · Anpassung durch IT-Rechtskanzlei und DSB empfohlen · Quellen: DSGVO, EU AI Act Art. 4, GeschGehG · Stand: Jun 2026 · CC BY 4.0</div>
+      </div>
+    </div>
+
+    <!-- ── VORLAGE 2: KI-REGISTER ── -->
+    <div class="vl-tpl" id="vlt-register">
+      <div class="vl-doc">
+        <div class="vl-doc-org">[ORGANISATION] · KI-Governance</div>
+        <div class="vl-doc-title">KI-Register / KI-Inventar</div>
+        <div class="vl-doc-meta">
+          Version ___ · Stand: ___________ · Verantwortlich: ___________ · Nächste Gesamtprüfung: ___________<br>
+          Pflege: Jedes neu eingeführte oder abgekündigte KI-Werkzeug ist binnen 5 Werktagen einzutragen/zu entfernen.
+        </div>
+
+        <div style="overflow-x:auto;margin-bottom:12px">
+          <table class="vl-tbl">
+            <thead><tr>
+              <th>#</th><th>Tool / Produkt</th><th>Anbieter</th><th>Einsatzzweck</th><th>Fachbereich</th>
+              <th>Datenkategorien*</th><th>AI Act Klasse</th><th>AVV</th><th>Serverstandort</th>
+              <th>Training opt-out</th><th>Freigabe durch</th><th>Freigabedatum</th><th>Nächste Prüfung</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>1</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td>2</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td>3</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td>4</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td>5</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr class="filler"><td colspan="13" style="text-align:center;color:var(--mute);font-style:italic;font-size:11px">weitere Zeilen nach Bedarf</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="vl-sec">
+          <div class="vl-sec-head">Legende</div>
+          <p class="vl-p" style="font-size:11px;line-height:1.7">
+            <strong>Datenkategorien*:</strong> Pb = personenbezogen · V = vertraulich · G = Geschäftsgeheimnis · I = intern · Ö = öffentlich<br>
+            <strong>AI Act Klasse:</strong> Min = minimal · Beg = begrenzt (Transparenzpflicht) · HR = hochrisiko (Anhang III) · GPAI = Allzweck-KI<br>
+            <strong>AVV:</strong> ✓ abgeschlossen · – nicht erforderlich (kein Personenbezug) · ✗ fehlt → Nutzung für personenbezogene Daten sofort einschränken<br>
+            <strong>Training opt-out:</strong> ✓ konfiguriert · vertragl. = vertraglich ausgeschlossen · – kein Training (z. B. lokale KI)
+          </p>
+        </div>
+
+        <div class="vl-note">Muster · Ergänzung durch VVT-Eintrag (Art. 30 DSGVO) je Tool mit Personenbezug erforderlich · Stand: Jun 2026 · CC BY 4.0</div>
+      </div>
+    </div>
+
+    <!-- ── VORLAGE 3: VVT-EINTRAG ── -->
+    <div class="vl-tpl" id="vlt-vvt">
+      <div class="vl-doc">
+        <div class="vl-doc-org">[ORGANISATION] · Datenschutz</div>
+        <div class="vl-doc-title">VVT-Eintrag: Einsatz eines KI-Werkzeugs</div>
+        <div class="vl-doc-meta">
+          gem. Art. 30 DSGVO · Eintrags-Nr.: ___ · Version: ___ · Stand: ___________ · Nächste Prüfung: ___________
+        </div>
+
+        <div class="vl-sec">
+          <div class="vl-sec-head">A · Verantwortliche Stelle</div>
+          <div class="vl-field"><span class="vl-flabel">Organisation:</span><span class="vl-fline"></span></div>
+          <div class="vl-field"><span class="vl-flabel">Anschrift:</span><span class="vl-fline"></span></div>
+          <div class="vl-field"><span class="vl-flabel">Datenschutzbeauftragte:r (DSB):</span><span class="vl-fline"></span></div>
+          <div class="vl-field"><span class="vl-flabel">Kontakt DSB:</span><span class="vl-fline"></span></div>
+          <div class="vl-field"><span class="vl-flabel">Fachbereich / intern Verantwortliche:r:</span><span class="vl-fline"></span></div>
+        </div>
+
+        <div class="vl-sec">
+          <div class="vl-sec-head">B · Verarbeitungstätigkeit</div>
+          <div class="vl-field"><span class="vl-flabel">Bezeichnung der Verarbeitung:</span><span class="vl-fline"></span></div>
+          <div class="vl-field"><span class="vl-flabel">KI-Werkzeug / Anbieter:</span><span class="vl-fline"></span></div>
+          <div class="vl-field"><span class="vl-flabel">Verarbeitungszweck (konkret):</span><span class="vl-fline"></span></div>
+          <p class="vl-p" style="font-size:12px;margin-bottom:6px"><strong>Rechtsgrundlage Art. 6 DSGVO:</strong></p>
+          <div class="vl-checks">
+            <div class="vl-ci"><span class="vl-box"></span>Art. 6(1)(a) Einwilligung</div>
+            <div class="vl-ci"><span class="vl-box"></span>Art. 6(1)(b) Vertragserfüllung</div>
+            <div class="vl-ci"><span class="vl-box"></span>Art. 6(1)(c) rechtl. Verpflichtung</div>
+            <div class="vl-ci"><span class="vl-box"></span>Art. 6(1)(f) berechtigtes Interesse</div>
+          </div>
+          <div class="vl-field" style="margin-top:6px"><span class="vl-flabel">Begründung (ggf. Interessenabwägung):</span><span class="vl-fline"></span></div>
+        </div>
+
+        <div class="vl-sec">
+          <div class="vl-sec-head">C · Betroffene Personen</div>
+          <div class="vl-checks">
+            <div class="vl-ci"><span class="vl-box"></span>Mitarbeitende</div>
+            <div class="vl-ci"><span class="vl-box"></span>Bewerber:innen</div>
+            <div class="vl-ci"><span class="vl-box"></span>Kunden (B2C)</div>
+            <div class="vl-ci"><span class="vl-box"></span>Geschäftspartner (B2B)</div>
+            <div class="vl-ci"><span class="vl-box"></span>Interessenten / Leads</div>
+            <div class="vl-ci"><span class="vl-box"></span>Sonstige: <span class="vl-fline" style="min-width:100px;display:inline-block"></span></div>
+          </div>
+        </div>
+
+        <div class="vl-sec">
+          <div class="vl-sec-head">D · Datenkategorien</div>
+          <div class="vl-checks">
+            <div class="vl-ci"><span class="vl-box"></span>Kontaktdaten (Name, E-Mail)</div>
+            <div class="vl-ci"><span class="vl-box"></span>Kommunikationsinhalte</div>
+            <div class="vl-ci"><span class="vl-box"></span>Vertragsdaten</div>
+            <div class="vl-ci"><span class="vl-box"></span>Leistungs- / Arbeitsdaten</div>
+            <div class="vl-ci"><span class="vl-box"></span>Standortdaten</div>
+            <div class="vl-ci"><span class="vl-box"></span>Gesundheitsdaten (Art. 9 DSGVO)</div>
+            <div class="vl-ci"><span class="vl-box"></span>Sonstige bes. Kategorien Art. 9: <span class="vl-fline" style="min-width:80px;display:inline-block"></span></div>
+          </div>
+          <div class="vl-field" style="margin-top:6px"><span class="vl-flabel">Rechtsgrundlage Art. 9 (falls zutreffend):</span><span class="vl-fline"></span></div>
+        </div>
+
+        <div class="vl-sec">
+          <div class="vl-sec-head">E · Anbieter &amp; Empfänger</div>
+          <div class="vl-field"><span class="vl-flabel">Anbieter (Name, Rechtsform):</span><span class="vl-fline"></span></div>
+          <div class="vl-checks">
+            <div class="vl-ci"><span class="vl-box"></span>Sitz: EU / EWR</div>
+            <div class="vl-ci"><span class="vl-box"></span>Sitz: USA (CLOUD Act anwendbar)</div>
+            <div class="vl-ci"><span class="vl-box"></span>Sitz: sonstiges Drittland: <span class="vl-fline" style="min-width:80px;display:inline-block"></span></div>
+          </div>
+          <div class="vl-field" style="margin-top:6px"><span class="vl-flabel">Unterauftragsverarbeiter (bekannt):</span><span class="vl-fline"></span></div>
+          <div class="vl-field"><span class="vl-flabel">Weitere interne Empfänger:</span><span class="vl-fline"></span></div>
+        </div>
+
+        <div class="vl-sec">
+          <div class="vl-sec-head">F · Drittlandübermittlung (Art. 44 ff. DSGVO)</div>
+          <div class="vl-checks">
+            <div class="vl-ci"><span class="vl-box"></span>Keine Übermittlung in Drittland</div>
+            <div class="vl-ci"><span class="vl-box"></span>Übermittlung → Garantie:</div>
+          </div>
+          <div class="vl-checks" style="margin-top:6px">
+            <div class="vl-ci"><span class="vl-box"></span>Angemessenheitsbeschluss (Art. 45)</div>
+            <div class="vl-ci"><span class="vl-box"></span>Standardvertragsklauseln (SCC, Art. 46)</div>
+            <div class="vl-ci"><span class="vl-box"></span>Verbindliche Unternehmensregeln (BCR)</div>
+            <div class="vl-ci"><span class="vl-box"></span>Sonstige: <span class="vl-fline" style="min-width:80px;display:inline-block"></span></div>
+          </div>
+        </div>
+
+        <div class="vl-sec">
+          <div class="vl-sec-head">G · Speicherung &amp; Löschung</div>
+          <div class="vl-field"><span class="vl-flabel">Speicherort (technisch/Region):</span><span class="vl-fline"></span></div>
+          <div class="vl-field"><span class="vl-flabel">Löschfrist (Daten gesamt):</span><span class="vl-fline"></span></div>
+          <div class="vl-field"><span class="vl-flabel">Löschfrist Chat-Verlauf / Logs:</span><span class="vl-fline"></span></div>
+          <div class="vl-checks">
+            <div class="vl-ci"><span class="vl-box"></span>Training opt-out konfiguriert</div>
+            <div class="vl-ci"><span class="vl-box"></span>Training vertraglich ausgeschlossen (AVV-Klausel)</div>
+            <div class="vl-ci"><span class="vl-box"></span>Kein Training (lokales Modell / On-Premise)</div>
+          </div>
+        </div>
+
+        <div class="vl-sec">
+          <div class="vl-sec-head">H · Technisch-organisatorische Maßnahmen (Art. 32 DSGVO)</div>
+          <div class="vl-checks">
+            <div class="vl-ci"><span class="vl-box"></span>Transportverschlüsselung (TLS)</div>
+            <div class="vl-ci"><span class="vl-box"></span>Speicherverschlüsselung</div>
+            <div class="vl-ci"><span class="vl-box"></span>Zugriffsbeschränkung / RBAC</div>
+            <div class="vl-ci"><span class="vl-box"></span>Pseudonymisierung möglich</div>
+            <div class="vl-ci"><span class="vl-box"></span>Audit-Logging aktiviert</div>
+            <div class="vl-ci"><span class="vl-box"></span>AVV abgeschlossen (Art. 28 DSGVO)</div>
+          </div>
+          <div class="vl-field" style="margin-top:6px"><span class="vl-flabel">Zertifizierungen des Anbieters:</span><span class="vl-fline"></span></div>
+        </div>
+
+        <div class="vl-sec">
+          <div class="vl-sec-head">I · EU AI Act</div>
+          <div class="vl-checks">
+            <div class="vl-ci"><span class="vl-box"></span>Minimales Risiko</div>
+            <div class="vl-ci"><span class="vl-box"></span>Begrenztes Risiko (Transparenzpflicht)</div>
+            <div class="vl-ci"><span class="vl-box"></span>Hochrisiko-KI (Anhang III EU AI Act)</div>
+            <div class="vl-ci"><span class="vl-box"></span>GPAI-Modell (Allzweck-KI)</div>
+          </div>
+          <div class="vl-field" style="margin-top:6px"><span class="vl-flabel">Besondere Deployer-Pflichten:</span><span class="vl-fline"></span></div>
+          <div class="vl-field"><span class="vl-flabel">DSFA erforderlich / erstellt:</span><span class="vl-fline"></span></div>
+        </div>
+
+        <div class="vl-sec">
+          <div class="vl-sec-head">J · Mitbestimmung</div>
+          <div class="vl-checks">
+            <div class="vl-ci"><span class="vl-box"></span>Betriebsrat beteiligt</div>
+            <div class="vl-ci"><span class="vl-box"></span>Betriebsvereinbarung vorhanden (Nr./Datum: <span class="vl-fline" style="min-width:100px;display:inline-block"></span>)</div>
+            <div class="vl-ci"><span class="vl-box"></span>Mitbestimmung geprüft: nicht erforderlich (Begründung: <span class="vl-fline" style="min-width:100px;display:inline-block"></span>)</div>
+          </div>
+        </div>
+
+        <div class="vl-sec">
+          <div class="vl-sec-head">K · Freigabe &amp; Revisionshistorie</div>
+          <div class="vl-field"><span class="vl-flabel">Erstellt durch:</span><span class="vl-fline"></span></div>
+          <div class="vl-field"><span class="vl-flabel">Geprüft durch (DSB):</span><span class="vl-fline"></span></div>
+          <div class="vl-field"><span class="vl-flabel">Freigegeben durch:</span><span class="vl-fline"></span></div>
+          <div class="vl-field"><span class="vl-flabel">Freigabedatum:</span><span class="vl-fline"></span></div>
+          <div class="vl-field"><span class="vl-flabel">Nächste Überprüfung:</span><span class="vl-fline"></span></div>
+          <div class="vl-field"><span class="vl-flabel">Änderungsanlass / Revisionsgrund:</span><span class="vl-fline"></span></div>
+        </div>
+
+        <div class="vl-note">Muster gem. Art. 30 DSGVO · kein Ersatz für Rechtsberatung · Anpassung durch DSB und IT-Rechtskanzlei erforderlich · Quellen: DSGVO Art. 30, EU AI Act, GeschGehG · Stand: Jun 2026 · CC BY 4.0</div>
+      </div>
+    </div>
+
+    <!-- ── VORLAGE 4: AVV-PRÜFCHECKLISTE ── -->
+    <div class="vl-tpl" id="vlt-avv">
+      <div class="vl-doc">
+        <div class="vl-doc-org">[ORGANISATION] · IT-Recht / Datenschutz</div>
+        <div class="vl-doc-title">AVV-Prüfcheckliste für KI-Anbieter</div>
+        <div class="vl-doc-meta">
+          gem. Art. 28 DSGVO · Stand: Jun 2026 · Geprüfter Anbieter: ___________ · Prüfer:in: ___________ · Datum: ___________
+        </div>
+
+        <div class="vl-sec">
+          <div class="vl-sec-head">1 · Formale Voraussetzungen</div>
+          <div class="vl-checks" style="flex-direction:column;gap:8px">
+            <div class="vl-ci"><span class="vl-box"></span>AVV schriftlich oder in elektronisch gleichwertiger Form (Art. 28 Abs. 9)</div>
+            <div class="vl-ci"><span class="vl-box"></span>Vertragspartner ist der tatsächliche Auftragsverarbeiter (nicht nur Vertriebsgesellschaft)</div>
+            <div class="vl-ci"><span class="vl-box"></span>Vertrag deckt alle verarbeiteten Datenkategorien ab</div>
+            <div class="vl-ci"><span class="vl-box"></span>Vertrag deckt alle geplanten Verarbeitungszwecke ab</div>
+          </div>
+        </div>
+
+        <div class="vl-sec">
+          <div class="vl-sec-head">2 · Pflichtinhalt Art. 28 Abs. 3 DSGVO</div>
+          <div class="vl-checks" style="flex-direction:column;gap:8px">
+            <div class="vl-ci"><span class="vl-box"></span>Weisungsgebundenheit des Auftragsverarbeiters festgelegt</div>
+            <div class="vl-ci"><span class="vl-box"></span>Vertraulichkeit der verarbeitenden Personen zugesichert</div>
+            <div class="vl-ci"><span class="vl-box"></span>Technisch-organisatorische Maßnahmen (TOMs) beschrieben oder als Anlage beigefügt</div>
+            <div class="vl-ci"><span class="vl-box"></span>Unterauftragsverarbeitung: Genehmigungspflicht oder Liste + Änderungsbenachrichtigung</div>
+            <div class="vl-ci"><span class="vl-box"></span>Unterstützung bei Betroffenenrechten (Auskunft, Löschung, Berichtigung)</div>
+            <div class="vl-ci"><span class="vl-box"></span>Unterstützung bei DSFA und Vorabkonsultation</div>
+            <div class="vl-ci"><span class="vl-box"></span>Löschung oder Rückgabe der Daten nach Vertragsende</div>
+            <div class="vl-ci"><span class="vl-box"></span>Nachweis- und Kontrollrechte (Audits, Inspektionen)</div>
+          </div>
+        </div>
+
+        <div class="vl-sec">
+          <div class="vl-sec-head">3 · KI-spezifische Klauseln</div>
+          <div class="vl-checks" style="flex-direction:column;gap:8px">
+            <div class="vl-ci"><span class="vl-box"></span><strong>Training-Verbot:</strong> Eingaben dürfen nicht für Modelltraining genutzt werden (explizite Klausel, nicht nur Opt-out)</div>
+            <div class="vl-ci"><span class="vl-box"></span><strong>Speicherort / EU-Region:</strong> Daten werden ausschließlich in [EU/EWR] verarbeitet und gespeichert</div>
+            <div class="vl-ci"><span class="vl-box"></span><strong>Aufbewahrungsfristen:</strong> Prompts/Antworten/Logs werden nach maximal [X Tagen] gelöscht</div>
+            <div class="vl-ci"><span class="vl-box"></span><strong>Memory/Persistenz:</strong> Regelung für persistente Nutzerdaten, Erinnerungen, RAG-Inhalte</div>
+            <div class="vl-ci"><span class="vl-box"></span><strong>Modellwechsel:</strong> Benachrichtigungspflicht bei wesentlicher Änderung des eingesetzten Modells</div>
+            <div class="vl-ci"><span class="vl-box"></span><strong>Unterauftragsverarbeiter-Liste:</strong> Aktuelle Liste einsehbar; Änderungen mit X Tagen Vorankündigung</div>
+          </div>
+        </div>
+
+        <div class="vl-sec">
+          <div class="vl-sec-head">4 · Drittlandübermittlung</div>
+          <div class="vl-checks" style="flex-direction:column;gap:8px">
+            <div class="vl-ci"><span class="vl-box"></span>Keine Übermittlung in Drittland — oder</div>
+            <div class="vl-ci"><span class="vl-box"></span>Angemessenheitsbeschluss (Art. 45) benannt und gültig</div>
+            <div class="vl-ci"><span class="vl-box"></span>SCC (Standardvertragsklauseln, EU 2021) integriert oder als Anlage</div>
+            <div class="vl-ci"><span class="vl-box"></span>Transfer Impact Assessment (TIA) durchgeführt und dokumentiert</div>
+            <div class="vl-ci"><span class="vl-box"></span>CLOUD Act-Risiko bewertet: Anbieter ist US-Unternehmen → Restrisiko dokumentiert</div>
+          </div>
+        </div>
+
+        <div class="vl-sec">
+          <div class="vl-sec-head">5 · Technisch-organisatorische Maßnahmen (Anlage zum AVV)</div>
+          <div class="vl-checks" style="flex-direction:column;gap:8px">
+            <div class="vl-ci"><span class="vl-box"></span>Transportverschlüsselung (TLS 1.2+)</div>
+            <div class="vl-ci"><span class="vl-box"></span>Speicherverschlüsselung (AES-256 o. gleichwertig)</div>
+            <div class="vl-ci"><span class="vl-box"></span>Zugriffskontrolle / RBAC beim Anbieter</div>
+            <div class="vl-ci"><span class="vl-box"></span>Audit-Logging durch Anbieter</div>
+            <div class="vl-ci"><span class="vl-box"></span>Zertifizierungen: <span class="vl-fline" style="min-width:120px;display:inline-block"></span> (ISO 27001 / SOC 2 Typ II / BSI C5 / …)</div>
+            <div class="vl-ci"><span class="vl-box"></span>Penetrationstests / Security Audits: Frequenz und Nachweis</div>
+            <div class="vl-ci"><span class="vl-box"></span>Incident-Response: Meldepflicht bei Verletzung innerhalb 24 h</div>
+          </div>
+        </div>
+
+        <div class="vl-sec">
+          <div class="vl-sec-head">6 · Bewertungsergebnis</div>
+          <div class="vl-checks">
+            <div class="vl-ci"><span class="vl-box"></span>AVV freigegeben — alle Pflichtpunkte erfüllt</div>
+            <div class="vl-ci"><span class="vl-box"></span>AVV mit Auflagen freigegeben (Auflagen: <span class="vl-fline" style="min-width:120px;display:inline-block"></span>)</div>
+            <div class="vl-ci"><span class="vl-box"></span>AVV abgelehnt — fehlende Punkte: <span class="vl-fline" style="min-width:120px;display:inline-block"></span></div>
+          </div>
+          <div class="vl-field" style="margin-top:10px"><span class="vl-flabel">Anmerkungen / Nachverhandlungsbedarf:</span><span class="vl-fline"></span></div>
+        </div>
+
+        <div class="vl-sign">
+          <div><div class="vl-sline"></div><div class="vl-slabel">Datenschutzbeauftragte:r · Datum</div></div>
+          <div><div class="vl-sline"></div><div class="vl-slabel">IT-Recht / Justiziariat · Datum</div></div>
+        </div>
+
+        <div class="vl-note">Muster ohne Rechtsberatungscharakter · Quellen: DSGVO Art. 28/44 ff., EU AI Act, EDPB Guidelines 07/2020 (AVV) · Stand: Jun 2026 · CC BY 4.0</div>
+      </div>
+    </div>
+
+    <!-- Quellen-Monitoring -->
+    <div class="quellen-block">
+      <div class="quellen-head">Monitoring — diese 6 Quellen für aktuelle Änderungen beobachten</div>
+      <div class="quellen-grid">
+        <div class="quelle-item"><div class="quelle-name">EU AI Office</div><div class="quelle-desc">AI Act Umsetzungsakte, GPAI-Leitlinien, Implementierungs-Timeline</div></div>
+        <div class="quelle-item"><div class="quelle-name">EDPB</div><div class="quelle-desc">DSGVO-Leitlinien zu KI, automatisierten Entscheidungen, Drittlandtransfer</div></div>
+        <div class="quelle-item"><div class="quelle-name">BfDI</div><div class="quelle-desc">Deutsche Orientierungshilfen, Auslegungen zu KI &amp; Datenschutz</div></div>
+        <div class="quelle-item"><div class="quelle-name">BSI</div><div class="quelle-desc">KI-Sicherheitshinweise, BSI C5 (Cloud), IT-Grundschutz KI</div></div>
+        <div class="quelle-item"><div class="quelle-name">Anbieter-Changelogs</div><div class="quelle-desc">OpenAI, Microsoft, Google — Datenschutzrichtlinien, Training-Klauseln, Enterprise-Bedingungen</div></div>
+        <div class="quelle-item"><div class="quelle-name">BITKOM</div><div class="quelle-desc">Praxisleitfäden für KMU, Muster-Betriebsvereinbarungen, AI Act Umsetzungshilfen</div></div>
+      </div>
+    </div>
+
+    <div class="tc-actions">
+      <button class="tc-btn primary" onclick="vlPrint()">Aktive Vorlage drucken / PDF</button>
     </div>
   </div>
 </div>
@@ -1545,6 +1964,22 @@ function fkPrint() {
 }
 
 document.querySelector('[data-view="fragenkatalog"]').addEventListener('click', fkInit);
+
+// ═══════════════════════════════════════════
+// VORLAGEN MODULE
+// ═══════════════════════════════════════════
+function vlSwitch(btn, tplId) {
+  document.querySelectorAll('.vl-nav-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.vl-tpl').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(tplId)?.classList.add('active');
+}
+
+function vlPrint() {
+  document.body.classList.add('vl-printing');
+  window.print();
+  setTimeout(() => document.body.classList.remove('vl-printing'), 1000);
+}
 </script>
 </body>
 </html>
