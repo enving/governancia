@@ -106,7 +106,11 @@ Vorschläge und Korrekturen willkommen (Pull Request). Der Katalog ist bewusst p
 *Orientierung* — Vor Eingabe minimieren/anonymisieren; technische Guardrails (z. B. PII-Entfernung) erwägen. **Wer:** Fachbereich, ISB. **Risiko:** unnötige Verarbeitung.
 
 **DSG-09 · Findet eine automatisierte Entscheidung mit Rechtswirkung statt (Art. 22)?**
+
 *Entscheidung* — Bei Einzelentscheidungen über Personen besonders prüfen. **Wer:** DSB, IT-Recht. **Risiko:** unzulässige Automatisierung.
+
+**DSG-10 · Gilt besondere Sorgfalt bei KI-gestützter Kommunikation an externe Einzelpersonen?**
+*Orientierung* — Inhalt prüfen; Personenbezug und Verbindlichkeit der Aussage beachten. **Wer:** Fachbereich, DSB. **Risiko:** fehlerhafte oder rechtlich heikle Außenkommunikation.
 
 ## VER · Vertraulichkeit & Geschäftsgeheimnisse
 
@@ -252,6 +256,12 @@ Vorschläge und Korrekturen willkommen (Pull Request). Der Katalog ist bewusst p
 **OUT-07 · Bei generiertem Code: erfolgt Review vor Produktiveinsatz?**
 *Orientierung* — Code-Review und Lizenz-/Security-Check Pflicht. **Wer:** IT-Betrieb, ISB. **Risiko:** unsicherer/lizenzwidriger Code.
 
+**OUT-08 · Wie wird die Verlässlichkeit von Übersetzungen sichergestellt, v. a. bei extern oder rechtlich relevanten Texten?**
+*Orientierung* — Fachliche Prüfung; bei rechtlicher Relevanz besondere Sorgfalt vor Versand/Veröffentlichung. **Wer:** Fachbereich, IT-Recht. **Risiko:** folgenreiche Übersetzungsfehler.
+
+**OUT-09 · Wie wird mit Verzerrungen (Bias) im Output umgegangen, besonders bei personen- oder gruppenbezogenen Aussagen?**
+*Orientierung* — Bewusstsein schaffen; kritische, personenbezogene Aussagen gegenprüfen (auch AGG-relevant). **Wer:** Fachbereich, DSB. **Risiko:** Diskriminierung, Reputationsschaden.
+
 ## MIT · Mitbestimmung & Beschäftigtendatenschutz
 
 **MIT-01 · Ermöglicht das Werkzeug Leistungs- oder Verhaltenskontrolle der Beschäftigten?**
@@ -331,6 +341,55 @@ Vorschläge und Korrekturen willkommen (Pull Request). Der Katalog ist bewusst p
 
 **TRA-06 · Ist geregelt, wie Output vor externer Veröffentlichung geprüft wird?**
 *Orientierung* — Fachliche und ggf. rechtliche QS. **Wer:** Fachbereich, IT-Recht. **Risiko:** fehlerhafte Veröffentlichung.
+
+## WIR · Wirksamkeit, Nutzen & Steuerung
+
+**WIR-01 · Wird gemessen, ob KI tatsächlich entlastet — oder nur Arbeit verlagert?**
+*Orientierung* — Nutzen messbar machen (Zeit, Qualität); verlagerte statt eingesparte Arbeit erkennen. **Wer:** Fachbereich, Leitung. **Risiko:** Scheinproduktivität.
+
+**WIR-02 · Wie hoch ist der typische Nachbearbeitungsaufwand — und ist er dokumentiert?**
+*Orientierung* — Nachbearbeitungsaufwand erfassen und dokumentieren. **Wer:** Fachbereich. **Risiko:** überschätzter Nutzen.
+
+**WIR-03 · Werden Nutzung und Anwendungsfälle systematisch erhoben (Adoption-Monitoring)?**
+*Orientierung* — Adoption-Monitoring etablieren, um Nutzung und Anwendungsfälle gezielt zu steuern. **Wer:** Leitung, Fachbereich. **Risiko:** Steuerung im Blindflug.
+
+**WIR-04 · Wie werden Kosten und Nutzung gesteuert (Budget, Transparenz, Fehlanreize)?**
+*Entscheidung* — Budget, Kostentransparenz und Anreizwirkung aktiv steuern. **Wer:** Leitung, IT-Betrieb. **Risiko:** Kostenexplosion.
+
+**WIR-05 · Besteht das Risiko von Überabhängigkeit oder Kompetenzverlust bei Daueranwendung?**
+*Orientierung* — Kernkompetenzen bewusst erhalten; KI als Unterstützung, nicht als Ersatz. **Wer:** Fachbereich, Leitung. **Risiko:** Skill-Erosion.
+
+**WIR-06 · Wie wird Anbieter-Lock-in vermieden (Portabilität von Prompts, Vorlagen, Daten)?**
+*Orientierung* — Portabilität sicherstellen; Exit-Strategie einplanen. **Wer:** IT-Betrieb, Leitung. **Risiko:** Abhängigkeit, hohe Wechselkosten.
+
+**WIR-07 · Werden Nachhaltigkeits-/Ressourcenaspekte des KI-Einsatzes berücksichtigt?**
+*Entscheidung* — Ressourcen-/Energiefußabdruck in die KI-Strategie einbeziehen. **Wer:** Leitung. **Risiko:** Zielkonflikt mit Nachhaltigkeitszielen.
+
+## FAE · Fähigkeiten, Grenzen & Aktualität
+
+**FAE-01 · Wird unterschieden, ob ein Misserfolg an der Modellqualität oder an fehlenden Werkzeugen/Anbindungen liegt?**
+*Orientierung* — Ursachen trennen: Modell vs. fehlende Tools/Daten. **Wer:** Fachbereich, ISB. **Risiko:** falsche Schlüsse, tragfähige Fälle werden verworfen.
+
+**FAE-02 · Welche Ausbaustufe (Werkzeuge/Anbindungen) setzt welche Anwendungsfälle voraus?**
+*Orientierung* — Anwendungsfälle den nötigen Ausbaustufen zuordnen. **Wer:** Fachbereich, ISB. **Risiko:** Erwartungslücke.
+
+**FAE-03 · Sind Mitarbeitende auf die tatsächlich verfügbaren Funktionen geschult (Lücke verfügbar vs. genutzt)?**
+*Orientierung* — Auf den real verfügbaren Funktionsumfang schulen (AI-Literacy, Art. 4 EU AI Act). **Wer:** Fachbereich, Leitung. **Risiko:** ungenutztes Potenzial, Fehlbedienung.
+
+**FAE-04 · Wie wird mit zahlen- und datenbezogenem Output umgegangen (erhöhtes Fehlerrisiko bei Statistiken)?**
+*Orientierung* — Zahlen/Statistiken mit deterministischen Werkzeugen gegenprüfen. **Wer:** Fachbereich. **Risiko:** falsche Kennzahlen, Fehlentscheidungen.
+
+**FAE-05 · Wie wird Aktualität bei zeitkritischen Themen sichergestellt (Wissensstand des Modells)?**
+*Orientierung* — Bei zeitkritischen Themen aktuelle Primärquelle prüfen; Wissensstichtag beachten. **Wer:** Fachbereich. **Risiko:** veraltete Aussagen.
+
+**FAE-06 · Wie wird fachliche Korrektheit bei domänenspezifischen Inhalten gesichert?**
+*Orientierung* — Domänenspezifischen Output fachlich gegenprüfen (Begriffe, aktueller Verfahrensstand). **Wer:** Fachbereich. **Risiko:** fachlich falsche Inhalte.
+
+**FAE-07 · Ist mangelnde Reproduzierbarkeit ein Problem (gleiche Anfrage, unterschiedliche Ergebnisse)?**
+*Orientierung* — Nicht-Determinismus einplanen; kritische Ergebnisse gegenprüfen und dokumentieren. **Wer:** Fachbereich, ISB. **Risiko:** Inkonsistenz.
+
+**FAE-08 · Wie wird mit hochgeladenen Dokumenten umgegangen (Sensibilität, Speicherung, Verbleib)?**
+*Entscheidung* — Vor Upload Sensibilität, Speicherort, Löschfristen und AVV-Deckung klären. **Wer:** DSB, Fachbereich. **Risiko:** unbeabsichtigte Speicherung sensibler Inhalte.
 
 ---
 

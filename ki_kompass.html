@@ -429,6 +429,8 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16p
 .trn-hud-bar{flex:1;height:8px;background:var(--rule);border-radius:4px;overflow:hidden}
 .trn-hud-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--gold));border-radius:4px;transition:width 0.4s ease}
 .trn-hud-xp{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--gold);white-space:nowrap}
+.trn-hud-streak{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--warn);white-space:nowrap;transition:transform 0.15s}
+.trn-hud-streak.pop{transform:scale(1.35)}
 .trn-hud-qnum{font-family:var(--mono);font-size:11px;color:var(--mute);white-space:nowrap}
 .trn-category{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--mute);margin-bottom:8px}
 .trn-situation{background:var(--eu-soft);border-left:3px solid var(--eu);padding:14px 18px;border-radius:0 4px 4px 0;margin-bottom:20px;font-size:14px;line-height:1.6;color:var(--eu)}
@@ -1142,7 +1144,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16p
         <div class="trn-role-grid" id="trnRoleGrid"></div>
       </div>
       <div style="text-align:center;font-family:var(--mono);font-size:11px;color:var(--mute);margin-top:16px">
-        5 universelle Szenarien + 3 rollenspezifische Fragen · max. 80 XP · Schulungsnachweis druckbar
+        Pro Runde 5 von 7 universellen + bis zu 3 rollenspezifische Szenarien — zufällig gemischt · Serien-Bonus 🔥 · Schulungsnachweis druckbar
       </div>
     </div>
 
@@ -1151,6 +1153,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16p
       <div class="trn-hud">
         <span class="trn-hud-label">Fortschritt</span>
         <div class="trn-hud-bar"><div class="trn-hud-fill" id="trnHudFill" style="width:0%"></div></div>
+        <span class="trn-hud-streak" id="trnHudStreak"></span>
         <span class="trn-hud-xp" id="trnHudXp">0 XP</span>
         <span class="trn-hud-qnum" id="trnHudQnum">1 / 8</span>
       </div>
@@ -1872,6 +1875,8 @@ const FK_CATS = [
   {id:'SEC',l:'Sicherheit'},
   {id:'AGE',l:'Agentische Nutzung & Automatisierung'},
   {id:'TRA',l:'Transparenz & Kennzeichnung'},
+  {id:'WIR',l:'Wirksamkeit, Nutzen & Steuerung'},
+  {id:'FAE',l:'Fähigkeiten, Grenzen & Aktualität'},
 ];
 
 // [id, frage, O/E, [wer], risiko, orientierungstext?]
@@ -1893,6 +1898,7 @@ const FK_Q=[
   ['DSG-07','Erfolgt eine Übermittlung in Drittländer — mit welchen Garantien?','E',['DSB','IT-Recht'],'Unzulässiger Drittlandtransfer'],
   ['DSG-08','Ist Datenminimierung umgesetzt (so wenig personenbezogene Eingaben wie möglich)?','O',['Fachbereich','ISB'],'Unnötige Verarbeitung','Vor Eingabe minimieren/anonymisieren; technische Guardrails (PII-Entfernung) erwägen.'],
   ['DSG-09','Findet eine automatisierte Entscheidung mit Rechtswirkung statt (Art. 22 DSGVO)?','E',['DSB','IT-Recht'],'Unzulässige Automatisierung'],
+  ['DSG-10','Gilt besondere Sorgfalt bei KI-gestützter Kommunikation an externe Einzelpersonen (Kund:innen/Betroffene)?','O',['Fachbereich','DSB'],'Fehlerhafte oder rechtlich heikle Außenkommunikation','Inhalt prüfen; Personenbezug und Verbindlichkeit der Aussage beachten — der Mensch verantwortet die Aussage.'],
   ['VER-01','Dürfen vertrauliche Inhalte in ein externes KI-Werkzeug eingegeben werden?','E',['ISB','IT-Recht','Fachbereich'],'Verlust von Geschäftsgeheimnissen (GeschGehG §2)'],
   ['VER-02','Existiert eine Datenklassifizierung (öffentlich/intern/vertraulich/geheim)?','O',['ISB','Fachbereich'],'Fehlbehandlung sensibler Daten','Voraussetzung für klare Nutzungsregeln — ohne Klassifizierung keine operativen Grenzen.'],
   ['VER-03','Sind durch Verträge/NDA bestimmte Inhalte von der KI-Nutzung ausgeschlossen?','E',['IT-Recht','Fachbereich'],'Vertragsbruch, Schadensersatz'],
@@ -1937,6 +1943,8 @@ const FK_Q=[
   ['OUT-05','Wie wird mit Halluzinationen/Faktenfehlern umgegangen?','O',['Fachbereich'],'Verbreitung falscher Inhalte','Verpflichtende Endkontrolle/Faktencheck — kein KI-Output ohne menschliche Prüfung nach außen.'],
   ['OUT-06','Wann ist menschliche Qualitätssicherung verpflichtend (je nach Außenwirkung)?','E',['Fachbereich','Leitung'],'Ungeprüfte Außenwirkung'],
   ['OUT-07','Bei generiertem Code: erfolgt Review vor Produktiveinsatz?','O',['IT-Betrieb','ISB'],'Unsicherer/lizenzwidriger Code in Produktion','Code-Review und Lizenz-/Security-Check sind Pflicht.'],
+  ['OUT-08','Wie wird die Verlässlichkeit von Übersetzungen sichergestellt, v. a. bei extern oder rechtlich relevanten Texten?','O',['Fachbereich','IT-Recht'],'Folgenreiche Übersetzungsfehler','Fachliche Prüfung; bei rechtlicher Relevanz besondere Sorgfalt vor Versand/Veröffentlichung.'],
+  ['OUT-09','Wie wird mit Verzerrungen (Bias) im Output umgegangen, besonders bei personen- oder gruppenbezogenen Aussagen?','O',['Fachbereich','DSB'],'Diskriminierung, Reputationsschaden','Bewusstsein schaffen; kritische, personenbezogene Aussagen gegenprüfen (auch AGG-relevant).'],
   ['MIT-01','Ermöglicht das Werkzeug Leistungs- oder Verhaltenskontrolle von Beschäftigten?','O',['BR','DSB'],'Mitbestimmungsverstoß','Verdeckte Kontrolle ausschließen; Mitbestimmung frühzeitig einbeziehen.'],
   ['MIT-02','Ist die Einführung mitbestimmungspflichtig (Beteiligung der Personalvertretung)?','O',['BR','Leitung'],'Unwirksame/anfechtbare Einführung','Häufig ja; frühzeitig beteiligen — Betriebsrat vor Rollout einbinden.'],
   ['MIT-03','Werden Beschäftigtendaten verarbeitet — auf welcher Rechtsgrundlage?','E',['DSB','BR'],'Unzulässige Verarbeitung'],
@@ -1961,6 +1969,21 @@ const FK_Q=[
   ['TRA-04','Sind Quellen/Fundstellen im Output nachvollziehbar?','O',['Fachbereich'],'Nicht überprüfbare Aussagen','Quellen mitliefern; Nachprüfbarkeit ist Teil der Qualitätssicherung.'],
   ['TRA-05','Gibt es klare, verständliche Nutzungsregeln mit konkreten Beispielen?','O',['Fachbereich','DSB'],'Unsicherheit, Fehlnutzung','Konkrete Beispiele (erlaubt / mit Auflagen / untersagt) statt abstrakter Regeln.'],
   ['TRA-06','Ist geregelt, wie Output vor externer Veröffentlichung geprüft wird?','O',['Fachbereich','IT-Recht'],'Fehlerhafte Außendarstellung','Fachliche und ggf. rechtliche QS-Stufe vor Veröffentlichung definieren.'],
+  ['WIR-01','Wird gemessen, ob KI tatsächlich entlastet — oder nur Arbeit verlagert?','O',['Fachbereich','Leitung'],'Scheinproduktivität','Nutzen messbar machen (Zeit, Qualität); verlagerte statt eingesparte Arbeit erkennen.'],
+  ['WIR-02','Wie hoch ist der typische Nachbearbeitungsaufwand — und ist er dokumentiert?','O',['Fachbereich'],'Überschätzter Nutzen','Nachbearbeitungsaufwand erfassen und dokumentieren — sonst wird der Nettonutzen überschätzt.'],
+  ['WIR-03','Werden Nutzung und Anwendungsfälle systematisch erhoben (Adoption-Monitoring)?','O',['Leitung','Fachbereich'],'Steuerung im Blindflug','Adoption-Monitoring etablieren, um Nutzung und Anwendungsfälle gezielt zu steuern.'],
+  ['WIR-04','Wie werden Kosten und Nutzung gesteuert (Budget, Transparenz, Fehlanreize)?','E',['Leitung','IT-Betrieb'],'Kostenexplosion','Budget, Kostentransparenz und Anreizwirkung aktiv steuern.'],
+  ['WIR-05','Besteht das Risiko von Überabhängigkeit oder Kompetenzverlust bei Daueranwendung?','O',['Fachbereich','Leitung'],'Skill-Erosion','Kernkompetenzen bewusst erhalten; KI als Unterstützung, nicht als Ersatz.'],
+  ['WIR-06','Wie wird Anbieter-Lock-in vermieden (Portabilität von Prompts, Vorlagen, Daten)?','O',['IT-Betrieb','Leitung'],'Abhängigkeit, hohe Wechselkosten','Portabilität von Prompts, Vorlagen und Daten sicherstellen; Exit-Strategie einplanen.'],
+  ['WIR-07','Werden Nachhaltigkeits-/Ressourcenaspekte des KI-Einsatzes berücksichtigt?','E',['Leitung'],'Zielkonflikt mit Nachhaltigkeitszielen','Ressourcen-/Energiefußabdruck in die KI-Strategie einbeziehen.'],
+  ['FAE-01','Wird unterschieden, ob ein Misserfolg an der Modellqualität oder an fehlenden Werkzeugen/Anbindungen liegt?','O',['Fachbereich','ISB'],'Falsche Schlüsse, tragfähige Fälle werden verworfen','Ursachen trennen: Modell vs. fehlende Tools/Daten — sonst werden gute Anwendungsfälle vorschnell verworfen.'],
+  ['FAE-02','Welche Ausbaustufe (Werkzeuge/Anbindungen) setzt welche Anwendungsfälle voraus?','O',['Fachbereich','ISB'],'Erwartungslücke','Anwendungsfälle den nötigen Ausbaustufen zuordnen, um Erwartungen zu kalibrieren.'],
+  ['FAE-03','Sind Mitarbeitende auf die tatsächlich verfügbaren Funktionen geschult (Lücke verfügbar vs. genutzt)?','O',['Fachbereich','Leitung'],'Ungenutztes Potenzial, Fehlbedienung','Auf den real verfügbaren Funktionsumfang schulen (AI-Literacy, Art. 4 EU AI Act).'],
+  ['FAE-04','Wie wird mit zahlen- und datenbezogenem Output umgegangen (erhöhtes Fehlerrisiko bei Statistiken)?','O',['Fachbereich'],'Falsche Kennzahlen, Fehlentscheidungen','Zahlen/Statistiken mit deterministischen Werkzeugen gegenprüfen — nicht blind übernehmen.'],
+  ['FAE-05','Wie wird Aktualität bei zeitkritischen Themen sichergestellt (Wissensstand des Modells)?','O',['Fachbereich'],'Veraltete Aussagen','Bei zeitkritischen Themen aktuelle Primärquelle prüfen; Wissensstichtag beachten.'],
+  ['FAE-06','Wie wird fachliche Korrektheit bei domänenspezifischen Inhalten gesichert (Fachbegriffe, Verfahrensstand)?','O',['Fachbereich'],'Fachlich falsche Inhalte','Domänenspezifischen Output fachlich gegenprüfen (Begriffe, aktueller Verfahrensstand).'],
+  ['FAE-07','Ist mangelnde Reproduzierbarkeit ein Problem (gleiche Anfrage, unterschiedliche Ergebnisse)?','O',['Fachbereich','ISB'],'Inkonsistenz','Nicht-Determinismus einplanen; kritische Ergebnisse gegenprüfen und dokumentieren.'],
+  ['FAE-08','Wie wird mit hochgeladenen Dokumenten umgegangen (Sensibilität, Speicherung, Verbleib)?','E',['DSB','Fachbereich'],'Unbeabsichtigte Speicherung sensibler Inhalte','Vor Upload Sensibilität, Speicherort, Löschfristen und AVV-Deckung klären.'],
 ];
 
 let fkFilter = {cat:'', status:'', role:''};
@@ -2173,6 +2196,24 @@ const TRN_CORE = [
     1,
     'Eine generelle Kennzeichnungspflicht für alle KI-Texte gibt es noch nicht, aber branchenspezifische Regeln und der EU AI Act sehen Transparenzpflichten vor. Interne Richtlinien sollten den Umgang mit KI-Inhalten klar regeln, um Reputationsrisiken zu vermeiden.',
     'FK: TRA-01 · AIA-03'],
+  ['C6','Bias & Fairness',
+    'Ein KI-Tool soll bei der Vorauswahl von Bewerbungen helfen. In Tests bevorzugt es systematisch Kandidat:innen eines bestimmten Profils.',
+    'Wie gehst du damit um?',
+    ['Das ist statistisch normal und kann ignoriert werden.',
+     'Bias erkennen und gegensteuern: kritische, personenbezogene Aussagen gegenprüfen – sonst drohen Diskriminierung und Reputationsschaden.',
+     'Das Problem dem Anbieter überlassen – er hat das Modell trainiert.'],
+    1,
+    'KI-Modelle übernehmen Verzerrungen aus ihren Trainingsdaten. Bei personen- oder gruppenbezogenen Aussagen (Bewerbung, Kreditvergabe) kann das zu Diskriminierung führen – auch AGG-relevant. Bewusstsein schaffen, kritische Outputs gegenprüfen, der Mensch entscheidet.',
+    'FK: OUT-09 · MIT-01'],
+  ['C7','Reproduzierbarkeit',
+    'Eine Kollegin stellt dem KI-Tool zweimal exakt dieselbe Frage und erhält zwei unterschiedliche Antworten. Sie ist verunsichert, welche stimmt.',
+    'Was erklärst du ihr?',
+    ['Eine der beiden Antworten ist immer ein technischer Fehler.',
+     'LLMs sind nicht deterministisch – gleiche Anfrage kann unterschiedliche Ergebnisse liefern. Für verbindliche Aussagen ist menschliche Prüfung nötig.',
+     'Sie muss die Frage nur präziser stellen, dann ist das Ergebnis immer identisch.'],
+    1,
+    'Mangelnde Reproduzierbarkeit ist eine Eigenschaft generativer Modelle. Für konsistente, nachvollziehbare Prozesse darf man sich nicht blind auf einzelne Outputs verlassen – kritische Ergebnisse gegenprüfen und dokumentieren.',
+    'FK: FAE-07 · OUT-05'],
 ];
 
 const TRN_ROLE_Q = {
@@ -2204,6 +2245,33 @@ const TRN_ROLE_Q = {
       1,
       'KI-generierter Code muss wie jeder externe Code behandelt werden: Code-Review durch IT, Tests, Dokumentation. Bei Finanzdaten kann fehlerhafter Code zu falschen Reports und Entscheidungsfehlern führen.',
       'FK: OUT-03 · SEC-02'],
+    ['F4','Zahlen & Statistik',
+      'Du lässt dir von einem KI-Tool aus einer Tabelle Durchschnittswerte und Quartalsvergleiche berechnen und übernimmst sie direkt ins Management-Reporting.',
+      'Welche Vorsicht ist geboten?',
+      ['Keine – Rechnen ist die Kernstärke von KI-Sprachmodellen.',
+       'Zahlen- und datenbezogener Output hat erhöhtes Fehlerrisiko – Kennzahlen vor Verwendung nachrechnen/prüfen.',
+       'Nur die Formatierung prüfen, die Zahlen stimmen automatisch.'],
+      1,
+      'Sprachmodelle sind keine Rechenmaschinen; bei Statistiken und Aggregationen entstehen leicht Fehler. Falsche Kennzahlen führen zu Fehlentscheidungen – Ergebnisse mit deterministischen Werkzeugen (Tabellenkalkulation) gegenprüfen.',
+      'FK: FAE-04 · OUT-05'],
+    ['F5','Aktualität',
+      'Du fragst ein KI-Tool nach der aktuell geltenden Fassung einer Förderrichtlinie für einen zeitkritischen Antrag.',
+      'Worauf musst du achten?',
+      ['Das Modell ist immer auf dem neuesten Stand.',
+       'Der Wissensstand des Modells kann veraltet sein – bei zeitkritischen Themen die aktuelle Primärquelle prüfen.',
+       'Wenn das Tool eine Jahreszahl nennt, stimmt die Information sicher.'],
+      1,
+      'Modelle haben einen Wissensstichtag und kennen spätere Änderungen oft nicht oder nur unvollständig. Bei Fristen, Gesetzesständen und Förderbedingungen immer die aktuelle Primärquelle gegenprüfen.',
+      'FK: FAE-05 · FAE-06'],
+    ['F6','Hochgeladene Dokumente',
+      'Für eine Auswertung lädst du einen internen Bericht mit Personaldaten in ein KI-Tool hoch und fragst dich, was danach mit dem Dokument passiert.',
+      'Was ist die richtige Haltung?',
+      ['Hochgeladene Dateien werden nach dem Chat automatisch und vollständig gelöscht.',
+       'Vor dem Upload klären: Sensibilität, Speicherung und Verbleib – sonst droht unbeabsichtigte Speicherung sensibler Inhalte.',
+       'Solange ich die Datei lokal behalte, ist der Upload unkritisch.'],
+      1,
+      'Hochgeladene Dokumente können serverseitig gespeichert, indexiert oder weiterverarbeitet werden. Vor dem Upload Sensibilität bewerten, AVV/Speicherort prüfen und sensible Inhalte minimieren – das ist eine Entscheidungsfrage (DSB einbinden).',
+      'FK: FAE-08 · SPE-01'],
   ],
   it: [
     ['I1','Prompt Injection',
@@ -2233,6 +2301,24 @@ const TRN_ROLE_Q = {
       1,
       'Eine neue KI-Integration erfordert: Security Review, Prüfung ob personenbezogene Daten fließen (dann AVV + ggf. DSFA nach Art. 35 DSGVO), Eintrag ins KI-Register und formale Freigabe. Der EU AI Act kann zusätzliche Anforderungen stellen.',
       'FK: INT-01 · DSG-05 · AGE-01'],
+    ['I4','Modell vs. Werkzeug',
+      'Ein KI-Anwendungsfall scheitert in der Pilotphase. Das Team will ihn als „technisch nicht machbar" verwerfen.',
+      'Was prüfst du vorher?',
+      ['Nichts – wenn der Pilot scheitert, ist der Fall ungeeignet.',
+       'Ob der Misserfolg an der Modellqualität liegt oder an fehlenden Werkzeugen/Anbindungen – sonst werden tragfähige Fälle vorschnell verworfen.',
+       'Ob ein größeres Modell teurer eingekauft werden kann.'],
+      1,
+      'Ein Misserfolg kann am Modell liegen – oder schlicht an fehlenden Tools, Anbindungen oder Daten (z. B. fehlender Zugriff, keine RAG-Anbindung). Diese Ursachen zu trennen verhindert falsche Schlüsse und das Verwerfen tragfähiger Anwendungsfälle.',
+      'FK: FAE-01 · FAE-02'],
+    ['I5','Konsistenz in Automatisierungen',
+      'Ihr wollt einen KI-Schritt in einen automatisierten Workflow einbauen, der täglich unbeaufsichtigt läuft.',
+      'Welches Merkmal generativer Modelle musst du einplanen?',
+      ['Modelle liefern bei gleicher Eingabe immer identische Ausgaben.',
+       'Fehlende Reproduzierbarkeit: gleiche Eingabe kann unterschiedliche Ergebnisse liefern – Validierung/Guardrails und Monitoring einplanen.',
+       'Automatisierungen brauchen keine Kontrolle, da sie deterministisch sind.'],
+      1,
+      'In unbeaufsichtigten Automatisierungen ist Nicht-Determinismus ein Risiko: Outputs schwanken. Plausibilitätschecks, Schwellenwerte, Human-in-the-Loop für kritische Schritte und Monitoring sind erforderlich.',
+      'FK: FAE-07 · AGE-02'],
   ],
   mg: [
     ['M1','KI-Governance & Haftung',
@@ -2262,6 +2348,33 @@ const TRN_ROLE_Q = {
       1,
       'KI-Systeme, die Verhalten oder Leistung von Mitarbeitenden überwachen, unterliegen nach §87 Abs. 1 Nr. 6 BetrVG der Mitbestimmung des Betriebsrats. Ohne Betriebsvereinbarung darf das Tool nicht eingesetzt werden.',
       'FK: MIT-01 · MIT-02 · DSG-05'],
+    ['M4','Wirksamkeit messen',
+      'Das KI-Tool ist seit einem halben Jahr im Einsatz. Die Geschäftsführung will wissen, ob es sich lohnt – gemessen hat den Nutzen niemand.',
+      'Was empfiehlst du?',
+      ['Wenn die Mitarbeitenden zufrieden sind, ist der Nutzen belegt.',
+       'Systematisch messen, ob KI wirklich entlastet oder nur Arbeit verlagert – inkl. Nachbearbeitungsaufwand, sonst droht Scheinproduktivität.',
+       'Den Nutzen anhand der Anzahl der Prompts bewerten.'],
+      1,
+      'Ohne Messung von tatsächlicher Entlastung und Nachbearbeitungsaufwand wird der Nutzen leicht überschätzt (Scheinproduktivität). Adoption-Monitoring und dokumentierter Nachbearbeitungsaufwand schaffen eine belastbare Steuerungsgrundlage.',
+      'FK: WIR-01 · WIR-02 · WIR-03'],
+    ['M5','Anbieter-Lock-in',
+      'Euer Unternehmen baut Prozesse, Prompts und Vorlagen vollständig auf einen einzigen KI-Anbieter auf. Ein Wechsel war bisher kein Thema.',
+      'Welches strategische Risiko entsteht?',
+      ['Keins – ein einziger Anbieter vereinfacht alles.',
+       'Anbieter-Lock-in: ohne Portabilität von Prompts, Vorlagen und Daten drohen Abhängigkeit und hohe Wechselkosten.',
+       'Nur ein Datenschutzrisiko, das der DSB löst.'],
+      1,
+      'Vollständige Bindung an einen Anbieter erhöht Abhängigkeit und Wechselkosten (Preis, Verfügbarkeit, Strategiewechsel des Anbieters). Portabilität von Prompts, Vorlagen und Daten sowie eine Exit-Strategie einplanen.',
+      'FK: WIR-06 · AVV-02'],
+    ['M6','Kosten & Nachhaltigkeit',
+      'Die KI-Nutzung wächst stark. Es gibt kein Budget-Monitoring, und Nachhaltigkeitsziele des Unternehmens werden im KI-Kontext nicht betrachtet.',
+      'Was ist die richtige Management-Entscheidung?',
+      ['Wachstum laufen lassen – KI-Kosten regeln sich von selbst.',
+       'Kosten und Nutzung aktiv steuern (Budget, Transparenz, Fehlanreize vermeiden) und Ressourcen-/Nachhaltigkeitsaspekte berücksichtigen.',
+       'Nur die Lizenzkosten einmal jährlich prüfen.'],
+      1,
+      'Ungesteuerte Nutzung kann zu Kostenexplosion und Fehlanreizen führen; zugleich hat KI-Betrieb einen Ressourcen-/Energie-Fußabdruck. Beides gehört auf die Management-Agenda (Budget-Transparenz, Steuerung, Nachhaltigkeitsziele).',
+      'FK: WIR-04 · WIR-07'],
   ],
   dsb: [
     ['D1','AVV mit KI-spezifischen Klauseln',
@@ -2291,21 +2404,87 @@ const TRN_ROLE_Q = {
       1,
       'Der US CLOUD Act (2018) verpflichtet US-Unternehmen, US-Behörden auf Anfrage Zugriff auf gespeicherte Daten zu gewähren – unabhängig vom Speicherort. Nur vollständig EU-ansässige Anbieter ohne US-Unternehmensstruktur umgehen dieses Risiko.',
       'FK: DSG-06 · VER-03'],
+    ['D4','Bias & Diskriminierungsrisiko',
+      'Ein Fachbereich setzt KI für personenbezogene Bewertungen ein. Niemand prüft den Output auf systematische Verzerrungen.',
+      'Was forderst du als DSB ein?',
+      ['Nichts – Bias ist ein rein technisches Anbieterthema.',
+       'Bewusstsein und Kontrolle für Bias bei personen-/gruppenbezogenen Aussagen – sonst drohen Diskriminierung (auch AGG) und Reputationsschaden.',
+       'Eine einmalige Freigabe genügt dauerhaft.'],
+      1,
+      'Verzerrungen im KI-Output können zu Diskriminierung führen und berühren DSGVO (faire Verarbeitung) sowie das AGG. Der DSB sollte Gegenprüfung kritischer, personenbezogener Aussagen und dokumentierte Kontrollen einfordern.',
+      'FK: OUT-09 · MIT-04'],
+    ['D5','Verbleib hochgeladener Dokumente',
+      'Mitarbeitende laden regelmäßig interne Dokumente in ein KI-Tool. Es ist ungeklärt, ob und wie lange die Dateien beim Anbieter gespeichert werden.',
+      'Was ist die richtige Einordnung?',
+      ['Unkritisch, solange keine Klarnamen enthalten sind.',
+       'Entscheidungsfrage: Sensibilität, Speicherung und Verbleib klären (AVV, Speicherort, Löschfristen) – sonst unbeabsichtigte Speicherung sensibler Inhalte.',
+       'Reine IT-Frage ohne Datenschutzrelevanz.'],
+      1,
+      'Hochgeladene Dokumente können serverseitig gespeichert und weiterverarbeitet werden. Der DSB muss Speicherort, Löschfristen und AVV-Deckung klären und die Sensibilität bewerten, bevor Uploads erlaubt werden.',
+      'FK: FAE-08 · SPE-02 · AVV-04'],
+  ],
+  all: [
+    ['A1','Übersetzungen',
+      'Du nutzt ein KI-Tool, um eine Vertragsklausel für eine:n internationale:n Kund:in ins Englische zu übersetzen, und willst sie direkt verschicken.',
+      'Was ist richtig?',
+      ['KI-Übersetzungen sind bei Verträgen immer rechtssicher.',
+       'Bei extern oder rechtlich relevanten Texten fachlich prüfen lassen – Übersetzungsfehler können folgenreich sein.',
+       'Eine kurze Eigenkontrolle genügt auch bei Rechtstexten.'],
+      1,
+      'KI-Übersetzungen sind oft gut, aber bei rechtlich relevanten oder extern wirksamen Texten können Fehler erhebliche Folgen haben. Fachliche/rechtliche Prüfung vor dem Versand ist Pflicht.',
+      'FK: OUT-08 · VER-07'],
+    ['A2','Kommunikation an Kund:innen',
+      'Du lässt dir von einem KI-Tool eine verbindliche Antwort an eine:n Kund:in zu einer Vertragsfrage formulieren und willst sie unverändert senden.',
+      'Worauf achtest du?',
+      ['Unkritisch – die KI formuliert höflich und korrekt.',
+       'Besondere Sorgfalt: Inhalt, Personenbezug und Verbindlichkeit der Aussage prüfen, bevor sie nach außen geht.',
+       'Nur die Rechtschreibung prüfen, der Inhalt stimmt.'],
+      1,
+      'KI-gestützte Außenkommunikation an Einzelpersonen kann fehlerhafte oder rechtlich heikle Zusagen enthalten. Vor dem Versand Inhalt und Verbindlichkeit prüfen (DSG-10) – der Mensch verantwortet die Aussage.',
+      'FK: DSG-10 · OUT-04'],
+    ['A3','Kompetenz erhalten',
+      'Ein Kollege nutzt für nahezu jede Aufgabe KI und merkt, dass ihm Routine-Aufgaben ohne Tool zunehmend schwerfallen.',
+      'Wie ordnest du das ein?',
+      ['Völlig unproblematisch – genau dafür ist KI da.',
+       'Risiko der Überabhängigkeit und Skill-Erosion – eigene Fachkompetenz bewusst erhalten, KI als Unterstützung statt Ersatz.',
+       'Ein reines Motivationsproblem ohne Compliance-Bezug.'],
+      1,
+      'Daueranwendung kann zu Kompetenzverlust und Überabhängigkeit führen. Mitarbeitende sollten Kernkompetenzen aktiv erhalten und KI als Assistenz nutzen – die fachliche Letztverantwortung bleibt beim Menschen.',
+      'FK: WIR-05 · OUT-04'],
+    ['A4','Funktionen wirklich nutzen',
+      'Viele im Team nutzen nur die Grundfunktion des KI-Tools; verfügbare Funktionen (z. B. Quellenangaben, sichere Ablagen) sind unbekannt.',
+      'Was ist das Problem?',
+      ['Kein Problem – Hauptsache, es wird überhaupt genutzt.',
+       'Lücke zwischen verfügbar und genutzt: ungenutztes Potenzial und Fehlbedienung – gezielt auf die tatsächlich verfügbaren Funktionen schulen.',
+       'Die fehlenden Funktionen müssen erst teuer eingekauft werden.'],
+      1,
+      'Wenn Mitarbeitende verfügbare Funktionen nicht kennen, bleibt Potenzial ungenutzt und es kommt zu Fehlbedienung. Schulung auf den real verfügbaren Funktionsumfang schließt die Lücke (AI-Literacy, Art. 4 EU AI Act).',
+      'FK: FAE-03 · AIA-04'],
   ],
 };
 
-let trnState = {role: null, questions: [], idx: 0, score: 0, wrong: []};
+let trnState = {role: null, questions: [], idx: 0, score: 0, wrong: [], streak: 0, maxStreak: 0, bonus: 0};
 
-const TRN_LEVELS = [
-  {min: 0,  max: 39, label: 'Einsteiger',             icon: '🌱'},
-  {min: 40, max: 59, label: 'Fortgeschritten',         icon: '📈'},
-  {min: 60, max: 79, label: 'KI-Compliance-Experte',  icon: '⭐'},
-  {min: 80, max: 80, label: 'KI-Compliance-Champion', icon: '🏆'},
-];
+const TRN_STREAK_BONUS = 5; // Bonus-XP ab Serie von 3 richtigen in Folge
 
-function trnGetLevel(score) {
-  return TRN_LEVELS.find(l => score >= l.min && score <= l.max) || TRN_LEVELS[0];
+// Level nach Trefferquote (robust gegenüber wechselnder Fragenanzahl)
+function trnLevel(correct, total) {
+  const p = total ? correct / total : 0;
+  if (p >= 1)    return {label: 'KI-Compliance-Champion', icon: '🏆'};
+  if (p >= 0.75) return {label: 'KI-Compliance-Experte',  icon: '⭐'};
+  if (p >= 0.5)  return {label: 'Fortgeschritten',         icon: '📈'};
+  return {label: 'Einsteiger', icon: '🌱'};
 }
+
+function trnShuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function trnSample(arr, n) { return trnShuffle(arr).slice(0, n); }
 
 function trnInit() {
   if (document.getElementById('trnRoleGrid').children.length) return;
@@ -2320,9 +2499,23 @@ function trnInit() {
 }
 
 function trnStart(roleId) {
-  trnState = {role: roleId, questions: [...TRN_CORE, ...(TRN_ROLE_Q[roleId] || [])], idx: 0, score: 0, wrong: []};
+  const core = trnSample(TRN_CORE, 5);          // 5 von 7 universellen, zufällig
+  const pool = TRN_ROLE_Q[roleId] || [];
+  const role = trnSample(pool, Math.min(3, pool.length)); // bis zu 3 rollenspezifische
+  trnState = {role: roleId, questions: [...core, ...role], idx: 0, score: 0, wrong: [], streak: 0, maxStreak: 0, bonus: 0};
   trnShowScreen('trn-quiz');
   trnRenderQ();
+}
+
+function trnUpdateStreakHud() {
+  const s = document.getElementById('trnHudStreak');
+  if (trnState.streak >= 2) {
+    s.textContent = '🔥 x' + trnState.streak;
+    s.classList.add('pop');
+    setTimeout(() => s.classList.remove('pop'), 160);
+  } else {
+    s.textContent = '';
+  }
 }
 
 function trnShowScreen(id) {
@@ -2336,6 +2529,7 @@ function trnRenderQ() {
   document.getElementById('trnHudFill').style.width = (trnState.idx / total * 100) + '%';
   document.getElementById('trnHudXp').textContent = trnState.score + ' XP';
   document.getElementById('trnHudQnum').textContent = (trnState.idx + 1) + ' / ' + total;
+  trnUpdateStreakHud();
   const opts = q[4].map((txt, i) =>
     `<button class="trn-opt" onclick="trnAnswer(${i})">${String.fromCharCode(65+i)}. ${txt}</button>`
   ).join('');
@@ -2358,16 +2552,26 @@ function trnAnswer(chosen) {
   const fb = document.getElementById('trnFeedback');
   if (chosen === correct) {
     trnState.score += 10;
+    trnState.streak += 1;
+    if (trnState.streak > trnState.maxStreak) trnState.maxStreak = trnState.streak;
+    let bonusTxt = '';
+    if (trnState.streak >= 3) {
+      trnState.score += TRN_STREAK_BONUS;
+      trnState.bonus += TRN_STREAK_BONUS;
+      bonusTxt = ` <span style="color:var(--warn)">🔥 Serie x${trnState.streak} · +${TRN_STREAK_BONUS} Bonus</span>`;
+    }
     document.querySelectorAll('.trn-opt')[chosen].classList.add('correct');
     fb.className = 'trn-feedback ok';
-    fb.innerHTML = `<strong>Richtig! +10 XP</strong>${q[6]}<div style="margin-top:8px;font-family:var(--mono);font-size:10px;color:var(--mute)">${q[7]}</div>`;
+    fb.innerHTML = `<strong>Richtig! +10 XP${bonusTxt}</strong>${q[6]}<div style="margin-top:8px;font-family:var(--mono);font-size:10px;color:var(--mute)">${q[7]}</div>`;
   } else {
+    trnState.streak = 0;
     document.querySelectorAll('.trn-opt')[chosen].classList.add('wrong');
     trnState.wrong.push(trnState.idx);
     fb.className = 'trn-feedback err';
     fb.innerHTML = `<strong>Leider falsch.</strong> ${q[6]}<div style="margin-top:8px;font-family:var(--mono);font-size:10px;color:var(--mute)">${q[7]}</div>`;
   }
   document.getElementById('trnHudXp').textContent = trnState.score + ' XP';
+  trnUpdateStreakHud();
   document.getElementById('trnNextBtn').classList.add('visible');
 }
 
@@ -2382,15 +2586,22 @@ function trnNext() {
 
 function trnShowResult() {
   trnShowScreen('trn-result');
+  const correct = trnState.questions.length - trnState.wrong.length;
+  const total = trnState.questions.length;
   const score = trnState.score;
-  const total = trnState.questions.length * 10;
-  const level = trnGetLevel(score);
-  document.getElementById('trnScoreDisplay').textContent = score + ' / ' + total + ' XP';
+  const maxBase = total * 10;
+  const level = trnLevel(correct, total);
+  document.getElementById('trnScoreDisplay').textContent = score + ' XP';
   document.getElementById('trnLevelLabel').textContent = level.icon + ' ' + level.label;
   document.getElementById('trnLevelBadge').textContent = level.icon + ' ' + level.label;
-  document.getElementById('trnCertScore').textContent = score + ' von ' + total + ' XP erreicht';
+  document.getElementById('trnCertScore').textContent =
+    correct + ' von ' + total + ' richtig · ' + score + ' XP' +
+    (trnState.bonus ? ' (inkl. ' + trnState.bonus + ' XP Serien-Bonus)' : '');
   document.getElementById('trnCertLevel').textContent = level.label;
   document.getElementById('trnCertDate').textContent = new Date().toLocaleDateString('de-DE', {day:'2-digit', month:'long', year:'numeric'});
+  const streakNote = trnState.maxStreak >= 3
+    ? `<div style="margin-top:12px;padding:10px 14px;background:var(--warn-soft);border-left:3px solid var(--warn);border-radius:0 4px 4px 0;font-size:13px;color:#5a2500">🔥 Beste Serie: ${trnState.maxStreak} in Folge · +${trnState.bonus} Bonus-XP</div>`
+    : '';
   const items = trnState.questions.map((q, i) => {
     const ok = !trnState.wrong.includes(i);
     return `<div class="trn-takeaway">
@@ -2401,12 +2612,13 @@ function trnShowResult() {
       </div>
     </div>`;
   }).join('');
-  document.getElementById('trnTakeaways').innerHTML = '<h3>Deine Ergebnisse im Überblick</h3>' + items;
+  document.getElementById('trnTakeaways').innerHTML =
+    `<h3>Deine Ergebnisse · ${correct}/${total} richtig</h3>` + streakNote + items;
 }
 
 function trnRestart() {
   trnShowScreen('trn-welcome');
-  trnState = {role: null, questions: [], idx: 0, score: 0, wrong: []};
+  trnState = {role: null, questions: [], idx: 0, score: 0, wrong: [], streak: 0, maxStreak: 0, bonus: 0};
 }
 
 function trnPrintCert() {
