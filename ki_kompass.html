@@ -412,6 +412,79 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16p
   body.vl-printing .vl-tpl.active{display:block!important}
   body.vl-printing .vl-doc{border:none;padding:0}
 }
+/* ── SCHULUNG MODULE ── */
+.trn-page{padding:32px;max-width:960px;margin:0 auto}
+.trn-screen{display:none}.trn-screen.active{display:block}
+.trn-hero{text-align:center;padding:48px 24px 36px;background:linear-gradient(135deg,var(--ink) 0%,#2a1a22 100%);color:var(--bg);border-radius:4px;margin-bottom:32px}
+.trn-hero h2{font-family:var(--serif);font-size:32px;font-weight:400;margin-bottom:12px}
+.trn-hero p{color:rgba(244,239,228,0.7);font-size:15px;max-width:560px;margin:0 auto 28px}
+.trn-role-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;max-width:720px;margin:0 auto}
+.trn-role-card{background:rgba(255,255,255,0.08);border:1px solid rgba(244,239,228,0.15);border-radius:4px;padding:20px 16px;cursor:pointer;transition:all 0.2s;text-align:center;color:var(--bg)}
+.trn-role-card:hover{background:rgba(154,123,58,0.25);border-color:var(--gold)}
+.trn-role-card .trn-role-icon{font-size:28px;margin-bottom:10px}
+.trn-role-card .trn-role-name{font-size:13px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.trn-role-card .trn-role-desc{font-size:11px;color:rgba(244,239,228,0.6);line-height:1.5}
+.trn-hud{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:12px 20px;margin-bottom:24px}
+.trn-hud-label{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--mute);white-space:nowrap}
+.trn-hud-bar{flex:1;height:8px;background:var(--rule);border-radius:4px;overflow:hidden}
+.trn-hud-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--gold));border-radius:4px;transition:width 0.4s ease}
+.trn-hud-xp{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--gold);white-space:nowrap}
+.trn-hud-qnum{font-family:var(--mono);font-size:11px;color:var(--mute);white-space:nowrap}
+.trn-category{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--mute);margin-bottom:8px}
+.trn-situation{background:var(--eu-soft);border-left:3px solid var(--eu);padding:14px 18px;border-radius:0 4px 4px 0;margin-bottom:20px;font-size:14px;line-height:1.6;color:var(--eu)}
+.trn-question{font-family:var(--serif);font-size:20px;font-weight:500;margin-bottom:20px;line-height:1.45;color:var(--ink)}
+.trn-options{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.trn-opt{border:1.5px solid var(--rule);background:var(--white);border-radius:4px;padding:14px 18px;cursor:pointer;text-align:left;font-family:var(--sans);font-size:14px;color:var(--ink2);transition:all 0.15s;line-height:1.5}
+.trn-opt:hover:not([disabled]){border-color:var(--accent);background:var(--accent-soft)}
+.trn-opt.correct{border-color:var(--teal);background:var(--teal-soft);color:var(--teal);font-weight:500}
+.trn-opt.wrong{border-color:var(--warn);background:var(--warn-soft);color:var(--warn)}
+.trn-opt[disabled]{cursor:not-allowed;opacity:0.7}
+.trn-feedback{border-radius:4px;padding:14px 18px;font-size:14px;line-height:1.6;display:none}
+.trn-feedback.ok{display:block;background:var(--teal-soft);border-left:3px solid var(--teal);color:#1a3d3a}
+.trn-feedback.err{display:block;background:var(--warn-soft);border-left:3px solid var(--warn);color:#5a1a10}
+.trn-feedback strong{display:block;margin-bottom:4px}
+.trn-next-btn{margin-top:16px;padding:12px 28px;background:var(--accent);color:var(--white);border:none;border-radius:4px;font-size:14px;font-weight:600;cursor:pointer;letter-spacing:0.04em;display:none;transition:background 0.2s}
+.trn-next-btn:hover{background:var(--accent-ink)}
+.trn-next-btn.visible{display:inline-block}
+.trn-result-hero{text-align:center;padding:48px 24px 32px;background:linear-gradient(135deg,#0d2a26 0%,var(--ink) 100%);color:var(--bg);border-radius:4px;margin-bottom:24px}
+.trn-result-hero h2{font-family:var(--serif);font-size:28px;font-weight:400;margin-bottom:8px}
+.trn-result-score{font-family:var(--mono);font-size:48px;font-weight:700;color:var(--gold);margin:16px 0 4px}
+.trn-result-level{font-family:var(--mono);font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(244,239,228,0.6);margin-bottom:24px}
+.trn-level-badge{display:inline-block;padding:6px 20px;border:1.5px solid var(--gold);border-radius:20px;font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:28px}
+.trn-takeaways{background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:24px;margin-bottom:24px}
+.trn-takeaways h3{font-size:13px;font-family:var(--mono);letter-spacing:0.1em;text-transform:uppercase;color:var(--mute);margin-bottom:16px}
+.trn-takeaway{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--rule2)}
+.trn-takeaway:last-child{border-bottom:none}
+.trn-tk-icon{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;margin-top:2px}
+.trn-tk-icon.ok{background:var(--teal-soft);color:var(--teal)}
+.trn-tk-icon.err{background:var(--warn-soft);color:var(--warn)}
+.trn-tk-text{font-size:13px;line-height:1.55;color:var(--ink2)}
+.trn-tk-ref{font-family:var(--mono);font-size:10px;color:var(--mute);margin-top:2px}
+.trn-cert{border:2px solid var(--gold);border-radius:4px;padding:40px;background:var(--card);text-align:center;margin-top:24px}
+.trn-cert-title{font-family:var(--serif);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mute);margin-bottom:16px}
+.trn-cert-headline{font-family:var(--serif);font-size:26px;font-weight:400;color:var(--ink);margin-bottom:8px}
+.trn-cert-sub{font-size:13px;color:var(--ink2);margin-bottom:24px}
+.trn-cert-name-wrap{margin-bottom:20px}
+.trn-cert-name-input{border:none;border-bottom:1.5px solid var(--rule);background:transparent;font-family:var(--serif);font-size:22px;text-align:center;color:var(--ink);padding:6px 12px;width:100%;max-width:380px;outline:none}
+.trn-cert-name-input:focus{border-bottom-color:var(--gold)}
+.trn-cert-score{font-family:var(--mono);font-size:13px;color:var(--mute);margin-bottom:4px}
+.trn-cert-level{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--gold);margin-bottom:24px}
+.trn-cert-sign{display:flex;justify-content:center;gap:40px;padding-top:24px;border-top:1px solid var(--rule)}
+.trn-cert-sline{text-align:center}
+.trn-cert-sline .line{width:140px;height:1px;background:var(--ink);margin:0 auto 4px}
+.trn-cert-sline .label{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--mute)}
+.trn-result-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:24px}
+.trn-btn{padding:11px 24px;border-radius:4px;font-size:13px;font-weight:600;cursor:pointer;letter-spacing:0.04em;border:none;transition:all 0.15s}
+.trn-btn.primary{background:var(--accent);color:var(--white)}.trn-btn.primary:hover{background:var(--accent-ink)}
+.trn-btn.secondary{background:var(--white);color:var(--ink2);border:1.5px solid var(--rule)}.trn-btn.secondary:hover{border-color:var(--ink2)}
+@media print{
+  body.trn-printing .topbar,body.trn-printing .profile-bar,body.trn-printing .trn-result-actions,body.trn-printing .trn-cert-name-wrap{display:none!important}
+  body.trn-printing .view{display:none!important}
+  body.trn-printing #view-schulung{display:block!important}
+  body.trn-printing .trn-screen{display:none!important}
+  body.trn-printing #trn-result{display:block!important}
+  body.trn-printing .trn-cert{border:2px solid #9a7b3a!important}
+}
 </style>
 </head>
 <body>
@@ -426,6 +499,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16p
     <button class="tab" data-view="toolcheck">Tool-Check</button>
     <button class="tab" data-view="fragenkatalog">Fragenkatalog</button>
     <button class="tab" data-view="vorlagen">Vorlagen</button>
+    <button class="tab" data-view="schulung">Schulung</button>
   </div>
   <div class="topbar-meta">v1.2 · Jun 2026 · Open Source</div>
 </div>
@@ -1050,6 +1124,66 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16p
         <div class="tc-sidebar-head">Über diesen Check</div>
         <p style="font-size:12px;line-height:1.55;color:var(--ink2)">Dieser Check prüft drei Rechtsrahmen: <strong>DSGVO</strong> (Personenbezug + AVV), <strong>GeschGehG §2</strong> (Schutz von Geschäftsgeheimnissen) und den <strong>US CLOUD Act</strong> (Datenzugriff durch US-Behörden auch bei EU-Nutzern).</p>
         <p style="font-size:12px;line-height:1.55;color:var(--mute);margin-top:8px">Kein Rechtsrat. Für verbindliche Einschätzungen IT-Rechtsanwalt hinzuziehen.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SCHULUNG -->
+<div class="view" id="view-schulung">
+  <div class="trn-page">
+
+    <!-- Screen 1: Role Select -->
+    <div class="trn-screen active" id="trn-welcome">
+      <div class="trn-hero">
+        <h2>KI-Compliance Schulung</h2>
+        <p>Interaktive Lernszenarien aus dem Arbeitsalltag – basierend auf dem KI-Kompass. Wähle deine Rolle und trainiere gezielt die für dich relevanten Compliance-Fälle.</p>
+        <div class="trn-role-grid" id="trnRoleGrid"></div>
+      </div>
+      <div style="text-align:center;font-family:var(--mono);font-size:11px;color:var(--mute);margin-top:16px">
+        5 universelle Szenarien + 3 rollenspezifische Fragen · max. 80 XP · Schulungsnachweis druckbar
+      </div>
+    </div>
+
+    <!-- Screen 2: Quiz -->
+    <div class="trn-screen" id="trn-quiz">
+      <div class="trn-hud">
+        <span class="trn-hud-label">Fortschritt</span>
+        <div class="trn-hud-bar"><div class="trn-hud-fill" id="trnHudFill" style="width:0%"></div></div>
+        <span class="trn-hud-xp" id="trnHudXp">0 XP</span>
+        <span class="trn-hud-qnum" id="trnHudQnum">1 / 8</span>
+      </div>
+      <div id="trnQArea"></div>
+    </div>
+
+    <!-- Screen 3: Result + Certificate -->
+    <div class="trn-screen" id="trn-result">
+      <div class="trn-result-hero">
+        <h2>Schulung abgeschlossen</h2>
+        <div class="trn-result-score" id="trnScoreDisplay">0 / 80 XP</div>
+        <div class="trn-result-level" id="trnLevelLabel">Einsteiger</div>
+        <div class="trn-level-badge" id="trnLevelBadge">Einsteiger</div>
+      </div>
+      <div class="trn-takeaways" id="trnTakeaways"></div>
+      <div class="trn-cert" id="trnCert">
+        <div class="trn-cert-title">KI-Kompass · Mitarbeiter-Schulungsnachweis</div>
+        <div class="trn-cert-headline">Schulungsnachweis</div>
+        <div class="trn-cert-sub">KI-Compliance-Training · <span id="trnCertDate"></span></div>
+        <div class="trn-cert-name-wrap">
+          <input class="trn-cert-name-input" id="trnCertName" placeholder="Vollständiger Name (zum Ausfüllen klicken)" />
+        </div>
+        <div class="trn-cert-score" id="trnCertScore"></div>
+        <div class="trn-cert-level" id="trnCertLevel"></div>
+        <div class="trn-cert-sign">
+          <div class="trn-cert-sline"><div class="line"></div><div class="label">Teilnehmer:in</div></div>
+          <div class="trn-cert-sline"><div class="line"></div><div class="label">Verantwortliche:r</div></div>
+          <div class="trn-cert-sline"><div class="line"></div><div class="label">Datum</div></div>
+        </div>
+      </div>
+      <div class="trn-result-actions">
+        <button class="trn-btn primary" onclick="trnPrintCert()">Nachweis drucken</button>
+        <button class="trn-btn secondary" onclick="trnRestart()">Nochmal spielen</button>
       </div>
     </div>
 
@@ -1980,6 +2114,308 @@ function vlPrint() {
   window.print();
   setTimeout(() => document.body.classList.remove('vl-printing'), 1000);
 }
+
+// ═══════════════════════════════════════════
+// SCHULUNG MODULE (gamified training)
+// ═══════════════════════════════════════════
+const TRN_ROLES = [
+  {id:'all', icon:'👤', name:'Alle Mitarbeiter',   desc:'Universelle KI-Compliance-Grundlagen'},
+  {id:'fa',  icon:'📊', name:'Fachabteilung',       desc:'Datennutzung, Vertraulichkeit, Output'},
+  {id:'it',  icon:'⚙️',  name:'IT / Entwicklung',   desc:'Sicherheit, Integration, Prompts'},
+  {id:'mg',  icon:'🏛️',  name:'Management',          desc:'Governance, Pflichten, Haftung'},
+  {id:'dsb', icon:'🔒', name:'Datenschutz (DSB)',   desc:'DSGVO, AVV, DSFA, CLOUD Act'},
+];
+
+// [id, category, situation, question, [A,B,C], correct(0-2), explanation, fk_ref]
+const TRN_CORE = [
+  ['C1','CLOUD Act & GeschGehG',
+    'Deine Kollegin will den Entwurf eines laufenden M&A-Vertrags in ChatGPT (Enterprise-Tier, US-Anbieter) eintippen, um eine Executive Summary zu erhalten.',
+    'Was rätst du ihr?',
+    ['Das geht – Enterprise-Tier schützt Daten vollständig vor US-Behörden.',
+     'Besser nicht: US CLOUD Act erlaubt Behördenzugriff; GeschGehG §2 kann verletzt werden.',
+     'Erlaubt, wenn die Datei als „intern" klassifiziert ist.'],
+    1,
+    'Auch im Enterprise-Tier gilt der US CLOUD Act: US-Behörden können Daten anfordern. Geschäftsgeheimnisse (M&A, Strategie) verlieren nach GeschGehG §2 ihren Schutz, wenn sie unkontrolliert in US-Cloud-Dienste übertragen werden. Alternativen: lokale LLMs oder EU-Anbieter (Aleph Alpha, Mistral EU).',
+    'FK: GOV-04 · VER-02'],
+  ['C2','DSGVO & AVV',
+    'Euer Team möchte Kundenfeedback-Texte mit Namen und E-Mail-Adressen in ein KI-Tool einspeisen, um Stimmungsanalysen zu erstellen.',
+    'Welche Voraussetzung muss VOR der Nutzung erfüllt sein?',
+    ['Der Anbieter muss ein ISO-27001-Zertifikat haben.',
+     'Ein Auftragsverarbeitungsvertrag (AVV) nach Art. 28 DSGVO muss mit dem KI-Anbieter geschlossen sein.',
+     'Es reicht, wenn die Daten pseudonymisiert aussehen.'],
+    1,
+    'Personenbezogene Daten dürfen nur mit gültigem AVV an externe KI-Anbieter weitergegeben werden (Art. 28 DSGVO). ISO-27001 ist ergänzend sinnvoll, aber kein DSGVO-Ersatz. Pseudonymisierung hilft, ersetzt aber keinen AVV wenn Re-Identifizierung möglich bleibt.',
+    'FK: DSG-01 · AVV-01'],
+  ['C3','Schatten-KI',
+    'Ein Mitarbeiter nutzt heimlich ein kostenloses KI-Tool auf seinem Dienstlaptop, da das zugelassene Tool „zu langsam" ist.',
+    'Welches Risiko entsteht dadurch primär?',
+    ['Kein Risiko – private Tools sind im Arbeitsalltag normal.',
+     'Datenschutz- und Sicherheitsrisiko: Daten gehen unkontrolliert an nicht geprüfte Dritte.',
+     'Nur ein technisches Risiko – Daten können jederzeit gelöscht werden.'],
+    1,
+    'Schatten-KI bezeichnet den nicht autorisierten Einsatz von KI-Tools. Dabei werden Unternehmensdaten an Anbieter weitergegeben, ohne AVV, ohne Sicherheitsprüfung und ohne Freigabe. Das verstößt regelmäßig gegen DSGVO und Unternehmensrichtlinien.',
+    'FK: GOV-02 · SEC-01'],
+  ['C4','Halluzinationen & Qualität',
+    'Ein Kollege erstellt mit einem LLM einen rechtlichen Sachverhalt und übernimmt die Zusammenfassung ohne Prüfung direkt in einen Kundenbericht.',
+    'Was ist dabei das Hauptproblem?',
+    ['Effizienzproblem – es dauert länger als selbst zu schreiben.',
+     'LLMs können plausibel klingende, aber falsche Fakten generieren (Halluzinationen) – ohne menschliche Prüfung entsteht Haftungsrisiko.',
+     'Datenschutzproblem, weil der Kunde kein KI-Tool autorisiert hat.'],
+    1,
+    'KI-Modelle „halluzinieren" – sie erzeugen grammatikalisch korrekte, sachlich aber fehlerhafte Aussagen. Bei Kundendokumenten oder Rechtstexten kann das zu Falschberatung und Haftungsansprüchen führen. Der EU AI Act Art. 14 fordert Human Oversight bei Hochrisiko-Systemen.',
+    'FK: OUT-01 · OUT-02'],
+  ['C5','Transparenz & Kennzeichnung',
+    'Dein Team möchte KI-generierte Produkttexte auf der Unternehmenswebseite veröffentlichen, ohne dies zu kennzeichnen.',
+    'Wie ist die Rechtslage?',
+    ['Vollständig erlaubt – KI-Texte sind kein Sonderfall.',
+     'Abhängig von der Branche: Im Finanz- und Gesundheitsbereich oft Kennzeichnungspflicht; allgemein wächst regulatorischer Druck.',
+     'Verboten – alle KI-Inhalte müssen immer als solche gekennzeichnet werden.'],
+    1,
+    'Eine generelle Kennzeichnungspflicht für alle KI-Texte gibt es noch nicht, aber branchenspezifische Regeln und der EU AI Act sehen Transparenzpflichten vor. Interne Richtlinien sollten den Umgang mit KI-Inhalten klar regeln, um Reputationsrisiken zu vermeiden.',
+    'FK: TRA-01 · AIA-03'],
+];
+
+const TRN_ROLE_Q = {
+  fa: [
+    ['F1','Datenminimierung',
+      'Du hast 500 Kundendatensätze inkl. Geburtsdaten, Telefonnummern und E-Mails. Du möchtest mit KI Kaufverhaltensmuster analysieren.',
+      'Welcher Ansatz ist DSGVO-konform?',
+      ['Alle Daten vollständig einspiegeln – mehr Kontext ergibt bessere Ergebnisse.',
+       'Nur die für die Analyse nötigen Felder übermitteln (Minimierungsprinzip Art. 5 DSGVO).',
+       'Daten pseudonymisieren und ohne AVV übermitteln.'],
+      1,
+      'Art. 5 Abs. 1 lit. c DSGVO (Datenminimierung): Nur Daten verarbeiten, die für den Zweck tatsächlich erforderlich sind. Überflüssige Felder (Geburtsdatum, Telefon) vor der KI-Verarbeitung entfernen. Pseudonymisierung ist zusätzlich sinnvoll, ersetzt aber keinen AVV.',
+      'FK: DSG-03 · SPE-01'],
+    ['F2','Vertraulichkeit bei Pitches',
+      'Du bereitest eine Präsentation für einen sensiblen Kundenauftrag vor und möchtest ChatGPT nutzen, um die Struktur zu verbessern.',
+      'Was musst du beachten?',
+      ['Kundendaten, Projektnamen und vertrauliche Details nie in das Prompt – nur allgemeine Struktur übergeben.',
+       'Das geht problemlos, wenn du danach den Chat-Verlauf löschst.',
+       'Kein Problem im Business-Tier – dort wird nichts gespeichert.'],
+      0,
+      'Einmal eingegeben, sind vertrauliche Daten beim Anbieter – Chatlöschung ändert nichts an der serverseitigen Verarbeitung. Enterprise-Tier schützt vor Training, aber nicht vor US-Behördenzugriff (CLOUD Act). Regel: Nur generische Inhalte ins Prompt, keine vertraulichen Projektnamen oder Kundendaten.',
+      'FK: VER-01 · VER-02'],
+    ['F3','KI-Code im Fachbereich',
+      'Ein Business-Analyst nutzt ein KI-Tool, um Excel-Makros für die Umsatzplanung zu erstellen, und setzt diese direkt produktiv ein.',
+      'Welches Risiko wird dabei übersehen?',
+      ['Kein Risiko – KI-generierter Code ist verlässlicher als manueller Code.',
+       'Fehlerrisiko und fehlende Nachvollziehbarkeit: KI-Code kann Bugs enthalten und muss durch IT geprüft werden.',
+       'Nur ein Lizenzproblem – KI-Code darf nicht kommerziell genutzt werden.'],
+      1,
+      'KI-generierter Code muss wie jeder externe Code behandelt werden: Code-Review durch IT, Tests, Dokumentation. Bei Finanzdaten kann fehlerhafter Code zu falschen Reports und Entscheidungsfehlern führen.',
+      'FK: OUT-03 · SEC-02'],
+  ],
+  it: [
+    ['I1','Prompt Injection',
+      'Ihr entwickelt einen internen KI-Assistenten. Ein Tester entdeckt, dass spezielle Formulierungen den Assistenten dazu bringen können, interne System-Prompts preiszugeben.',
+      'Was beschreibt dieses Sicherheitsrisiko?',
+      ['SQL-Injection – ein Datenbankproblem.',
+       'Prompt Injection: Angreifer manipulieren das Modell durch eingefügte Instruktionen, um Sicherheitsgrenzen zu umgehen.',
+       'Halluzination – das Modell erfindet falsche Antworten.'],
+      1,
+      'Prompt Injection ist ein zentrales Sicherheitsrisiko bei LLM-Anwendungen (OWASP LLM Top 10). Gegenmaßnahmen: Eingabevalidierung, Ausgabefilterung, minimale Berechtigung für den Assistenten, klare Trennung von System- und User-Prompts.',
+      'FK: SEC-03 · INT-02'],
+    ['I2','Secrets in Prompts',
+      'Ein Entwickler fügt zum schnellen Testen einen API-Key direkt in ein KI-Tool ein: „Nutze diesen Key: sk-abc123..."',
+      'Was ist das Problem?',
+      ['Kein Problem – API-Keys sind technisch nicht personenbezogen.',
+       'API-Keys gehören nicht in Prompts: Sie können in Logs landen und bei einem Datenleck kompromittiert werden.',
+       'Nur ein Versionierungsproblem – der Key muss danach rotiert werden.'],
+      1,
+      'Secrets (API-Keys, Passwörter, Tokens) dürfen nie in KI-Tool-Prompts eingegeben werden. Key-Rotation allein reicht nicht – Secrets Management (Vault, Umgebungsvariablen) ist Pflicht.',
+      'FK: SEC-04 · INT-01'],
+    ['I3','Neue KI-Integration genehmigen',
+      'Ein Team möchte ein externes KI-API in die Produktionsumgebung integrieren. Der Product Owner möchte „direkt loslegen".',
+      'Was muss vor dem Go-Live sichergestellt sein?',
+      ['Nichts Besonderes – externe APIs sind Standard.',
+       'Security Review, Datenschutz-Folgenabschätzung (wenn nötig), AVV, Freigabe durch IT und ggf. DSB.',
+       'Nur eine DSGVO-Prüfung durch den DSB.'],
+      1,
+      'Eine neue KI-Integration erfordert: Security Review, Prüfung ob personenbezogene Daten fließen (dann AVV + ggf. DSFA nach Art. 35 DSGVO), Eintrag ins KI-Register und formale Freigabe. Der EU AI Act kann zusätzliche Anforderungen stellen.',
+      'FK: INT-01 · DSG-05 · AGE-01'],
+  ],
+  mg: [
+    ['M1','KI-Governance & Haftung',
+      'Euer Unternehmen setzt KI in der Kreditprüfung ein. Eine Kundin beschwert sich, sie sei ungerecht behandelt worden. Das KI-System war nicht dokumentiert.',
+      'Wer trägt die Haftung?',
+      ['Der KI-Anbieter – er hat das Modell entwickelt.',
+       'Das Unternehmen als KI-Betreiber – Governance und Dokumentationspflicht liegen beim Einsatzbetrieb.',
+       'Niemand – KI-Entscheidungen sind automatisiert und daher haftungsbefreit.'],
+      1,
+      'Unternehmen, die KI einsetzen, sind als Betreiber verantwortlich. Kreditentscheidungen durch KI sind explizit Hochrisiko (Anhang III EU AI Act). Dokumentationspflichten, Human Oversight und Beschwerdemechanismen sind gesetzlich vorgeschrieben.',
+      'FK: GOV-01 · AIA-01 · MIT-01'],
+    ['M2','AI Literacy Pflicht (Art. 4 EU AI Act)',
+      'Der EU AI Act Art. 4 verlangt, dass Unternehmen sicherstellen, dass Mitarbeitende über ausreichende KI-Kompetenz verfügen.',
+      'Was bedeutet das praktisch für das Management?',
+      ['Nichts – nur KI-Entwickler müssen Art. 4 beachten.',
+       'Management muss KI-Schulungen für alle relevanten Mitarbeitenden sicherstellen und dokumentieren.',
+       'Es reicht, wenn die IT-Abteilung geschult wird.'],
+      1,
+      'Art. 4 EU AI Act (AI Literacy) verpflichtet Betreiber von KI-Systemen, ausreichende KI-Kompetenz im gesamten relevanten Personal sicherzustellen. Das Management trägt die Verantwortung, Schulungsmaßnahmen zu planen, durchzuführen und zu dokumentieren.',
+      'FK: AIA-04 · AGE-02'],
+    ['M3','Betriebsrat & KI-Einführung',
+      'Ihr plant den Einsatz eines KI-Tools zur Leistungsauswertung von Mitarbeitenden. Die Einführung soll schnell erfolgen.',
+      'Was wird dabei oft vergessen?',
+      ['Nichts – KI-Tools fallen unter normale Software-Einführungen.',
+       'Mitbestimmungsrecht des Betriebsrats (§87 BetrVG): KI zur Verhaltens-/Leistungsüberwachung ist mitbestimmungspflichtig.',
+       'Nur die DSGVO-Prüfung – Betriebsrat muss nicht einbezogen werden.'],
+      1,
+      'KI-Systeme, die Verhalten oder Leistung von Mitarbeitenden überwachen, unterliegen nach §87 Abs. 1 Nr. 6 BetrVG der Mitbestimmung des Betriebsrats. Ohne Betriebsvereinbarung darf das Tool nicht eingesetzt werden.',
+      'FK: MIT-01 · MIT-02 · DSG-05'],
+  ],
+  dsb: [
+    ['D1','AVV mit KI-spezifischen Klauseln',
+      'Du prüfst einen AVV eines KI-Anbieters. Der AVV enthält Standardklauseln, aber keine Regelungen zu Modelltraining mit euren Daten.',
+      'Was fehlt?',
+      ['Nichts – Standard-AVV sind DSGVO-konform.',
+       'Eine explizite Klausel, die Training auf Kundendaten untersagt, sowie Regelungen zu Modellwechseln und Speicherort.',
+       'Nur eine Regelung zum Speicherort in der EU.'],
+      1,
+      'KI-spezifische AVV-Klauseln müssen enthalten: explizites Training-Verbot (oder Opt-out), Regelung bei Modellwechsel (Benachrichtigungspflicht), Festlegung der Datenverarbeitungsregion (EU), Löschfristen für Prompts und Outputs.',
+      'FK: AVV-01 · AVV-02 · AVV-03'],
+    ['D2','DSFA-Pflicht erkennen',
+      'Ein Unternehmen plant, KI zur automatisierten Analyse von Krankmeldungsmustern aller Mitarbeitenden einzusetzen.',
+      'Ist eine Datenschutz-Folgenabschätzung (DSFA) erforderlich?',
+      ['Nein – DSFA ist nur bei externen Daten erforderlich.',
+       'Ja – Gesundheitsdaten (Sonderkat. Art. 9) + systematische Überwachung = hohes Risiko → DSFA Pflicht (Art. 35 DSGVO).',
+       'Nur wenn mehr als 1.000 Mitarbeitende betroffen sind.'],
+      1,
+      'Art. 35 DSGVO schreibt eine DSFA vor bei voraussichtlich hohem Risiko für Rechte natürlicher Personen. Gesundheitsdaten kombiniert mit systematischer Auswertung und Automatisierung erfüllen dieses Kriterium eindeutig.',
+      'FK: DSG-05 · AIA-02'],
+    ['D3','CLOUD Act vs. EU-Server-Versprechen',
+      'Ein KI-Anbieter wirbt damit, dass Daten „nur auf EU-Servern" gespeichert werden. Das Unternehmen hat seinen Hauptsitz in den USA.',
+      'Was bedeutet das für die CLOUD Act-Risikoeinschätzung?',
+      ['Kein Risiko – EU-Server bedeuten EU-Recht.',
+       'EU-Server reduzieren das Risiko, schließen CLOUD Act-Zugriff aber nicht aus: US-Behörden können Daten von US-Unternehmen anfordern, unabhängig vom Serverstandort.',
+       'CLOUD Act gilt nur bei konkretem Verdacht – kein praktisches Risiko.'],
+      1,
+      'Der US CLOUD Act (2018) verpflichtet US-Unternehmen, US-Behörden auf Anfrage Zugriff auf gespeicherte Daten zu gewähren – unabhängig vom Speicherort. Nur vollständig EU-ansässige Anbieter ohne US-Unternehmensstruktur umgehen dieses Risiko.',
+      'FK: DSG-06 · VER-03'],
+  ],
+};
+
+let trnState = {role: null, questions: [], idx: 0, score: 0, wrong: []};
+
+const TRN_LEVELS = [
+  {min: 0,  max: 39, label: 'Einsteiger',             icon: '🌱'},
+  {min: 40, max: 59, label: 'Fortgeschritten',         icon: '📈'},
+  {min: 60, max: 79, label: 'KI-Compliance-Experte',  icon: '⭐'},
+  {min: 80, max: 80, label: 'KI-Compliance-Champion', icon: '🏆'},
+];
+
+function trnGetLevel(score) {
+  return TRN_LEVELS.find(l => score >= l.min && score <= l.max) || TRN_LEVELS[0];
+}
+
+function trnInit() {
+  if (document.getElementById('trnRoleGrid').children.length) return;
+  const grid = document.getElementById('trnRoleGrid');
+  TRN_ROLES.forEach(r => {
+    const card = document.createElement('div');
+    card.className = 'trn-role-card';
+    card.innerHTML = `<div class="trn-role-icon">${r.icon}</div><div class="trn-role-name">${r.name}</div><div class="trn-role-desc">${r.desc}</div>`;
+    card.onclick = () => trnStart(r.id);
+    grid.appendChild(card);
+  });
+}
+
+function trnStart(roleId) {
+  trnState = {role: roleId, questions: [...TRN_CORE, ...(TRN_ROLE_Q[roleId] || [])], idx: 0, score: 0, wrong: []};
+  trnShowScreen('trn-quiz');
+  trnRenderQ();
+}
+
+function trnShowScreen(id) {
+  document.querySelectorAll('.trn-screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function trnRenderQ() {
+  const q = trnState.questions[trnState.idx];
+  const total = trnState.questions.length;
+  document.getElementById('trnHudFill').style.width = (trnState.idx / total * 100) + '%';
+  document.getElementById('trnHudXp').textContent = trnState.score + ' XP';
+  document.getElementById('trnHudQnum').textContent = (trnState.idx + 1) + ' / ' + total;
+  const opts = q[4].map((txt, i) =>
+    `<button class="trn-opt" onclick="trnAnswer(${i})">${String.fromCharCode(65+i)}. ${txt}</button>`
+  ).join('');
+  document.getElementById('trnQArea').innerHTML = `
+    <div class="trn-category">${q[1]}</div>
+    <div class="trn-situation">${q[2]}</div>
+    <div class="trn-question">${q[3]}</div>
+    <div class="trn-options">${opts}</div>
+    <div class="trn-feedback" id="trnFeedback"></div>
+    <button class="trn-next-btn" id="trnNextBtn" onclick="trnNext()">
+      ${trnState.idx + 1 < total ? 'Nächste Frage →' : 'Ergebnis anzeigen →'}
+    </button>`;
+}
+
+function trnAnswer(chosen) {
+  const q = trnState.questions[trnState.idx];
+  const correct = q[5];
+  document.querySelectorAll('.trn-opt').forEach(o => { o.disabled = true; });
+  document.querySelectorAll('.trn-opt')[correct].classList.add('correct');
+  const fb = document.getElementById('trnFeedback');
+  if (chosen === correct) {
+    trnState.score += 10;
+    document.querySelectorAll('.trn-opt')[chosen].classList.add('correct');
+    fb.className = 'trn-feedback ok';
+    fb.innerHTML = `<strong>Richtig! +10 XP</strong>${q[6]}<div style="margin-top:8px;font-family:var(--mono);font-size:10px;color:var(--mute)">${q[7]}</div>`;
+  } else {
+    document.querySelectorAll('.trn-opt')[chosen].classList.add('wrong');
+    trnState.wrong.push(trnState.idx);
+    fb.className = 'trn-feedback err';
+    fb.innerHTML = `<strong>Leider falsch.</strong> ${q[6]}<div style="margin-top:8px;font-family:var(--mono);font-size:10px;color:var(--mute)">${q[7]}</div>`;
+  }
+  document.getElementById('trnHudXp').textContent = trnState.score + ' XP';
+  document.getElementById('trnNextBtn').classList.add('visible');
+}
+
+function trnNext() {
+  trnState.idx++;
+  if (trnState.idx < trnState.questions.length) {
+    trnRenderQ();
+  } else {
+    trnShowResult();
+  }
+}
+
+function trnShowResult() {
+  trnShowScreen('trn-result');
+  const score = trnState.score;
+  const total = trnState.questions.length * 10;
+  const level = trnGetLevel(score);
+  document.getElementById('trnScoreDisplay').textContent = score + ' / ' + total + ' XP';
+  document.getElementById('trnLevelLabel').textContent = level.icon + ' ' + level.label;
+  document.getElementById('trnLevelBadge').textContent = level.icon + ' ' + level.label;
+  document.getElementById('trnCertScore').textContent = score + ' von ' + total + ' XP erreicht';
+  document.getElementById('trnCertLevel').textContent = level.label;
+  document.getElementById('trnCertDate').textContent = new Date().toLocaleDateString('de-DE', {day:'2-digit', month:'long', year:'numeric'});
+  const items = trnState.questions.map((q, i) => {
+    const ok = !trnState.wrong.includes(i);
+    return `<div class="trn-takeaway">
+      <div class="trn-tk-icon ${ok?'ok':'err'}">${ok?'✓':'✗'}</div>
+      <div>
+        <div class="trn-tk-text"><strong>${q[1]}:</strong> ${q[3]}</div>
+        ${!ok ? `<div class="trn-tk-ref">${q[7]}</div>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('trnTakeaways').innerHTML = '<h3>Deine Ergebnisse im Überblick</h3>' + items;
+}
+
+function trnRestart() {
+  trnShowScreen('trn-welcome');
+  trnState = {role: null, questions: [], idx: 0, score: 0, wrong: []};
+}
+
+function trnPrintCert() {
+  document.body.classList.add('trn-printing');
+  window.print();
+  setTimeout(() => document.body.classList.remove('trn-printing'), 1000);
+}
+
+document.querySelector('[data-view="schulung"]').addEventListener('click', trnInit);
 </script>
 </body>
 </html>
