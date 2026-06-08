@@ -1337,17 +1337,32 @@ function countAnswers(){return Object.keys(answers).length;}
 // ═══════════════════════════════════════════
 // TABS
 // ═══════════════════════════════════════════
+const VALID_VIEWS = ['walkthrough','uebersicht','ergebnis','kompass','toolcheck','fragenkatalog','vorlagen','schulung'];
+
 function switchTab(view){
+  if(!VALID_VIEWS.includes(view)) view = 'walkthrough';
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.querySelector(`[data-view="${view}"]`).classList.add('active');
   document.getElementById('view-'+view).classList.add('active');
   if(view==='ergebnis') updateErgebnis();
   if(view==='uebersicht') buildUebersicht();
+  if(view==='toolcheck') tcInit();
+  if(view==='fragenkatalog') fkInit();
+  if(view==='schulung') trnInit();
+  history.replaceState(null,'','#'+view);
 }
 document.querySelectorAll('.tab').forEach(tab=>{
   tab.addEventListener('click',()=>switchTab(tab.dataset.view));
 });
+window.addEventListener('hashchange',()=>{
+  const view = location.hash.slice(1);
+  if(VALID_VIEWS.includes(view)) switchTab(view);
+});
+(()=>{
+  const initial = location.hash.slice(1);
+  if(VALID_VIEWS.includes(initial)) switchTab(initial);
+})();
 
 // ═══════════════════════════════════════════
 // WIZARD
@@ -1856,7 +1871,6 @@ function tcReset() {
 }
 
 // Hook into tab switch to lazy-init
-document.querySelector('[data-view="toolcheck"]').addEventListener('click', tcInit);
 
 // ═══════════════════════════════════════════
 // FRAGENKATALOG MODULE
@@ -2120,7 +2134,6 @@ function fkPrint() {
   }, 1000);
 }
 
-document.querySelector('[data-view="fragenkatalog"]').addEventListener('click', fkInit);
 
 // ═══════════════════════════════════════════
 // VORLAGEN MODULE
@@ -2627,7 +2640,6 @@ function trnPrintCert() {
   setTimeout(() => document.body.classList.remove('trn-printing'), 1000);
 }
 
-document.querySelector('[data-view="schulung"]').addEventListener('click', trnInit);
 </script>
 </body>
 </html>
