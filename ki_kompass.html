@@ -487,6 +487,63 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16p
   body.trn-printing #trn-result{display:block!important}
   body.trn-printing .trn-cert{border:2px solid #9a7b3a!important}
 }
+/* ── VORFALL MODULE ── */
+.inc-page{padding:32px;max-width:800px;margin:0 auto}
+.inc-screen{display:none}.inc-screen.active{display:block}
+.inc-step-head{margin-bottom:28px}
+.inc-step-head h2{font-family:var(--serif);font-size:26px;font-weight:400;color:var(--ink);margin-bottom:6px}
+.inc-step-head p{font-size:14px;color:var(--ink2);line-height:1.6}
+.inc-back{background:none;border:none;color:var(--mute);font-size:13px;cursor:pointer;padding:0 0 20px;display:flex;align-items:center;gap:6px}
+.inc-back:hover{color:var(--ink)}
+.inc-type-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:8px}
+.inc-type-card{border:1.5px solid var(--rule);background:var(--white);border-radius:4px;padding:20px;cursor:pointer;transition:all 0.15s;text-align:left}
+.inc-type-card:hover{border-color:var(--accent);background:var(--accent-soft)}
+.inc-type-card.selected{border-color:var(--accent);background:var(--accent-soft)}
+.inc-type-icon{font-size:26px;margin-bottom:10px}
+.inc-type-label{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.inc-type-desc{font-size:12px;color:var(--mute);line-height:1.5}
+.inc-type-badge{display:inline-flex;align-items:center;gap:8px;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:8px 14px;font-size:13px;color:var(--accent-ink);margin-bottom:24px;font-weight:500}
+.inc-form{display:flex;flex-direction:column;gap:20px;margin-bottom:28px}
+.inc-field label{display:block;font-size:13px;font-weight:600;color:var(--ink2);margin-bottom:8px}
+.inc-field select,.inc-field input[type=text]{width:100%;border:1.5px solid var(--rule);border-radius:4px;padding:10px 14px;font-family:var(--sans);font-size:14px;background:var(--white);color:var(--ink);outline:none;transition:border-color 0.15s}
+.inc-field select:focus,.inc-field input:focus{border-color:var(--accent)}
+.inc-radios{display:flex;flex-direction:column;gap:8px}
+.inc-radio{display:flex;align-items:center;gap:10px;padding:10px 14px;border:1.5px solid var(--rule);border-radius:4px;cursor:pointer;font-size:14px;color:var(--ink2);transition:all 0.15s;user-select:none}
+.inc-radio:has(input:checked){border-color:var(--accent);background:var(--accent-soft);color:var(--accent-ink)}
+.inc-radio input{accent-color:var(--accent);flex-shrink:0}
+/* severity */
+.inc-severity{display:flex;align-items:flex-start;gap:16px;padding:20px 24px;border-radius:4px;margin-bottom:24px}
+.inc-severity.red{background:var(--warn-soft);border-left:4px solid var(--warn)}
+.inc-severity.yellow{background:#fef9e7;border-left:4px solid #c8a800}
+.inc-severity.green{background:var(--teal-soft);border-left:4px solid var(--teal)}
+.inc-sev-icon{font-size:30px;flex-shrink:0;margin-top:2px}
+.inc-sev-label{font-family:var(--serif);font-size:19px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.inc-sev-sub{font-size:13px;color:var(--ink2);line-height:1.5}
+/* notify */
+.inc-notify{background:var(--eu-soft);border:1px solid var(--eu);border-radius:4px;padding:16px 20px;margin-bottom:20px}
+.inc-notify-head{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--eu);margin-bottom:10px}
+.inc-notify-chips{display:flex;flex-wrap:wrap;gap:8px}
+.inc-notify-chip{padding:4px 12px;background:var(--eu);color:var(--white);border-radius:12px;font-size:12px;font-weight:500}
+/* action steps */
+.inc-actions{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.inc-action{background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:14px 18px;display:flex;gap:14px;align-items:flex-start}
+.inc-action-num{width:26px;height:26px;border-radius:50%;background:var(--accent);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:2px}
+.inc-action-body h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.inc-action-body p{font-size:13px;color:var(--ink2);line-height:1.55}
+.inc-frist{font-family:var(--mono);font-size:10px;color:var(--warn);text-transform:uppercase;letter-spacing:0.08em;margin-top:6px;font-weight:600}
+.inc-basis{font-family:var(--mono);font-size:10px;color:var(--mute);margin-top:2px}
+.inc-disclaimer{font-size:12px;color:var(--mute);padding:12px 16px;background:var(--card);border-radius:4px;line-height:1.6;margin-top:8px}
+.inc-btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.inc-btn{padding:11px 24px;border-radius:4px;font-size:13px;font-weight:600;cursor:pointer;letter-spacing:0.04em;border:none;transition:all 0.15s}
+.inc-btn.primary{background:var(--accent);color:var(--white)}.inc-btn.primary:hover{background:var(--accent-ink)}
+.inc-btn.secondary{background:var(--white);color:var(--ink2);border:1.5px solid var(--rule)}.inc-btn.secondary:hover{border-color:var(--ink2)}
+@media print{
+  body.inc-printing .topbar,body.inc-printing .profile-bar,body.inc-printing .inc-btn-row,body.inc-printing .inc-back{display:none!important}
+  body.inc-printing .view{display:none!important}
+  body.inc-printing #view-vorfall{display:block!important}
+  body.inc-printing .inc-screen{display:none!important}
+  body.inc-printing #inc-result{display:block!important}
+}
 </style>
 </head>
 <body>
@@ -502,6 +559,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16p
     <button class="tab" data-view="fragenkatalog">Fragenkatalog</button>
     <button class="tab" data-view="vorlagen">Vorlagen</button>
     <button class="tab" data-view="schulung">Schulung</button>
+    <button class="tab" data-view="vorfall">Vorfall melden</button>
   </div>
   <div class="topbar-meta">v1.2 · Jun 2026 · Open Source</div>
 </div>
@@ -1193,6 +1251,48 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16p
   </div>
 </div>
 
+<!-- VORFALL -->
+<div class="view" id="view-vorfall">
+  <div class="inc-page">
+
+    <!-- Screen 1: Vorfall-Typ -->
+    <div class="inc-screen active" id="inc-type">
+      <div class="inc-step-head">
+        <h2>KI-Vorfall melden</h2>
+        <p>Was ist passiert? Wähle die Art des Vorfalls — du erhältst sofort eine strukturierte Handlungsempfehlung.</p>
+      </div>
+      <div class="inc-type-grid" id="incTypeGrid"></div>
+    </div>
+
+    <!-- Screen 2: Details -->
+    <div class="inc-screen" id="inc-details">
+      <button class="inc-back" onclick="incShowScreen('inc-type')">← Zurück</button>
+      <div class="inc-type-badge" id="incTypeBadge"></div>
+      <div class="inc-step-head">
+        <h2>Details zum Vorfall</h2>
+        <p>Beantworte die folgenden Fragen — die Antworten bestimmen Schwere und Handlungsempfehlung.</p>
+      </div>
+      <div class="inc-form" id="incFormFields"></div>
+      <button class="inc-btn primary" onclick="incSubmit()">Bewertung anzeigen →</button>
+    </div>
+
+    <!-- Screen 3: Bewertung + Aktionsplan -->
+    <div class="inc-screen" id="inc-result">
+      <button class="inc-back" onclick="incShowScreen('inc-details')">← Zurück</button>
+      <div id="incSeverity"></div>
+      <div id="incNotify"></div>
+      <h3 style="font-family:var(--serif);font-size:18px;font-weight:500;margin-bottom:14px;color:var(--ink)">Sofortmaßnahmen &amp; nächste Schritte</h3>
+      <div class="inc-actions" id="incActions"></div>
+      <div class="inc-disclaimer">⚖️ Kein Rechtsrat. Diese Empfehlung ersetzt keine Einzelfallprüfung durch einen Datenschutzbeauftragten oder IT-Rechtler. Bei Unsicherheit: DSB oder Rechtsabteilung einschalten.</div>
+      <div class="inc-btn-row">
+        <button class="inc-btn primary" onclick="incPrint()">Meldung drucken / PDF</button>
+        <button class="inc-btn secondary" onclick="incReset()">Neue Meldung</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <script>
 // ═══════════════════════════════════════════
 // PROFIL: wählbar über Profile-Bar
@@ -1337,7 +1437,7 @@ function countAnswers(){return Object.keys(answers).length;}
 // ═══════════════════════════════════════════
 // TABS
 // ═══════════════════════════════════════════
-const VALID_VIEWS = ['walkthrough','uebersicht','ergebnis','kompass','toolcheck','fragenkatalog','vorlagen','schulung'];
+const VALID_VIEWS = ['walkthrough','uebersicht','ergebnis','kompass','toolcheck','fragenkatalog','vorlagen','schulung','vorfall'];
 
 function switchTab(view){
   if(!VALID_VIEWS.includes(view)) view = 'walkthrough';
@@ -1350,6 +1450,7 @@ function switchTab(view){
   if(view==='toolcheck') tcInit();
   if(view==='fragenkatalog') fkInit();
   if(view==='schulung') trnInit();
+  if(view==='vorfall') incInit();
   history.replaceState(null,'','#'+view);
 }
 document.querySelectorAll('.tab').forEach(tab=>{
@@ -1891,6 +1992,7 @@ const FK_CATS = [
   {id:'TRA',l:'Transparenz & Kennzeichnung'},
   {id:'WIR',l:'Wirksamkeit, Nutzen & Steuerung'},
   {id:'FAE',l:'Fähigkeiten, Grenzen & Aktualität'},
+  {id:'INC',l:'Vorfallmanagement & Meldepflichten'},
 ];
 
 // [id, frage, O/E, [wer], risiko, orientierungstext?]
@@ -1935,6 +2037,7 @@ const FK_Q=[
   ['SPE-06','Wie werden eingebettete Daten (Vektor-Index) gelöscht/aktualisiert?','E',['IT-Betrieb','DSB'],'Faktisch unlöschbare Daten'],
   ['SPE-07','Werden gespeicherte Inhalte zweckfremd weiterverwendet (z. B. Training, Analyse)?','O',['DSB','IT-Recht'],'Zweckentfremdung','Zweckbindung sicherstellen, Sekundärnutzung vertraglich/technisch unterbinden.'],
   ['SPE-08','Wie wird Datensparsamkeit bei persistenter Speicherung umgesetzt?','O',['ISB','DSB'],'Wachsende Altdatenrisiken','Standardmäßig wenig speichern, aktiv aufräumen.'],
+  ['SPE-09','Werden Chat-/Historien-Speicherfristen aktiv auf das datenschutzrechtlich notwendige Minimum reduziert?','E',['DSB','IT-Betrieb'],'Unnötig lange Speicherung, erhöhtes Risiko im Vorfall','Kürzeste verfügbare Frist wählen und im AVV verankern; automatisches Ablaufen prüfen.'],
   ['INT-01','Dürfen Funktionen wie Projekte, Erinnerungen, Aufgaben aktiviert werden?','E',['ISB','DSB','BR'],'Unbeabsichtigte Dauerverarbeitung'],
   ['INT-02','Stellt eine neue Anbindung eine wesentliche Änderung dar (Prüf-/Beteiligungspflicht)?','O',['DSB','BR','ISB'],'Übergangene Mitbestimmung/Prüfung','Neue autonome Datenzugriffe sind i. d. R. wesentlich → Prüfung/Beteiligung erforderlich.'],
   ['INT-03','Erbt die Anbindung die Zugriffsrechte des Nutzers (z. B. via OAuth)?','O',['IT-Betrieb','ISB'],'Zugriff auf unbefugte Inhalte','Das KI-Werkzeug erbt vorhandene Rechte; ein fehlerhaftes Quell-RBAC wird mitgeerbt.'],
@@ -1950,6 +2053,8 @@ const FK_Q=[
   ['AIA-05','Welche Pflichten treffen uns als Betreiber (Deployer) vs. als Anbieter (Provider)?','E',['IT-Recht'],'Verkannte Pflichten'],
   ['AIA-06','Bei Allzweck-KI (GPAI): welche Hinweise/Grenzen des Anbieters gelten?','O',['IT-Recht','ISB'],'Nutzung außerhalb zulässiger Grenzen','Anbieter-Dokumentation und Nutzungsgrenzen beachten.'],
   ['AIA-07','Bei Hochrisiko-Anwendungen: sind menschliche Aufsicht und Dokumentation gewährleistet?','E',['IT-Recht','DSB'],'Nichterfüllung der Hochrisiko-Anforderungen'],
+  ['AIA-08','Wird regelmäßig geprüft, ob der KI-Anbieter nach Art. 53 EU AI Act Informationen zu Modellentwicklung und Trainingsdaten veröffentlicht?','O',['IT-Recht','DSB'],'Unentdeckte Compliance-Verstöße des Anbieters','Halbjährliche Prüfung; Anbieter-Changelog und EU-AI-Office-Register beobachten.'],
+  ['AIA-09','Werden Anhaltspunkte für ein rechtswidriges Training des KI-Modells mit eigenen Daten aktiv überwacht?','O',['DSB','ISB'],'Unentdeckter Datenmissbrauch durch Anbieter','Medienbeobachtung, Anbieter-Benachrichtigungen und Aufsichtsbehörden-Meldungen im Blick behalten.'],
   ['OUT-01','Wem „gehört" der generierte Output — und darf er kommerziell genutzt werden?','E',['IT-Recht'],'Unklare/fehlende Nutzungsrechte'],
   ['OUT-02','Verletzt generierter Output Rechte Dritter (Marken, geschützte Werke)?','O',['Fachbereich','IT-Recht'],'Urheberrechts-/Markenverletzung','Keine realen Personen/Marken/geschützten Werke ohne Prüfung verwenden.'],
   ['OUT-03','Sind verwendete/generierte Bilder lizenziert?','O',['Fachbereich'],'Urheberrechtsverstoß','Nur lizenzfrei/lizenziert; Quelle/Lizenz dokumentieren.'],
@@ -1965,6 +2070,8 @@ const FK_Q=[
   ['MIT-04','Lassen Nutzungs-/Verlaufsdaten Rückschlüsse auf einzelne Beschäftigte zu?','E',['DSB','BR'],'Profilbildung, Kontrollpflichten'],
   ['MIT-05','Regelt eine Betriebs-/Dienstvereinbarung die KI-Nutzung?','O',['BR','Leitung'],'Regelungslücke','Technologieoffen mit klaren Grenzen formulieren; wesentliche Änderungen über Beteiligung.'],
   ['MIT-06','Ist die Nutzung freiwillig — gibt es Schutz vor Sanktionen bei Nichtnutzung?','E',['Leitung','BR'],'Druck/Akzeptanzprobleme'],
+  ['MIT-07','Haben nur befugte Rollen (Workspace Owner/Admin) Zugriff auf User-Analytics-Daten des KI-Tools?','E',['ISB','IT-Betrieb'],'Unberechtigter Zugriff auf Nutzungsprofile','Rollenkonzept prüfen; Vergabe von Admin-Rechten auf das notwendige Minimum begrenzen.'],
+  ['MIT-08','Ist schriftlich geregelt, dass User-Analytics-Daten nicht zur Verhaltens- oder Leistungskontrolle von Beschäftigten genutzt werden dürfen?','E',['Leitung','BR','DSB'],'Mitbestimmungsverstoß, unzulässige Leistungskontrolle','Richtlinie/Betriebsvereinbarung explizit formulieren; zulässige Nutzung (z. B. anonymisierte Effektivitätsprüfung) positiv beschreiben.'],
   ['SEC-01','Wie wird Prompt Injection / Manipulation der KI begegnet?','O',['ISB'],'Manipulation, Datenabfluss','Tests (inkl. Red-Teaming), Eingaben/externe Quellen kontrollieren.'],
   ['SEC-02','Können Zugangsdaten/Secrets in Eingaben gelangen — wie wird das verhindert?','O',['ISB'],'Kompromittierung von Credentials','Keine Secrets in Prompts; technische Filter und Schulung einsetzen.'],
   ['SEC-03','Wird ungeprüfter, KI-erzeugter Code/Inhalt ausgeführt?','O',['ISB','IT-Betrieb'],'Schadcode in Produktion','Sandbox/Review vor Ausführung — niemals blind ausführen.'],
@@ -1998,6 +2105,12 @@ const FK_Q=[
   ['FAE-06','Wie wird fachliche Korrektheit bei domänenspezifischen Inhalten gesichert (Fachbegriffe, Verfahrensstand)?','O',['Fachbereich'],'Fachlich falsche Inhalte','Domänenspezifischen Output fachlich gegenprüfen (Begriffe, aktueller Verfahrensstand).'],
   ['FAE-07','Ist mangelnde Reproduzierbarkeit ein Problem (gleiche Anfrage, unterschiedliche Ergebnisse)?','O',['Fachbereich','ISB'],'Inkonsistenz','Nicht-Determinismus einplanen; kritische Ergebnisse gegenprüfen und dokumentieren.'],
   ['FAE-08','Wie wird mit hochgeladenen Dokumenten umgegangen (Sensibilität, Speicherung, Verbleib)?','E',['DSB','Fachbereich'],'Unbeabsichtigte Speicherung sensibler Inhalte','Vor Upload Sensibilität, Speicherort, Löschfristen und AVV-Deckung klären.'],
+  ['INC-01','Gibt es eine interne Meldepflicht, wenn versehentlich personenbezogene Daten in ein KI-Tool eingegeben wurden?','E',['DSB','Leitung'],'Unentdeckte Datenschutzverletzung, versäumte Art.-33-Frist','Meldepflicht schriftlich verankern (Richtlinie/Betriebsvereinbarung); Meldekanal und Ansprechpartner benennen.'],
+  ['INC-02','Wie wird die Schwere eines pbD-Vorfalls bewertet und die Meldepflicht nach Art. 33 DSGVO (72h) geprüft?','E',['DSB'],'Versäumte Aufsichtsbehördenmeldung, Bußgeld','DSB-geführter Bewertungsprozess: Anzahl Betroffener, Datenkategorien (Art. 9?), externe Weitergabe, Risiko für Betroffene.'],
+  ['INC-03','Ist geregelt, wer formelle Löschungsanträge an KI-Anbieter stellt — und wie (Fristen, Dokumentation)?','O',['DSB','IT-Betrieb'],'Fehlende Nachvollziehbarkeit, nicht gelöschte Daten','Zuständigkeit, Weg (z. B. privacy.openai.com), Frist und Dokumentation der Anbieter-Antwort festlegen.'],
+  ['INC-04','Gibt es eine interne Meldepflicht bei versehentlicher Eingabe vertraulicher oder geschäftsgeheimnisrelevanter Daten?','E',['ISB','Leitung'],'Unkontrollierter Geheimnisschutz-Verlust','Separate Meldepflicht neben pbD-Meldung; Ansprechpartner ISB und ggf. Rechtsabteilung benennen.'],
+  ['INC-05','Ist der Umgang mit einem Vertraulichkeitsvorfall klar geregelt (wer, was, Schwerebewertung, Löschung, Löschungsantrag)?','E',['ISB','IT-Recht'],'Ad-hoc-Reaktion ohne Struktur, Beweismittelverlust','Schriftlichen Prozess definieren: Schwere bewerten → Chat löschen → Löschungsantrag → dokumentieren → ggf. eskalieren.'],
+  ['INC-06','Existiert ein dokumentierter Incident-Response-Prozess speziell für KI-Vorfälle (pbD, Vertraulichkeit, Schatten-KI, Anbieter-Breach)?','O',['DSB','ISB','Leitung'],'Unstrukturierte, verzögerte Reaktion im Ernstfall','Prozessdokument erstellen; jährlich testen (Tabletop-Übung); Erkenntnisse einarbeiten.'],
 ];
 
 let fkFilter = {cat:'', status:'', role:''};
@@ -2638,6 +2751,332 @@ function trnPrintCert() {
   document.body.classList.add('trn-printing');
   window.print();
   setTimeout(() => document.body.classList.remove('trn-printing'), 1000);
+}
+
+// ═══════════════════════════════════════════
+// VORFALL MODULE (incident reporting)
+// ═══════════════════════════════════════════
+const INC_TYPES = [
+  {id:'pbd',    icon:'👤', label:'Personenbezogene Daten eingegeben',
+   desc:'Namen, E-Mails, Adressen o. ä. versehentlich in ein KI-Tool eingegeben'},
+  {id:'secret', icon:'🔒', label:'Vertrauliche Daten eingegeben',
+   desc:'Geschäftsgeheimnisse, Finanzdaten, M&A-Infos oder NDA-geschützte Inhalte'},
+  {id:'shadow', icon:'⚠️',  label:'Nicht freigegebenes Tool genutzt',
+   desc:'Nicht genehmigtes oder nicht geprüftes KI-Tool wurde eingesetzt'},
+  {id:'output', icon:'📄', label:'Fehlerhafter Output weitergegeben',
+   desc:'Halluzinierter, falscher oder irreführender KI-Output wurde kommuniziert'},
+  {id:'breach', icon:'🚨', label:'Anbieter-Vorfall / Trainingsverdacht',
+   desc:'Datenmissbrauch, unzulässiges Training oder Datenleck beim Anbieter'},
+];
+
+// [id, label, type, opts?]
+const INC_DETAIL_Q = {
+  pbd: [
+    {id:'tool',  l:'Welches KI-Tool war betroffen?', t:'select',
+     o:['ChatGPT Free/Plus','ChatGPT Business/Enterprise','Microsoft Copilot','Google Gemini','Anderes Tool']},
+    {id:'scope', l:'Wie viele Personen sind betroffen?', t:'radio',
+     o:['1 Person','2–10 Personen','Mehr als 10 Personen']},
+    {id:'cat',   l:'Art der betroffenen Daten', t:'radio',
+     o:['Normale pbD (Name, E-Mail, Telefon …)','Besondere Kategorien Art. 9 (Gesundheit, Biometrie, Religion …)']},
+    {id:'extern',l:'Wurden Daten extern weitergegeben (Output geteilt/veröffentlicht)?', t:'radio',
+     o:['Nein – nur intern','Ja – an externe Dritte','Ja – öffentlich']},
+    {id:'del',   l:'Ist der Chat/Verlauf bereits gelöscht?', t:'radio',
+     o:['Ja','Nein','Kein Zugriff / unklar']},
+  ],
+  secret: [
+    {id:'tool',  l:'Welches KI-Tool war betroffen?', t:'select',
+     o:['ChatGPT Free/Plus','ChatGPT Business/Enterprise','Microsoft Copilot','Google Gemini','Anderes Tool']},
+    {id:'level', l:'Klassifizierung der Daten', t:'radio',
+     o:['Intern (nicht öffentlich)','Vertraulich','Streng vertraulich / NDA-geschützt']},
+    {id:'extern',l:'Wurden die Daten extern weitergegeben?', t:'radio',
+     o:['Nein','Ja – an externe Dritte / öffentlich']},
+    {id:'nda',   l:'Sind vertragliche Geheimhaltungspflichten betroffen (NDA, Kundenvertrag)?', t:'radio',
+     o:['Nein / unklar','Ja']},
+  ],
+  shadow: [
+    {id:'tool',  l:'Welches Tool wurde genutzt? (Name)', t:'text'},
+    {id:'data',  l:'Wurden Unternehmensdaten eingegeben?', t:'radio',
+     o:['Nein – nur öffentliche Infos','Ja – interne, nicht sensible Daten','Ja – sensible, vertrauliche oder personenbezogene Daten']},
+    {id:'freq',  l:'War dies einmalig oder wiederholt?', t:'radio',
+     o:['Einmalig','Mehrfach / regelmäßig']},
+  ],
+  output: [
+    {id:'reach', l:'An wen wurde der fehlerhafte Output weitergegeben?', t:'radio',
+     o:['Nur intern','An externe:n Kund:in / Partner:in','Öffentlich (Website, Social Media, Presse …)']},
+    {id:'impact',l:'Hat der Output zu einer Entscheidung oder Handlung geführt?', t:'radio',
+     o:['Nein','Ja / unklar']},
+    {id:'type',  l:'Art des Fehlers', t:'radio',
+     o:['Falsche Fakten / Halluzination','Fehlerhafte Übersetzung mit Außenwirkung','Rechtlich heikle oder verbindlich wirkende Aussage','Anderer Fehler']},
+  ],
+  breach: [
+    {id:'source',l:'Woher kommt die Information?', t:'radio',
+     o:['Eigene Beobachtung','Medienbericht / Pressemitteilung','Hinweis von Mitarbeitenden','Anbieter-Benachrichtigung']},
+    {id:'own',   l:'Sind eigene Unternehmensdaten betroffen?', t:'radio',
+     o:['Ja – sicher','Möglicherweise','Nein / unklar']},
+    {id:'topic', l:'Schwerpunkt des Vorfalls', t:'radio',
+     o:['Verdacht auf unzulässiges Training mit unseren Daten','Sicherheitsvorfall / Datenleck beim Anbieter','Keine Transparenz zu Training (Art. 53 EU AI Act)','Anderer Verdacht']},
+  ],
+};
+
+let incState = {type: null, details: {}};
+
+function incInit() {
+  const grid = document.getElementById('incTypeGrid');
+  if (grid.children.length) return;
+  INC_TYPES.forEach(t => {
+    const c = document.createElement('div');
+    c.className = 'inc-type-card';
+    c.innerHTML = `<div class="inc-type-icon">${t.icon}</div><div class="inc-type-label">${t.label}</div><div class="inc-type-desc">${t.desc}</div>`;
+    c.onclick = () => incSelectType(t);
+    grid.appendChild(c);
+  });
+}
+
+function incSelectType(t) {
+  incState.type = t.id;
+  incState.details = {};
+  document.getElementById('incTypeBadge').innerHTML = `${t.icon} ${t.label}`;
+  const form = document.getElementById('incFormFields');
+  form.innerHTML = INC_DETAIL_Q[t.id].map(q => {
+    if (q.t === 'text') return `
+      <div class="inc-field" data-qid="${q.id}">
+        <label>${q.l}</label>
+        <input type="text" placeholder="z. B. Toolname eingeben …" />
+      </div>`;
+    if (q.t === 'select') return `
+      <div class="inc-field" data-qid="${q.id}">
+        <label>${q.l}</label>
+        <select><option value="">Bitte wählen …</option>${q.o.map(o=>`<option>${o}</option>`).join('')}</select>
+      </div>`;
+    return `
+      <div class="inc-field" data-qid="${q.id}">
+        <label>${q.l}</label>
+        <div class="inc-radios">${q.o.map(o=>`
+          <label class="inc-radio"><input type="radio" name="${q.id}" value="${o}" />${o}</label>`).join('')}
+        </div>
+      </div>`;
+  }).join('');
+  incShowScreen('inc-details');
+}
+
+function incShowScreen(id) {
+  document.querySelectorAll('.inc-screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function incSubmit() {
+  // collect answers
+  const qs = INC_DETAIL_Q[incState.type];
+  incState.details = {};
+  let ok = true;
+  qs.forEach(q => {
+    const field = document.querySelector(`.inc-field[data-qid="${q.id}"]`);
+    if (!field) return;
+    if (q.t === 'text') incState.details[q.id] = field.querySelector('input').value || '';
+    else if (q.t === 'select') incState.details[q.id] = field.querySelector('select').value;
+    else {
+      const checked = field.querySelector('input:checked');
+      incState.details[q.id] = checked ? checked.value : '';
+      if (!checked) ok = false;
+    }
+  });
+  if (!ok) { alert('Bitte alle Fragen beantworten.'); return; }
+  incRender();
+  incShowScreen('inc-result');
+}
+
+function incRender() {
+  const {severity, icon, title, sub, notify, actions} = incBuildResult();
+  const sevEl = document.getElementById('incSeverity');
+  sevEl.innerHTML = `<div class="inc-severity ${severity}">
+    <div class="inc-sev-icon">${icon}</div>
+    <div><div class="inc-sev-label">${title}</div><div class="inc-sev-sub">${sub}</div></div>
+  </div>`;
+  document.getElementById('incNotify').innerHTML = `<div class="inc-notify">
+    <div class="inc-notify-head">Wen sofort informieren</div>
+    <div class="inc-notify-chips">${notify.map(n=>`<span class="inc-notify-chip">${n}</span>`).join('')}</div>
+  </div>`;
+  document.getElementById('incActions').innerHTML = actions.map((a,i) => `
+    <div class="inc-action">
+      <div class="inc-action-num">${i+1}</div>
+      <div class="inc-action-body">
+        <h4>${a.t}</h4><p>${a.b}</p>
+        <div class="inc-frist">⏱ ${a.frist}</div>
+        <div class="inc-basis">${a.basis}</div>
+      </div>
+    </div>`).join('');
+}
+
+function incBuildResult() {
+  const type = incState.type;
+  const d = incState.details;
+
+  if (type === 'pbd') {
+    const special = d.cat && d.cat.includes('Art. 9');
+    const extern  = d.extern && !d.extern.startsWith('Nein');
+    const many    = d.scope === 'Mehr als 10 Personen';
+    if (special || (extern && many)) return {
+      severity:'red', icon:'🚨',
+      title:'Hohes Risiko — Sofortmaßnahmen erforderlich',
+      sub:'Meldepflicht Art. 33 DSGVO (72-Stunden-Frist) wahrscheinlich. DSB jetzt informieren.',
+      notify:['DSB sofort','Leitung','ggf. IT-Betrieb'],
+      actions:[
+        {t:'DSB sofort informieren', b:'Sachverhalt schildern — DSB leitet Schwerebewertung und entscheidet über Art.-33-Meldepflicht.', frist:'Sofort', basis:'Art. 33 DSGVO'},
+        {t:'Chat / Verlauf löschen', b:'Im KI-Tool verfügbare Löschfunktionen nutzen. Screenshot als Nachweis.', frist:'Sofort', basis:'Art. 5 Abs. 1e DSGVO'},
+        {t:'Formellen Löschungsantrag stellen', b:`Schriftlichen Antrag auf Datenlöschung an ${d.tool||'den Anbieter'} schicken (OpenAI: privacy.openai.com). Antwort dokumentieren.`, frist:'Innerhalb 24h', basis:'Art. 17 DSGVO'},
+        {t:'Meldepflicht Art. 33 prüfen', b:'DSB beurteilt: Meldung an zuständige Aufsichtsbehörde (BfDI / Landes-DSB) erforderlich?', frist:'Max. 72h ab Kenntnis', basis:'Art. 33 DSGVO'},
+        {t:'Betroffene ggf. informieren', b:'DSB prüft, ob betroffene Personen nach Art. 34 DSGVO benachrichtigt werden müssen.', frist:'Unverzüglich', basis:'Art. 34 DSGVO'},
+        {t:'Vorfall vollständig dokumentieren', b:'Was, wann, wer, welche Daten, welche Maßnahmen — schriftlich festhalten.', frist:'Innerhalb 7 Tage', basis:'Art. 5 Abs. 2 DSGVO'},
+      ]};
+    if (extern || many) return {
+      severity:'yellow', icon:'⚠️',
+      title:'Mittleres Risiko — DSB informieren',
+      sub:'Art.-33-Meldepflicht ist zu prüfen. Chat löschen und Löschungsantrag stellen.',
+      notify:['DSB','IT-Betrieb'],
+      actions:[
+        {t:'DSB informieren', b:'Vorfall schildern; Schwerebewertung gemeinsam vornehmen.', frist:'Heute', basis:'Art. 33 DSGVO'},
+        {t:'Chat / Verlauf löschen', b:'Im KI-Tool löschen; Nachweis festhalten.', frist:'Sofort', basis:'Art. 5 Abs. 1e DSGVO'},
+        {t:'Löschungsantrag stellen', b:`Schriftlichen Antrag an ${d.tool||'den Anbieter'}; Antwort dokumentieren.`, frist:'Innerhalb 48h', basis:'Art. 17 DSGVO'},
+        {t:'Meldepflicht prüfen', b:'DSB entscheidet über Art.-33-Meldung.', frist:'Innerhalb 24h', basis:'Art. 33 DSGVO'},
+        {t:'Vorfall dokumentieren', b:'Vollständige Aufzeichnung anlegen.', frist:'Innerhalb 7 Tage', basis:'Rechenschaftspflicht'},
+      ]};
+    return {
+      severity:'yellow', icon:'⚠️',
+      title:'Geringes bis mittleres Risiko',
+      sub:'Intern dokumentieren, Chat löschen, DSB zur Kenntnis informieren.',
+      notify:['DSB (zur Kenntnis)'],
+      actions:[
+        {t:'Chat / Verlauf löschen', b:'Im KI-Tool löschen; Nachweis festhalten.', frist:'Sofort', basis:'Art. 5 Abs. 1e DSGVO'},
+        {t:'DSB zur Kenntnis', b:'Kurze Meldung; gemeinsam Art.-33-Meldepflicht ausschließen.', frist:'Heute', basis:'Interne Meldepflicht'},
+        {t:'Löschungsantrag prüfen', b:'Nach DSB-Rücksprache: ggf. Antrag an Anbieter.', frist:'Nach DSB-Einschätzung', basis:'Art. 17 DSGVO'},
+        {t:'Vorfall dokumentieren', b:'Kurze schriftliche Aufzeichnung.', frist:'Innerhalb 7 Tage', basis:'Rechenschaftspflicht'},
+      ]};
+  }
+
+  if (type === 'secret') {
+    const high = d.level === 'Streng vertraulich / NDA-geschützt' || d.nda === 'Ja';
+    const extern = d.extern && d.extern.includes('extern');
+    if (high || extern) return {
+      severity:'red', icon:'🔒',
+      title:'Hohes Risiko — Rechts-/ISB-Eskalation erforderlich',
+      sub:'GeschGehG §2 und ggf. Vertragsrecht (NDA) betroffen. Keine eigenen Rechtseinschätzungen treffen.',
+      notify:['ISB sofort','IT-Recht / Rechtsabteilung','Leitung'],
+      actions:[
+        {t:'ISB und Rechtsabteilung sofort informieren', b:'Sachverhalt vollständig schildern. Keine eigenen rechtlichen Bewertungen vornehmen.', frist:'Sofort', basis:'GeschGehG §2'},
+        {t:'Chat / Verlauf löschen', b:'Im KI-Tool alle betroffenen Verläufe löschen; Screenshot als Nachweis.', frist:'Sofort', basis:'Interne Richtlinie'},
+        {t:'Formellen Löschungsantrag stellen', b:`Schriftlicher Antrag an ${d.tool||'den Anbieter'}: Löschung der eingegangenen Daten. Antwort dokumentieren.`, frist:'Innerhalb 24h', basis:'Vertragsrecht / GeschGehG'},
+        {t:'Vertragliche Folgen prüfen', b:'Rechtsabteilung prüft NDA-Verletzung und ob betroffene Vertragspartner zu informieren sind.', frist:'Innerhalb 48h', basis:'NDA / Vertragsrecht'},
+        {t:'Vorfall dokumentieren', b:'Vollständige Aufzeichnung; relevant für Governance und ggf. Schadensersatzfragen.', frist:'Innerhalb 7 Tage', basis:'Interne Governance'},
+      ]};
+    return {
+      severity:'yellow', icon:'⚠️',
+      title:'Mittleres Risiko — ISB informieren',
+      sub:'Chat löschen, ISB bewerten lassen, Löschungsantrag prüfen.',
+      notify:['ISB','Vorgesetzte:r'],
+      actions:[
+        {t:'Chat / Verlauf löschen', b:'Im KI-Tool löschen.', frist:'Sofort', basis:'Interne Richtlinie'},
+        {t:'ISB informieren', b:'Vorfall melden; ISB bewertet weiteren Handlungsbedarf.', frist:'Heute', basis:'Interne Meldepflicht'},
+        {t:'Löschungsantrag prüfen', b:'ISB entscheidet, ob formeller Antrag an Anbieter nötig ist.', frist:'Nach ISB-Rücksprache', basis:'Interne Governance'},
+        {t:'Vorfall dokumentieren', b:'Schriftliche Aufzeichnung anlegen.', frist:'Innerhalb 7 Tage', basis:'Interne Governance'},
+      ]};
+  }
+
+  if (type === 'shadow') {
+    const sensData = d.data && d.data.includes('sensible');
+    const anyData  = d.data && !d.data.includes('öffentlich');
+    if (sensData) return {
+      severity:'red', icon:'🚨',
+      title:'Hohes Risiko — sensible Daten in nicht geprüftem Tool',
+      sub:'Ggf. pbD-Vorfall separat melden. ISB und DSB sofort einbinden.',
+      notify:['ISB sofort','DSB','IT-Betrieb','Vorgesetzte:r'],
+      actions:[
+        {t:'ISB und DSB sofort informieren', b:'Sachverhalt melden; prüfen, ob zusätzlich ein pbD-Vorfall vorliegt (ggf. dieses Formular erneut nutzen).', frist:'Sofort', basis:'DSGVO / GeschGehG'},
+        {t:'Nutzung sofort einstellen', b:'Verwendung des nicht freigegebenen Tools sofort beenden.', frist:'Sofort', basis:'Interne Richtlinie'},
+        {t:'Datenlage klären', b:'Gemeinsam mit ISB klären, welche Daten eingegeben wurden und welches Risiko besteht.', frist:'Innerhalb 24h', basis:'Art. 32 DSGVO'},
+        {t:'Löschungsantrag stellen', b:'Soweit möglich: Löschungsantrag an den Anbieter des nicht freigegebenen Tools.', frist:'Innerhalb 48h', basis:'Art. 17 DSGVO'},
+        {t:'Schulung einleiten', b:'Betroffene Person über freigegebene Tools und Risiken schulen.', frist:'Innerhalb 2 Wochen', basis:'Art. 4 EU AI Act'},
+        {t:'Vorfall dokumentieren', b:'Aufzeichnung anlegen.', frist:'Innerhalb 7 Tage', basis:'Rechenschaftspflicht'},
+      ]};
+    return {
+      severity:'yellow', icon:'⚠️',
+      title:anyData ? 'Mittleres Risiko — ISB informieren' : 'Geringes Risiko — Nutzung einstellen',
+      sub:'Nur freigegebene Tools verwenden; Freigabeprozess anstoßen.',
+      notify: anyData ? ['ISB','Vorgesetzte:r'] : ['Vorgesetzte:r (zur Kenntnis)'],
+      actions:[
+        {t:'Nutzung sofort einstellen', b:'Tool nicht weiter verwenden bis zur Freigabe.', frist:'Sofort', basis:'Interne Richtlinie'},
+        {t:'ISB informieren und Freigabeprozess anstoßen', b:'Falls Tool sinnvoll: IT/ISB um offizielle Prüfung und Freigabe bitten.', frist:'Innerhalb 1 Woche', basis:'Interne Governance'},
+        {t:'Schulung', b:'Nutzungsregeln und freigegebene Tools kommunizieren.', frist:'Innerhalb 2 Wochen', basis:'Interne Richtlinie'},
+      ]};
+  }
+
+  if (type === 'output') {
+    const pub    = d.reach && d.reach.includes('Öffentlich');
+    const extern = d.reach && d.reach.includes('extern');
+    const impact = d.impact === 'Ja / unklar';
+    if (pub || (extern && impact)) return {
+      severity:'red', icon:'📄',
+      title:'Hohes Risiko — externer Schaden möglich',
+      sub:'Fehlerhafte Aussage sofort zurückziehen. Rechtsabteilung einschalten.',
+      notify:['Leitung sofort','IT-Recht / Rechtsabteilung','Fachbereich'],
+      actions:[
+        {t:'Fehlerhafte Aussage sofort richtigstellen', b:'Betroffene Kommunikation zurückziehen oder korrigieren; Empfänger / Öffentlichkeit informieren.', frist:'Sofort', basis:'Sorgfaltspflicht / Vertragsrecht'},
+        {t:'Rechtsabteilung einschalten', b:'Haftungsrisiko, Schadensersatz, Wettbewerbsrecht prüfen lassen.', frist:'Sofort', basis:'Vertragsrecht / Deliktsrecht'},
+        {t:'Intern klären', b:'Wie ist der Fehler entstanden? QS-Prozess für KI-Output vor Außenkommunikation definieren.', frist:'Innerhalb 48h', basis:'Interne Governance'},
+        {t:'QS-Pflicht verankern', b:'Menschliche Prüfung vor externem KI-Output als Pflichtschritt einführen.', frist:'Innerhalb 2 Wochen', basis:'FK: OUT-06'},
+      ]};
+    return {
+      severity:'yellow', icon:'⚠️',
+      title:'Mittleres Risiko — Fehler korrigieren',
+      sub:'Aussage intern richtigstellen und QS-Prozess anpassen.',
+      notify:['Vorgesetzte:r','Fachbereich'],
+      actions:[
+        {t:'Fehler korrigieren', b:'Betroffene Aussage intern richtigstellen; ggf. Empfänger informieren.', frist:'Sofort', basis:'Sorgfaltspflicht'},
+        {t:'QS-Prozess anpassen', b:'Menschliche Prüfung vor KI-Output-Verwendung sicherstellen.', frist:'Innerhalb 2 Wochen', basis:'FK: OUT-06'},
+        {t:'Lernfall dokumentieren', b:'Kurze interne Notiz als Basis für Teamschulung.', frist:'Innerhalb 7 Tage', basis:'Interne Governance'},
+      ]};
+  }
+
+  if (type === 'breach') {
+    const own = d.own && (d.own.includes('sicher') || d.own.includes('Möglicherweise'));
+    if (own) return {
+      severity:'red', icon:'🚨',
+      title:'Hohes Risiko — eigene Daten möglicherweise betroffen',
+      sub:'DSB und ISB sofort informieren. Meldepflicht nach Art. 33 DSGVO prüfen.',
+      notify:['DSB sofort','ISB','Leitung'],
+      actions:[
+        {t:'DSB und ISB sofort informieren', b:'Sachverhalt und Quelle vollständig schildern.', frist:'Sofort', basis:'Art. 33 DSGVO / Art. 53 KI-VO'},
+        {t:'Nutzung des betroffenen Tools prüfen', b:'Ggf. vorübergehend aussetzen bis zur Klärung.', frist:'Sofort', basis:'Art. 32 DSGVO'},
+        {t:'Art.-33-Meldepflicht prüfen', b:'DSB beurteilt: 72h-Meldung an Aufsichtsbehörde erforderlich?', frist:'Max. 72h ab Kenntnis', basis:'Art. 33 DSGVO'},
+        {t:'Anbieter offiziell anfragen', b:'Schriftliche Anfrage: Sind eigene Daten betroffen? Antwort dokumentieren.', frist:'Innerhalb 24h', basis:'Art. 53 EU AI Act / Vertragsrecht'},
+        {t:'Art.-53-Veröffentlichungen prüfen', b:'Hat der Anbieter nach Art. 53 EU AI Act Informationen zu Trainingsdaten veröffentlicht?', frist:'Innerhalb 7 Tage', basis:'Art. 53 EU AI Act'},
+        {t:'Vorfall dokumentieren', b:'Vollständige Aufzeichnung.', frist:'Innerhalb 7 Tage', basis:'Rechenschaftspflicht'},
+      ]};
+    return {
+      severity:'yellow', icon:'⚠️',
+      title:'Mittleres Risiko — Entwicklung beobachten',
+      sub:'DSB zur Kenntnis informieren; Art.-53-Veröffentlichungen verfolgen.',
+      notify:['DSB (zur Kenntnis)','ISB'],
+      actions:[
+        {t:'Entwicklung verfolgen', b:'Anbieter-Kommunikation, Fachnews und BfDI/EDPB-Meldungen beobachten.', frist:'Laufend', basis:'Art. 53 EU AI Act'},
+        {t:'DSB zur Kenntnis informieren', b:'Kurze Meldung; DSB bewertet Handlungsbedarf.', frist:'Heute', basis:'Interne Meldepflicht'},
+        {t:'Ggf. Nutzung einschränken', b:'Falls Risiko konkreter wird: Nutzung vorübergehend aussetzen.', frist:'Nach DSB-Einschätzung', basis:'Art. 32 DSGVO'},
+      ]};
+  }
+
+  return {severity:'yellow', icon:'ℹ️', title:'Vorfall erfasst', sub:'Bitte DSB oder ISB kontaktieren.', notify:['DSB'], actions:[
+    {t:'Manuell bewerten', b:'Vorfall dem DSB oder ISB schildern.', frist:'Heute', basis:'Interne Meldepflicht'},
+  ]};
+}
+
+function incReset() {
+  incState = {type: null, details: {}};
+  incShowScreen('inc-type');
+}
+
+function incPrint() {
+  document.body.classList.add('inc-printing');
+  window.print();
+  setTimeout(() => document.body.classList.remove('inc-printing'), 1000);
 }
 
 </script>
